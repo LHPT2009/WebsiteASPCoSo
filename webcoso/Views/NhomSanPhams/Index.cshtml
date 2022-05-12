@@ -1,0 +1,60 @@
+﻿@model PagedList.PagedList<webcoso.Models.NhomSanPham>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <div style="display: flex; margin-top: 20px; justify-content: space-between">
+                <h2>Trang Nhóm Sản Phẩm</h2>
+                <form>
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Tìm kiếm theo nội dung..." aria-label="Tìm kiếm theo nội dung..." value="@ViewBag.Keyword" name="searchString" aria-describedby="btnNavbarSearch" />
+                        <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table table-bordered table-dark">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            Tên nhóm
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="table-light">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TenNhom)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.MaNhom }, new { @class = "btn btn-danger", @style = "margin-left:5px" }) |
+                                @Html.ActionLink("Chi tiết", "Details", new { id = item.MaNhom }, new { @class = "btn btn-danger", @style = "margin-left:5px" }) |
+                                @Html.ActionLink("Xóa", "Delete", new { id = item.MaNhom }, new { @class = "btn btn-danger", @style = "margin-left:5px" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div style=" margin-bottom:50px;">
+                <div>
+                    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                </div>
+                <div class="MenuTrang">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

@@ -1,0 +1,431 @@
+﻿@model IEnumerable<webcoso.Models.SanPham>
+@{
+    ViewBag.Title = "Home Page";
+}
+<section id="home-section" class="hero">
+    <div class="home-slider owl-carousel">
+        <div class="slider-item js-fullheight">
+            <div class="overlay"></div>
+            <div class="container-fluid p-0">
+                <div class="row d-md-flex no-gutters slider-text align-items-center justify-content-end" data-scrollax-parent="true">
+                    <img class="one-third order-md-last img-fluid" src="~/Content/images/banner/diem-danh-top-5-chiec-dien-thoai-ban-chay-va-duoc-yeu-thich-nhat-nam-2017-medium-removebg-preview.png" alt="">
+                    <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                        <div class="text">
+                            <span class="subheading">#Kỷ nguyên điện thoại</span>
+                            <div class="horizontal">
+                                <h1 class="mb-4 mt-3">Điện thoại</h1>
+                                <p class="mb-4">Thiết bị nhỏ gọn nhưng vô cừ quan trọng<br /> trong đời sống</p>
+
+                                <p><a href="#" class="btn-custom">Tìm hiểu thêm</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-item js-fullheight">
+            <div class="overlay"></div>
+            <div class="container-fluid p-0">
+                <div class="row d-flex no-gutters slider-text align-items-center justify-content-end" data-scrollax-parent="true">
+                    <img class="one-third order-md-last img-fluid" src="~/Content/images/banner/42438_surface_laptop_go_platinum_h1-removebg-preview.png" alt="">
+                    <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                        <div class="text">
+                            <span class="subheading">#Laptop di động</span>
+                            <div class="horizontal">
+                                <h1 class="mb-4 mt-3">Laptop</h1>
+                                <p class="mb-4">Máy tính bàn nhỏ gọn hỗ trợ đủ tính năng</p>
+                                <p><a href="#" class="btn-custom">Tìm hiểu thêm</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-item js-fullheight">
+            <div class="overlay"></div>
+            <div class="container-fluid p-0">
+                <div class="row d-flex no-gutters slider-text align-items-center justify-content-end" data-scrollax-parent="true">
+                    <img class="one-third order-md-last img-fluid" src="~/Content/images/banner/2021_Moto-Tab-G70--1-._Design_Modernist-Teal-removebg-preview.png" alt="">
+                    <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                        <div class="text">
+                            <span class="subheading">#Máy tính bảng siêu ngầu</span>
+                            <div class="horizontal">
+                                <h1 class="mb-4 mt-3">Máy tính bảng</h1>
+                                <p class="mb-4">Máy tính bảng kiểu dáng vừa phải và thời thượng và hỗ trợ cho công việc</p>
+
+                                <p><a href="#" class="btn-custom">Tìm hiểu thêm</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-no-pt ftco-no-pb">
+    <div class="container">
+        <div class="row no-gutters ftco-services">
+            <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services p-4 py-md-5">
+                    <div class="icon d-flex justify-content-center align-items-center mb-4">
+                        <span class="flaticon-bag"></span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="heading">Free Shipping</h3>
+                        <p>Giao hàng tận nơi mà không có thêm một khoảng chi thu nào cả</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services p-4 py-md-5">
+                    <div class="icon d-flex justify-content-center align-items-center mb-4">
+                        <span class="flaticon-customer-service"></span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="heading">Hỗ trợ tận tình</h3>
+                        <p>Chúng tôi có một đội ngũ tận tâm và luôn hỗ trợ cũng như giải quyết mọi khó khăn của khách hàng</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services p-4 py-md-5">
+                    <div class="icon d-flex justify-content-center align-items-center mb-4">
+                        <span class="flaticon-payment-security"></span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="heading">Bảo mật thông tin</h3>
+                        <p>Bảo mật thông tin là nguyên tắc của sự thành công của chúng tôi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 class="mb-4" style="margin-top:100px">Thế giới Laptop</h2>
+                <p>Bạn yêu thích các sản phẩm về Laptop</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+
+            @foreach (var item in Model.Take(8))
+            {
+                if (item.MaLoai == 10)
+                {
+                    <div class="col-sm-12 col-md-6 col-lg-3 ftco-animate d-flex">
+                        <div class="product d-flex flex-column">
+                            <a href="#" class="img-prod">
+                                <img class="img-fluid" src="@item.Hinh" alt="Colorlib Template">
+                                <div class="overlay"></div>
+                            </a>
+                            <div class="text py-3 pb-4 px-3">
+                                <div class="d-flex">
+                                    <div class="cat">
+                                        <span>Lifestyle</span>
+                                    </div>
+                                    <div class="rating">
+                                        <p class="text-right mb-0">
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <h3><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
+                                <div class="pricing">
+                                    <p class="price"><span>@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                                </div>
+                                <p class="bottom-area d-flex px-3">
+                                    <a href="@Url.Action("ThemGioHang", "GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString() })" class="add-to-cart text-center py-2 mr-1"><span>Thêm giỏ<i class="ion-ios-add ml-1"></i></span></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+
+<section class="bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 class="mb-4">Laptop văn phòng</h2>
+                <p>Laptop cho các tác vụ căn bản cũng như sử dụng Office</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+
+
+            @foreach (var item in Model.Take(8))
+            {
+                if (@item.MaLoai == 10 && @item.MaNhom == 1)
+                {
+                    <div class="col-sm-12 col-md-6 col-lg-3 ftco-animate d-flex">
+                        <div class="product d-flex flex-column">
+                            <a href="#" class="img-prod">
+                                <img class="img-fluid" src="@item.Hinh" alt="Colorlib Template">
+                                <div class="overlay"></div>
+                            </a>
+                            <div class="text py-3 pb-4 px-3">
+                                <div class="d-flex">
+                                    <div class="cat">
+                                        <span>Lifestyle</span>
+                                    </div>
+                                    <div class="rating">
+                                        <p class="text-right mb-0">
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <h3><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
+                                <div class="pricing">
+                                    <p class="price"><span>@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                                </div>
+                                <p class="bottom-area d-flex px-3">
+                                    <a href="@Url.Action("ThemGioHang", "GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString() })" class="add-to-cart text-center py-2 mr-1"><span>Thêm giỏ<i class="ion-ios-add ml-1"></i></span></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+
+<section class="bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 class="mb-4">Laptop Gaming và đồ họa</h2>
+                <p>Laptop cho các tác vụ chơi game và thiết kế</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model.Take(16))
+            {
+                if (@item.MaLoai == 10 && @item.MaNhom == 2)
+                {
+                    <div class="col-sm-12 col-md-6 col-lg-3 ftco-animate d-flex">
+                        <div class="product d-flex flex-column">
+                            <a href="#" class="img-prod">
+                                <img class="img-fluid" src="@item.Hinh" alt="Colorlib Template">
+                                <div class="overlay"></div>
+                            </a>
+                            <div class="text py-3 pb-4 px-3">
+                                <div class="d-flex">
+                                    <div class="cat">
+                                        <span>Lifestyle</span>
+                                    </div>
+                                    <div class="rating">
+                                        <p class="text-right mb-0">
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <h3><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
+                                <div class="pricing">
+                                    <p class="price"><span>@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                                </div>
+                                <p class="bottom-area d-flex px-3">
+                                    <a href="@Url.Action("ThemGioHang", "GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString() })" class="add-to-cart text-center py-2 mr-1"><span>Thêm giỏ<i class="ion-ios-add ml-1"></i></span></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+
+<section class="ftco-deal bg-primary">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" style="margin-top:75px">
+                <div class="heading-section heading-section-white">
+                    <span class="subheading">Điện thoại</span>
+                    <h2 class="mb-3">Giá khuyến mãi siêu Hot</h2>
+                </div>
+                <div id="timer" class="d-flex mb-4">
+                    <div class="time" id="days"></div>
+                    <div class="time pl-4" id="hours"></div>
+                    <div class="time pl-4" id="minutes"></div>
+                    <div class="time pl-4" id="seconds"></div>
+                </div>
+                <div class="text-deal">
+                    <h2><a href="#">Iphone, Samsung, Oppo</a></h2>
+                    <p class="price"><span class="mr-2 price-dc">20.000.000 VNĐ</span><span class="price-sale">chỉ còn 14.000.000 VNĐ</span></p>
+                    <ul class="thumb-deal d-flex mt-4">
+                        <li class="img" style="background-image: url(/Content/images/product-6.png);"></li>
+                        <li class="img" style="background-image: url(/Content/images/product-2.png);"></li>
+                        <li class="img" style="background-image: url(/Content/images/product-4.png);"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6" style="margin-top:75px">
+                <img src="~/Content/images/banner/diem-danh-top-5-chiec-dien-thoai-ban-chay-va-duoc-yeu-thich-nhat-nam-2017-medium-removebg-preview.png" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 class="mb-4" style="margin-top:100px">Bạn có hứng thú với điện thoại không?</h2>
+                <p>Ở đây chúng tôi kinh doanh cả những sản phẩm điện thoại lớn và nhỏ đó</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                if (@item.MaLoai == 9)
+                {
+                    <div class="col-sm-12 col-md-6 col-lg-3 ftco-animate d-flex">
+                        <div class="product d-flex flex-column">
+                            <a href="#" class="img-prod">
+                                <img class="img-fluid" src="@item.Hinh" alt="Colorlib Template">
+                                <div class="overlay"></div>
+                            </a>
+                            <div class="text py-3 pb-4 px-3">
+                                <div class="d-flex">
+                                    <div class="cat">
+                                        <span>Lifestyle</span>
+                                    </div>
+                                    <div class="rating">
+                                        <p class="text-right mb-0">
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <h3><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
+                                <div class="pricing">
+                                    <p class="price"><span>@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                                </div>
+                                <p class="bottom-area d-flex px-3">
+                                    <a href="@Url.Action("ThemGioHang", "GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString() })" class="add-to-cart text-center py-2 mr-1"><span>Thêm giỏ<i class="ion-ios-add ml-1"></i></span></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+
+<section class="ftco-deal bg-primary">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="~/Content/images/banner/2021_Moto-Tab-G70--1-._Design_Modernist-Teal-removebg-preview.png" class="img-fluid" alt="">
+            </div>
+            <div class="col-md-6" style="margin-top:100px">
+                <div class="heading-section heading-section-white">
+                    <span class="subheading">Máy tính bảng</span>
+                    <h2 class="mb-3">Khuyến mãi trong tháng</h2>
+                </div>
+                <div id="timer" class="d-flex mb-4">
+                    <div class="time" id="days"></div>
+                    <div class="time pl-4" id="hours"></div>
+                    <div class="time pl-4" id="minutes"></div>
+                    <div class="time pl-4" id="seconds"></div>
+                </div>
+                <div class="text-deal">
+                    <h2><a href="#">Samsung, Apple giảm giá sập sàn</a></h2>
+                    <p class="price"><span class="mr-2 price-dc">30.000.000 VNĐ</span><span class="price-sale">chỉ còn 22.000.000 VNĐ</span></p>
+                    <ul class="thumb-deal d-flex mt-4" style="margin-bottom:75px">
+                        <li class="img" style="background-image: url(/Content/images/product-6.png);"></li>
+                        <li class="img" style="background-image: url(/Content/images/product-2.png);"></li>
+                        <li class="img" style="background-image: url(/Content/images/product-4.png);"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 class="mb-4" style="margin-top:50px">Ở đây chúng tôi còn có cả Máy tính bảng luôn!</h2>
+                <p>Máy tính bảng một thiết bị thông minh không thể vắng mặt khi nói về các thiết bị thông minh</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                if (@item.MaLoai == 11)
+                {
+                    <div class="col-sm-12 col-md-6 col-lg-3 ftco-animate d-flex">
+                        <div class="product d-flex flex-column">
+                            <a href="#" class="img-prod">
+                                <img class="img-fluid" src="@item.Hinh" alt="Colorlib Template">
+                                <div class="overlay"></div>
+                            </a>
+                            <div class="text py-3 pb-4 px-3">
+                                <div class="d-flex">
+                                    <div class="cat">
+                                        <span>Lifestyle</span>
+                                    </div>
+                                    <div class="rating">
+                                        <p class="text-right mb-0">
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <h3><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
+                                <div class="pricing">
+                                    <p class="price"><span>@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                                </div>
+                                <p class="bottom-area d-flex px-3">
+                                    <a href="@Url.Action("ThemGioHang", "GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString() })" class="add-to-cart text-center py-2 mr-1"><span>Thêm giỏ<i class="ion-ios-add ml-1"></i></span></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,160 @@
+﻿@using PagedList.Mvc;
+@model webcoso.Models.SanPhamDetailModel
+
+@{ ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div class="hero-wrap hero-bread" style="background-image: url('/Content/images/banner/laptop-tot-nhat-1638390226558.jpg'); ">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Sản</a></span> <span>phẩm</span></p>
+                <h1 class="mb-0 bread">Chi tiết sản phẩm</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section End -->
+<!-- Product Details Section Begin -->
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-5 ftco-animate">
+                <a href="images/product-1.png" class="image-popup prod-img-bg"><img src="@Model.SanPham.Hinh" class="img-fluid" alt="Colorlib Template"></a>
+            </div>
+            <div class="col-lg-6 product-details pl-md-5 ftco-animate">
+                <h3>@Model.SanPham.Ten</h3>
+                <div class="rating d-flex">
+                    <p class="text-left mr-4">
+                        <a href="#" class="mr-2">5.0</a>
+                        <a href="#"><span class="ion-ios-star-outline"></span></a>
+                        <a href="#"><span class="ion-ios-star-outline"></span></a>
+                        <a href="#"><span class="ion-ios-star-outline"></span></a>
+                        <a href="#"><span class="ion-ios-star-outline"></span></a>
+                        <a href="#"><span class="ion-ios-star-outline"></span></a>
+                    </p>
+                    <p class="text-left mr-4">
+                        <a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
+                    </p>
+                    <p class="text-left">
+                        <a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
+                    </p>
+                </div>
+                <p class="price"><span>@String.Format("{0:0,0}", @Model.SanPham.Gia) VNĐ</span></p>
+                <div class="row mt-4">
+                    <div class="w-100"></div>
+                    <div class="col-md-12">
+                        <p style="color: #000;">CPU: @Model.SanPham.CPU &emsp; Màn hình: @Model.SanPham.ManHinh</p>
+                        <p style="color: #000;">RAM: @Model.SanPham.RAM &emsp; Ổ Cứng: @Model.SanPham.OCung</p>
+                        <p style="color: #000;">VGA: @Model.SanPham.VGA &emsp; HDH: @Model.SanPham.HDH</p>
+                        <p style="color: #000;">Mẫu: @Model.SanPham.Mau &emsp; Bảo Hành: @Model.SanPham.BaoHang</p>
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col-md-12">
+                        <p style="color: #000;">Số lượng còn @Model.SanPham.SoLuong</p>
+                    </div>
+                </div>
+                <p><a href="@Url.Action("ThemGioHang","GioHang", new { @id = Model.SanPham.MaSP , @strURL = Request.Url.ToString() } )" class="btn btn-black py-3 px-5 mr-2">Add to Cart</a></p>
+            </div>
+            <div class="col-lg-12">
+                @using (Html.BeginForm())
+                {
+    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div class="container mt-5">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-md-8">
+                                        <strong style="font-size:20px">Bình Luận</strong>
+                                        <div class="card p-3">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="user d-flex flex-row align-items-center">
+                                                    <textarea name="txtContent" rows="3" cols="98" style="resize:none;border:none;font-size:14px" placeholder="Hãy để lại cảm nghĩ của bạn về món ăn này nhé!"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input style="margin: 15px 0px; font-size:18px;font-weight:500;" type="submit" value="Đăng" class="btn btn-warning pull-right" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>}
+
+                <div class="container mt-5">
+                    <div class="row d-flex justify-content-center">
+
+                        <div class="col-md-8">
+                            @foreach (var item in Model.BinhLuans.OrderByDescending(e => e.NgayTao))
+                            {
+                <div class="card p-3" style="margin-bottom: 20px;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="user d-flex flex-row align-items-center">
+                            <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2">
+                            <span>
+                                <small style="font-size: 16px;" class="font-weight-bold text-primary">@Html.DisplayFor(hoten => item.Name)</small>
+                            </span>
+                        </div> <small style="font-size: 14px;"> @Html.DisplayFor(ngaytao => item.NgayTao)</small>
+                    </div>
+                    <div class="action d-flex justify-content-between mt-2 align-items-center">
+                        <div class="reply px-4" style="font-size: 16px;min-width:100vw;">@Html.DisplayFor(noidung => item.NoiDung)</div>
+                    </div>
+                </div>}
+                            <div class="col text-center">
+                                <div class="block-27">
+                                    Trang @(Model.BinhLuans.PageCount < Model.BinhLuans.PageNumber ? 0 : Model.BinhLuans.PageNumber) / @Model.BinhLuans.PageCount
+                                    @Html.PagedListPager(Model.BinhLuans, page => Url.Action("Detailssanpham", new { page = page }))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
+<style type="text/css">
+    #mau-nut a {
+        clear: both;
+        background-color: orange;
+        color: snow;
+    }
+
+        #mau-nut a:hover {
+            background-color: darkcyan;
+            color: snow;
+        }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var maxLength = 100;
+        $(".show-read-more").each(function () {
+            var myStr = $(this).text();
+            if ($.trim(myStr).length > maxLength) {
+                var newStr = myStr.substring(0, maxLength);
+                var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                $(this).empty().html(newStr);
+
+                $(this).append(' <a href="javascript:void(0);" class="read-more">đọc tiếp...</a>');
+                $(this).append('<span class="more-text">' + removedStr + '</span>');
+            }
+        });
+        $(".read-more").click(function () {
+            $(this).siblings(".more-text").contents().unwrap();
+            $(this).remove();
+        });
+    });</script>
+<style>
+    .show-read-more .more-text {
+        display: none;
+    }
+</style>
+
+

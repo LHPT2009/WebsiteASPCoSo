@@ -1,0 +1,124 @@
+﻿@model webcoso.Models.SanPham
+
+@{ ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; }
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h2>Chỉnh sửa</h2>
+
+            @using (Html.BeginForm())
+            {
+@Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>Sản phẩm</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.MaSP)
+
+                    <div class="form-group">
+                        <strong class="control-label col-md-2">Mã loại</strong>
+                        <div class="col-md-10">
+                            @Html.DropDownList("MaLoai", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MaLoai, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <strong class="control-label col-md-2">Tên sản phẩm</strong>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <strong class="control-label col-md-2">Mô tả</strong>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <strong class="control-label col-md-2">Giá</strong>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Gia, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Gia, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <strong class="control-label col-md-2">Số lượng</strong>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <strong class="control-label col-md-2">Giảm giá</strong>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.GiamGia, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.GiamGia, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <strong class="control-label col-md-2">Hình</strong>
+                        <div class="col-md-10">
+                            <div style="display:none;">
+                                @Html.EditorFor(model => model.Hinh, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Hinh, "", new { @class = "text-danger" })
+                            </div>
+                            <img src="@Model.Hinh" id="pictureUpload" width="250" />
+                            <input type="file" name="fileUpload" id="fileUpload" accept="image/*" style="display:none;" />
+                            <input type="button" id="btnUpload" value="Chọn" class="btn btn-success" />
+                        </div>
+                    </div>
+                    <div class="col-md-offset-2 col-md-10" style="margin-bottom:15px">
+                        <input type="submit" value="Lưu" class="btn btn-info" /> |
+                        <a class="btn btn-success" href='@Url.Action("IndexAdmin", "SanPhams")' style="margin: 30px 0;">
+                            Trở về
+                        </a>
+                    </div>
+                </div>}
+            @section upload
+{
+                <script>
+                    $(function () {
+                        $('#btnUpload').click(function () {
+                            $('#fileUpload').trigger('click');
+                        });
+                    });
+                    $('#fileUpload').change(function () {
+                        if (window.FormData !== undefined) {
+                            var fileUpload = $('#fileUpload').get(0);
+                            var files = fileUpload.files;
+                            var formData = new FormData();
+                            formData.append('file', files[0]);
+
+                            $.ajax(
+                                {
+                                    type: 'POST',
+                                    url: '/SanPhams/ProcessUpload',
+                                    contentType: false,
+                                    processData: false,
+                                    data: formData,
+                                    success: function (urlImage) {
+
+                                        $('#pictureUpload').attr('src', urlImage);
+                                        $('#Hinh').val(urlImage);
+                                    },
+                                    error: function (err) {
+                                        alert('Error ', err.statusText);
+                                    }
+                                });
+                        }
+                    });</script>
+            }
+        </div>
+    </main>
+</div>

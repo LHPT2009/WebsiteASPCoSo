@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Webcoso" Class="MyDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-1LU7SQG\SQLEXPRESS;Initial Catalog=Webcoso;Persist Security Info=True;User ID=sa;Connect Timeout=0" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="WebcosoConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.[__MigrationHistory]" Member="__MigrationHistories">
+    <Type Name="__MigrationHistory">
+      <Column Name="MigrationId" Type="System.String" DbType="NVarChar(150) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ContextKey" Type="System.String" DbType="NVarChar(300) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Model" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ProductVersion" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetRoles" Member="AspNetRoles">
+    <Type Name="AspNetRole">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetRole_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="RoleId" Type="AspNetUserRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserClaims" Member="AspNetUserClaims">
+    <Type Name="AspNetUserClaim">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="ClaimType" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ClaimValue" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserLogins" Member="AspNetUserLogins">
+    <Type Name="AspNetUserLogin">
+      <Column Name="LoginProvider" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProviderKey" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserRoles" Member="AspNetUserRoles">
+    <Type Name="AspNetUserRole">
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="AspNetRole_AspNetUserRole" Member="AspNetRole" ThisKey="RoleId" OtherKey="Id" Type="AspNetRole" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUsers" Member="AspNetUsers">
+    <Type Name="AspNetUser">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="EmailConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SecurityStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumberConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TwoFactorEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LockoutEndDateUtc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LockoutEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AccessFailedCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUserClaims" ThisKey="Id" OtherKey="UserId" Type="AspNetUserClaim" />
+      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
+      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
+      <Association Name="AspNetUser_BinhLuan" Member="BinhLuans" ThisKey="Id" OtherKey="MaKH" Type="BinhLuan" />
+      <Association Name="AspNetUser_DonHang" Member="DonHangs" ThisKey="Id" OtherKey="MaKH" Type="DonHang" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BinhLuan" Member="BinhLuans">
+    <Type Name="BinhLuan">
+      <Column Name="MaBinhLuan" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NoiDung" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MaSP" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaKH" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="NgayTao" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="AspNetUser_BinhLuan" Member="AspNetUser" ThisKey="MaKH" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+      <Association Name="SanPham_BinhLuan" Member="SanPham" ThisKey="MaSP" OtherKey="MaSP" Type="SanPham" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ChiTietDonHang" Member="ChiTietDonHangs">
+    <Type Name="ChiTietDonHang">
+      <Column Name="MaSP" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaDH" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Soluong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Gia" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="DonHang_ChiTietDonHang" Member="DonHang" ThisKey="MaDH" OtherKey="MaDH" Type="DonHang" IsForeignKey="true" />
+      <Association Name="SanPham_ChiTietDonHang" Member="SanPham" ThisKey="MaSP" OtherKey="MaSP" Type="SanPham" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DonHang" Member="DonHangs">
+    <Type Name="DonHang">
+      <Column Name="MaDH" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TrangThaiGiaoHang" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="NgayDat" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="NgayGiao" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="MaKH" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="TongTien" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="DonHang_ChiTietDonHang" Member="ChiTietDonHangs" ThisKey="MaDH" OtherKey="MaDH" Type="ChiTietDonHang" />
+      <Association Name="AspNetUser_DonHang" Member="AspNetUser" ThisKey="MaKH" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LoaiSP" Member="LoaiSPs">
+    <Type Name="LoaiSP">
+      <Column Name="MaLoai" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenLoai" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Association Name="LoaiSP_SanPham" Member="SanPhams" ThisKey="MaLoai" OtherKey="MaLoai" Type="SanPham" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NhomSanPham" Member="NhomSanPhams">
+    <Type Name="NhomSanPham">
+      <Column Name="MaNhom" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenNhom" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Association Name="NhomSanPham_SanPham" Member="SanPhams" ThisKey="MaNhom" OtherKey="MaNhom" Type="SanPham" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SanPham" Member="SanPhams">
+    <Type Name="SanPham">
+      <Column Name="MaSP" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MaLoai" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Ten" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MoTa" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Gia" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SoLuong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GiamGia" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Hinh" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="CPU" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="ManHinh" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="RAM" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="OCung" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="VGA" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="HDH" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="Mau" Type="System.String" DbType="NVarChar(64)" CanBeNull="true" />
+      <Column Name="BaoHang" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaTH" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaNhom" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SanPham_BinhLuan" Member="BinhLuans" ThisKey="MaSP" OtherKey="MaSP" Type="BinhLuan" />
+      <Association Name="SanPham_ChiTietDonHang" Member="ChiTietDonHangs" ThisKey="MaSP" OtherKey="MaSP" Type="ChiTietDonHang" />
+      <Association Name="LoaiSP_SanPham" Member="LoaiSP" ThisKey="MaLoai" OtherKey="MaLoai" Type="LoaiSP" IsForeignKey="true" />
+      <Association Name="NhomSanPham_SanPham" Member="NhomSanPham" ThisKey="MaNhom" OtherKey="MaNhom" Type="NhomSanPham" IsForeignKey="true" />
+      <Association Name="ThuongHieu_SanPham" Member="ThuongHieu" ThisKey="MaTH" OtherKey="MaTH" Type="ThuongHieu" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ThuongHieu" Member="ThuongHieus">
+    <Type Name="ThuongHieu">
+      <Column Name="MaTH" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenTH" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Association Name="ThuongHieu_SanPham" Member="SanPhams" ThisKey="MaTH" OtherKey="MaTH" Type="SanPham" />
+    </Type>
+  </Table>
+</Database>

@@ -1,0 +1,86 @@
+﻿@model webcoso.Models.SanPham
+
+@{ ViewBag.Title = "DetailsAdmin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; }
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+
+            <h2>Thông tin chi tiết</h2>
+
+            <div>
+                <h4>Sản phẩm</h4>
+                <hr />
+                <dl class="dl-horizontal" style="margin-left:20px">
+                    <dt>
+                        Loại
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LoaiSP.TenLoai)
+                    </dd>
+
+                    <dt>
+                        Tên sản phẩm
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Ten)
+                    </dd>
+
+                    <dt>
+                        Mô tả
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MoTa)
+                    </dd>
+
+                    <dt>
+                        Giá
+                    </dt>
+
+                    <dd>
+                        @String.Format("{0:0,0}", @Model.Gia)
+                    </dd>
+
+                    <dt>
+                        Số lượng
+                    </dt>
+
+                    <dd>
+                        @String.Format("{0:0,0}", @Model.SoLuong)
+                    </dd>
+
+                    <dt>
+                        Đơn vị
+                    </dt>
+
+                    <dt>
+                        Giảm giá
+                    </dt>
+
+                    <dd>
+                        @String.Format("{0:0,0}", @Model.GiamGia)
+                    </dd>
+
+                    <dt>
+                        Hình
+                    </dt>
+
+                    <dd>
+                        <img src="@Model.Hinh" alt="thumbnail" width="250" />
+                    </dd>
+
+                </dl>
+            </div>
+            <p>
+                @Html.ActionLink("Sửa", "Edit", new { id = Model.MaSP }, new { @class = "btn btn-info" }) |
+                <a class="btn btn-success" href='@Url.Action("IndexAdmin", "SanPhams")' style="margin:10px 0px;">
+                    Trở về
+                </a>
+            </p>
+        </div>
+    </main>
+</div>

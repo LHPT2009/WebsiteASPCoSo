@@ -1,0 +1,64 @@
+﻿@model webcoso.Models.BinhLuan
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h2>Chỉnh sửa</h2>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>Bình luận</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.MaBinhLuan)
+
+                    <div class="form-group">
+                        <strong class="control-label col-md-2">Nội dung</strong>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.NoiDung, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                            @Html.LabelFor(model => model.MaSP, "MaSP", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("MaSP", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.MaSP, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MaKH, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.MaKH, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MaKH, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NgayTao, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.NgayTao, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NgayTao, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+
+                    <div class="col-md-offset-2 col-md-10" style="margin-bottom:15px">
+                        <input type="submit" value="Lưu" class="btn btn-info" /> |
+                        <a class="btn btn-success" href='@Url.Action("Index", "BinhLuans")' style="margin: 30px 0;">
+                            Trở về
+                        </a>
+                    </div>
+                </div>}
+        </div>
+    </main>
+</div>
+

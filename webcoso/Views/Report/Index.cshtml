@@ -1,0 +1,15 @@
+﻿@using ReportViewerForMvc
+
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; }
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <div style="margin-top:20px">
+                @if (ViewBag.ReportViewer != null)
+                {
+    @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)}
+            </div>
+        </div>
+    </main>
+</div>

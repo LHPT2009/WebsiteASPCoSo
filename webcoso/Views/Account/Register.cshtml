@@ -1,0 +1,48 @@
+﻿@model webcoso.Models.RegisterViewModel
+@{ ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div class="hero-wrap hero-bread" style="background-image: url('/Content/images/banner/laptop-tot-nhat-1638390226558.jpg'); ">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>About</span></p>
+                <h1 class="mb-0 bread">Register</h1>
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form", @style = "width:500px" }))
+{
+@Html.AntiForgeryToken()
+                <div class="col-md-offset-1">
+                    <div class="signup-form">
+                        <h2 class="text-center">Đăng ký</h2>
+                        <hr />
+                        @Html.ValidationSummary("", new { @class = "text-danger", @style = "font-size: 14px;" })
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Họ tên", @style = "height:50px" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", @style = "height:50px" })
+                        </div>
+                        <div class="form-group">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Mật khẩu", @style = "height:50px" })
+                        </div>
+                        <div class="form-group">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Nhập lại mật khẩu", @style = "height:50px" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Số điện thoại", @style = "height:50px" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Địa chỉ", @style = "height:50px" })
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-blue btn-block text-center" value="Đăng ký" style="background-color: #44c5ee" />
+                        </div>
+                        <div class="form-group text-center">
+                            @Html.ActionLink("Đã có tài khoản", "Login", routeValues: null, htmlAttributes: new { @class = "btn-outline-info", @style = "margin-top:10px; font-size: 12px; text-decoration:none;" })
+                        </div>
+                    </div>
+                </div>}

@@ -1,0 +1,115 @@
+﻿@model webcoso.Models.DonHangViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4" style=" margin-top:20px;">
+            <h2>Thông tin chi tiết</h2>
+            <div>
+                <h4>Đơn hàng</h4>
+                <hr />
+                @Html.ActionLink("Xuất hóa đơn", "Index", "Report", new { id = Model.DonHang.MaDH }, new { @class = "btn btn-success" })
+                <dl class="dl-horizontal" style="display:flex;flex-wrap:wrap">
+                    <dt class="col-md-2">
+                        Trạng thái giao hàng
+                    </dt>
+                    <dd class="col-md-10">
+                        @if (Model.DonHang.TrangThaiGiaoHang == true)
+                        {
+                            <label class="list-box tri-state" id="TrangThaiGiaoHang" name="TrangThaiGiaoHang">
+                                <a value="true">Đã giao</a>
+                            </label> }
+                        else
+                        {
+                            <label class="list-box tri-state" id="TrangThaiGiaoHang" name="TrangThaiGiaoHang">
+                                <a value="true">Chưa giao</a>
+                            </label>}
+                    </dd>
+
+                    <dt class="col-md-2">
+                        Ngày đặt
+                    </dt>
+                    <dd class="col-md-10">
+                        @Html.DisplayFor(model => model.DonHang.NgayDat)
+                    </dd>
+
+                    <dt class="col-md-2">
+                        Ngày giao
+                    </dt>
+                    <dd class="col-md-10">
+                        @Html.DisplayFor(model => model.DonHang.NgayGiao)
+                    </dd>
+
+                    <dt class="col-md-2">
+                        Email
+                    </dt>
+                    <dd class="col-md-10">
+                        @Html.DisplayFor(model => model.DonHang.AspNetUser.Email)
+                    </dd>
+
+                    <dt class="col-md-2">
+                        Số điện thoại
+                    </dt>
+                    <dd class="col-md-10">
+                        @Html.DisplayFor(model => model.DonHang.AspNetUser.PhoneNumber)
+                    </dd>
+
+                    <dt class="col-md-2">
+                        Địa chỉ
+                    </dt>
+                    <dd class="col-md-10">
+                        @Html.DisplayFor(model => model.DonHang.AspNetUser.Address)
+                    </dd>
+
+                    <dt class="col-md-2">
+                        Tổng tiền
+                    </dt>
+                    <dd class="col-md-10">
+                        @String.Format("{0:0,0}", Model.DonHang.TongTien)
+                    </dd>
+                </dl>
+                <table class="table table-bordered table-dark">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>
+                                Tên sản phẩm
+                            </th>
+                            <th>
+                                Số lượng
+                            </th>
+                            <th>
+                                Thành tiền
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-light">
+                        @foreach (var item in Model.CTDH)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SanPham.Ten)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Soluong)
+                                </td>
+                                <td>
+                                    @String.Format("{0:0,0}", item.Gia)
+                                </td>
+                            </tr>
+}
+                    </tbody>
+                </table>
+            </div>
+            <p>
+                @Html.ActionLink("Sửa", "Edit", new { id = Model.DonHang.MaDH }, new { @class = "btn btn-warning" })
+                <a class="btn btn-warning" href='@Url.Action("Index", "DonHangs")' style="margin:10px 0px;">
+                    Trở về
+                </a>
+            </p>
+        </div>
+    </main>
+</div>
+

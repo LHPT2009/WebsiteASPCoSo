@@ -1,0 +1,166 @@
+﻿@using PagedList.Mvc;
+@model webcoso.Models.SanPhamViewModel
+
+
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div class="hero-wrap hero-bread" style="background-image: url('/Content/images/banner/laptop-tot-nhat-1638390226558.jpg'); ">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Shop</span></p>
+                <h1 class="mb-0 bread">Shop</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-10 order-md-last">
+                <search class="navbar navbar-light bg-light">
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" value="@ViewBag.Keyword" name="searchString" placeholder="Nhập tên sản phẩm cần tìm" aria-label="Search"
+                               style="width:300px; height:40px; font-size:16px;">
+                        <input type="submit" class="btn btn-success my-2 my-sm-0" value="Tìm kiếm" style="margin-left: 10px; height: 40px; font-size: 16px;" width="50">
+                    </form>
+                </search>
+                <div class="filter__item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-5">
+                            <div class="filter__sort">
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="filter__found">
+                                <h6><span>@Model.SanPhams.Count()</span> Sản phẩm</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @if (Model.SanPhams.Count > 0)
+                    {
+                        foreach (var item in Model.SanPhams)
+                        {
+        <div class="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex">
+            <div class="product d-flex flex-column">
+                <a href="#" class="img-prod">
+                    <img class="img-fluid" src="@item.Hinh" alt="Colorlib Template">
+                    <div class="overlay"></div>
+                </a>
+                <div class="text py-3 pb-4 px-3">
+                    <div class="d-flex">
+                        <div class="cat">
+                            <span>Lifestyle</span>
+                        </div>
+                        <div class="rating">
+                            <p class="text-right mb-0">
+                                <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                <a href="#"><span class="ion-ios-star-outline"></span></a>
+                            </p>
+                        </div>
+                    </div>
+                    <h3><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
+                    <div class="pricing">
+                        <p class="price"><span>@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                    </div>
+                    <p class="bottom-area d-flex px-3">
+                        <a href="@Url.Action("ThemGioHang", "GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString() })" class="add-to-cart text-center py-2 mr-1"><span>Thêm vào giỏ hàng <i class="ion-ios-add ml-1"></i></span></a>
+                    </p>
+                </div>
+            </div>
+        </div> }
+}
+else
+{
+<div class="text-center">
+    <h3>Không tìm thấy sản phẩm:  <strong style="color:red">@ViewBag.Keyword</strong></h3>
+</div>}
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <div class="block-27">
+                            @Html.PagedListPager(Model.SanPhams, page => Url.Action("Index", new { page = page }))
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <div class="sidebar">
+                    <div class="sidebar-box-2">
+                        <h2 class="heading">Loại sản phẩm</h2>
+                        <div class="fancy-collapse-panel">
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            @{ foreach (var item in Model.LoaiSPs)
+                                                {
+                                                <ul>
+                                                    <li><a href="#" style="text-decoration:none">@item.TenLoai</a></li>
+                                                </ul> 
+                                                    }
+                                                }
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
+<style type="text/css">
+    #mau-nut a {
+        clear: both;
+        background-color: orange;
+        color: snow;
+    }
+
+        #mau-nut a:hover {
+            background-color: darkcyan;
+            color: snow;
+        }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var maxLength = 100;
+        $(".show-read-more").each(function () {
+            var myStr = $(this).text();
+            if ($.trim(myStr).length > maxLength) {
+                var newStr = myStr.substring(0, maxLength);
+                var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                $(this).empty().html(newStr);
+
+                $(this).append(' <a href="javascript:void(0);" class="read-more">đọc tiếp...</a>');
+                $(this).append('<span class="more-text">' + removedStr + '</span>');
+            }
+        });
+        $(".read-more").click(function () {
+            $(this).siblings(".more-text").contents().unwrap();
+            $(this).remove();
+        });
+    });</script>
+<style>
+    .show-read-more .more-text {
+        display: none;
+    }
+</style>
+
+
