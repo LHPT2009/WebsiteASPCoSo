@@ -9,6 +9,10 @@ using System.Web.Mvc;
 using webcoso.Models;
 using webcoso.Models.LinQ;
 using PagedList;
+using DocumentFormat.OpenXml.Office2013.Drawing.ChartStyle;
+using DataTable = System.Data.DataTable;
+using ClosedXML.Excel;
+using System.IO;
 
 namespace webcoso.Controllers
 {
@@ -204,6 +208,33 @@ namespace webcoso.Controllers
                 Total = total
             };
             return View(viewModel);
+        }
+
+        public FileResult Export()
+        {
+            DataTable dt = new DataTable("Grib");
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("Ngày"),
+                new DataColumn("Tổng số tiền")
+            });
+            var emps = data.DonHangs.GroupBy(p => p.NgayDat).Distinct().Select(g => new
+            {
+                Pla = g.Key,
+                Total = g.Sum(t => t.TongTien)
+            });
+            foreach (var emp in emps)
+            {
+                dt.Rows.Add(emp.Pla, emp.Total);
+            }
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Doanh-Thu.xlsx");
+                }
+            }
         }
 
         public bool AuthAdmin()

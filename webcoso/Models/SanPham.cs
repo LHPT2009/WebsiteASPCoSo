@@ -84,5 +84,40 @@ namespace webcoso.Models
             searchKey = searchKey + "";
             return db.SanPham.Where(p => p.Ten.Contains(searchKey) && p.SoLuong > 0).ToList();
         }
+        public static List<SanPham> getAllgiaduoi2()
+        {
+            WebcosoContext db = new WebcosoContext();
+            return db.SanPham.Where(p => p.Gia < 20000000 && p.SoLuong > 0).ToList();
+        }
+        public static List<SanPham> getAllgia23()
+        {
+            WebcosoContext db = new WebcosoContext();
+            return db.SanPham.Where(p => p.Gia >= 20000000 && p.Gia < 35000000 && p.SoLuong > 0).ToList();
+        }
+        public static List<SanPham> getAllgiatren3()
+        {
+            WebcosoContext db = new WebcosoContext();
+            return db.SanPham.Where(p => p.Gia >= 35000000 && p.SoLuong > 0).ToList();
+        }
+        public static List<SanPham> getAlldienthoai()
+        {
+            WebcosoContext db = new WebcosoContext();
+            return db.SanPham.Where(p => p.MaLoai == 8 && p.SoLuong > 0).ToList();
+        }
+        public static List<SanPham> getAlllaptop()
+        {
+            WebcosoContext db = new WebcosoContext();
+            return db.SanPham.Where(p => p.MaLoai == 9 && p.SoLuong > 0).ToList();
+        }
+        public static List<SanPham> getAlltablet()
+        {
+            WebcosoContext db = new WebcosoContext();
+            return db.SanPham.Where(p => p.MaLoai == 10 && p.SoLuong > 0).ToList();
+        }
+        public static List<SanPham> getAllkhac()
+        {
+            WebcosoContext db = new WebcosoContext();
+            return db.SanPham.Where(p => p.MaLoai == 11 && p.SoLuong > 0).ToList();
+        }
     }
 }
