@@ -20,7 +20,7 @@ namespace webcoso.Controllers
         private ApplicationDbContext data = new ApplicationDbContext();
 
         // GET: SanPhams
-        public ActionResult Index(int? page, string searchString)
+        public ActionResult Index(int? page, string searchString, string b, string listb)
         {
             ViewBag.Keyword = searchString;
             var loaiSP = db.LoaiSP.ToList();
@@ -35,9 +35,78 @@ namespace webcoso.Controllers
                 //SanPhams = (PagedList<SanPham>)all_sanPham.ToPagedList(pageNum, pageSize)
                 SanPhams = (PagedList<SanPham>)SanPham.getAll(searchString).ToPagedList(pageNum, pageSize)
             };
+            if (b == "Giá dưới 20 triệu")
+            {
+                SanPhamViewModel sp1 = new SanPhamViewModel
+                {
 
-            //ViewBag.AllProduct = all_sanPham.ToPagedList(pageNum, pageSize);
+                    LoaiSPs = loaiSP,
+                    SanPhams = (PagedList<SanPham>)SanPham.getAllgiaduoi2().ToPagedList(pageNum, pageSize)
+                };
+                return View(sp1);
+            }
 
+            if (b == "Giá 20 <- 30 triệu")
+            {
+                SanPhamViewModel sp2 = new SanPhamViewModel
+                {
+
+                    LoaiSPs = loaiSP,
+                    SanPhams = (PagedList<SanPham>)SanPham.getAllgia23().ToPagedList(pageNum, pageSize)
+                };
+                return View(sp2);
+            }
+
+            if (b == "Giá trên 30 triệu")
+            {
+                SanPhamViewModel sp3 = new SanPhamViewModel
+                {
+
+                    LoaiSPs = loaiSP,
+                    SanPhams = (PagedList<SanPham>)SanPham.getAllgiatren3().ToPagedList(pageNum, pageSize)
+                };
+                return View(sp3);
+            }
+            if (listb == "Điện thoại")
+            {
+                SanPhamViewModel spdt = new SanPhamViewModel
+                {
+
+                    LoaiSPs = loaiSP,
+                    SanPhams = (PagedList<SanPham>)SanPham.getAlldienthoai().ToPagedList(pageNum, pageSize)
+                };
+                return View(spdt);
+            }
+            if (listb == "Laptop")
+            {
+                SanPhamViewModel splt = new SanPhamViewModel
+                {
+
+                    LoaiSPs = loaiSP,
+                    SanPhams = (PagedList<SanPham>)SanPham.getAlllaptop().ToPagedList(pageNum, pageSize)
+                };
+                return View(splt);
+            }
+            if (listb == "Tablet")
+            {
+                SanPhamViewModel spt = new SanPhamViewModel
+                {
+
+                    LoaiSPs = loaiSP,
+                    SanPhams = (PagedList<SanPham>)SanPham.getAlltablet().ToPagedList(pageNum, pageSize)
+                };
+                return View(spt);
+            }
+            if (listb == "Khác")
+            {
+                SanPhamViewModel sp3 = new SanPhamViewModel
+                {
+
+                    LoaiSPs = loaiSP,
+                    SanPhams = (PagedList<SanPham>)SanPham.getAllkhac().ToPagedList(pageNum, pageSize)
+                };
+                return View(sp3);
+            }
             return View(sp);
         }
 

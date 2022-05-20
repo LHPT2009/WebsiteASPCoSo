@@ -8,6 +8,9 @@
         <div class="container-fluid px-4">
             <table class="table table-bordered table-dark">
                 <h1 style="margin:10px">Doanh thu theo ngày</h1>
+                @using (Html.BeginForm("Export", "DonHangs", FormMethod.Post))
+                {
+    <input type="submit" value="Xuất Excel" class="btn btn-success">}
                 <thead class="thead-dark">
                     <tr>
                         <th>
@@ -28,8 +31,7 @@
             <td>
                 @String.Format("{0:0,0}", @Model.Result[i])
             </td>
-        </tr>
-}
+        </tr>}
                 </tbody>
             </table>
             <div style=" margin-bottom:50px;">
