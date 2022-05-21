@@ -21,18 +21,39 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.MaDH)
 
+                    @*<div class="form-group">
+                            @Html.LabelFor(model => model.TrangThaiGiaoHang, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.TrangThaiGiaoHang)
+                                    @Html.ValidationMessageFor(model => model.TrangThaiGiaoHang, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>*@
                     <div class="form-group">
-                        @Html.LabelFor(model => model.TrangThaiGiaoHang, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <strong class="control-label col-md-2">Trạng thái giao hàng</strong>
                         <div class="col-md-10">
                             <div class="checkbox">
-                                @Html.EditorFor(model => model.TrangThaiGiaoHang)
+                                @if (Model.TrangThaiGiaoHang == true)
+                                {
+                                    <select class="list-box tri-state" id="TrangThaiGiaoHang" name="TrangThaiGiaoHang">
+                                        <option selected="selected" value="true">Đã giao</option>
+                                        <option value="false">Chưa giao</option>
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select class="list-box tri-state" id="TrangThaiGiaoHang" name="TrangThaiGiaoHang">
+                                        <option value="true">Đã giao</option>
+                                        <option selected="selected" value="false">Chưa giao</option>
+                                    </select>
+                                }
                                 @Html.ValidationMessageFor(model => model.TrangThaiGiaoHang, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
-
                     <div class="form-group">
-                        @Html.LabelFor(model => model.NgayDat, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <strong class="control-label col-md-2">Ngày đặt</strong>
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.NgayDat, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.NgayDat, "", new { @class = "text-danger" })
@@ -40,7 +61,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.NgayGiao, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <strong class="control-label col-md-2">Ngày giao</strong>
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.NgayGiao, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.NgayGiao, "", new { @class = "text-danger" })
@@ -48,10 +69,18 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.MaKH, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <strong class="control-label col-md-2">Mã khách hàng</strong>
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.MaKH, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.MaKH, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="display:none;">
+                        <strong class="control-label col-md-2">Tổng tiền</strong>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TongTien, "", new { @class = "text-danger" })
                         </div>
                     </div>
 

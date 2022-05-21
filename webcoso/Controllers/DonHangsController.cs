@@ -122,7 +122,7 @@ namespace webcoso.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaDH,TrangThaiGiaoHang,NgayDat,NgayGiao,MaKH")] Models.DonHang donHang)
+        public ActionResult Edit([Bind(Include = "MaDH,TrangThaiGiaoHang,NgayDat,NgayGiao,MaKH,TongTien")] Models.DonHang donHang)
         {
             if (!AuthAdmin())
                 return RedirectToAction("Error401", "Admin");
