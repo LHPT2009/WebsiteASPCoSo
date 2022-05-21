@@ -99,25 +99,10 @@ namespace webcoso.Models
             WebcosoContext db = new WebcosoContext();
             return db.SanPham.Where(p => p.Gia >= 35000000 && p.SoLuong > 0).ToList();
         }
-        public static List<SanPham> getAlldienthoai()
+        public static List<SanPham> getsanphamtheoid(int maloai)
         {
             WebcosoContext db = new WebcosoContext();
-            return db.SanPham.Where(p => p.MaLoai == 8 && p.SoLuong > 0).ToList();
-        }
-        public static List<SanPham> getAlllaptop()
-        {
-            WebcosoContext db = new WebcosoContext();
-            return db.SanPham.Where(p => p.MaLoai == 9 && p.SoLuong > 0).ToList();
-        }
-        public static List<SanPham> getAlltablet()
-        {
-            WebcosoContext db = new WebcosoContext();
-            return db.SanPham.Where(p => p.MaLoai == 10 && p.SoLuong > 0).ToList();
-        }
-        public static List<SanPham> getAllkhac()
-        {
-            WebcosoContext db = new WebcosoContext();
-            return db.SanPham.Where(p => p.MaLoai == 11 && p.SoLuong > 0).ToList();
+            return db.SanPham.Where(p => p.MaLoai == maloai && p.SoLuong > 0).ToList();
         }
     }
 }

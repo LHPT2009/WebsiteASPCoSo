@@ -588,6 +588,10 @@
     <Content Include="Views\NhomSanPhams\Edit.cshtml" />
     <Content Include="Views\NhomSanPhams\Index.cshtml" />
     <Content Include="Views\Admin\Error401.cshtml" />
+    <Content Include="Views\SanPhams\Index1.cshtml" />
+    <Content Include="Views\SanPhams\Index2.cshtml" />
+    <Content Include="Views\SanPhams\Index3.cshtml" />
+    <Content Include="Views\SanPhams\sanphamtheomaloai.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

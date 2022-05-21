@@ -1,8 +1,7 @@
 ﻿@using PagedList.Mvc;
 @model webcoso.Models.SanPhamViewModel
 
-
-@{ ViewBag.Title = "Index";
+@{ ViewBag.Title = "sanphamtheomaloai";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <div class="hero-wrap hero-bread" style="background-image: url('/Content/images/banner/laptop-tot-nhat-1638390226558.jpg'); ">
@@ -90,8 +89,7 @@ else
                 <div class="row">
                     <div class="col text-center">
                         <div class="block-27">
-                            @Html.PagedListPager(Model.SanPhams, page => Url.Action(
-                                                                                                                                                        "Index", new { page = page }))
+                        @Html.PagedListPager(Model.SanPhams, page => Url.Action("sanphamtheomaloai", new { @page = page, @maloai = 9 }));
                         </div>
                     </div>
                 </div>

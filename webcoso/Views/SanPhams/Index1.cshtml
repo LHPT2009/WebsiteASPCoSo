@@ -2,7 +2,7 @@
 @model webcoso.Models.SanPhamViewModel
 
 
-@{ ViewBag.Title = "Index";
+@{ ViewBag.Title = "Index1";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <div class="hero-wrap hero-bread" style="background-image: url('/Content/images/banner/laptop-tot-nhat-1638390226558.jpg'); ">
@@ -91,7 +91,7 @@ else
                     <div class="col text-center">
                         <div class="block-27">
                             @Html.PagedListPager(Model.SanPhams, page => Url.Action(
-                                                                                                                                                        "Index", new { page = page }))
+                                                                                                                                                                                           "Index1", new { page = page }))
                         </div>
                     </div>
                 </div>
