@@ -20,13 +20,12 @@ namespace webcoso.Controllers
         private ApplicationDbContext data = new ApplicationDbContext();
 
         // GET: SanPhams
-        public ActionResult Index(int? page,int? maloai, string searchString)
+        public ActionResult Index(int? page, string searchString)
         {
             ViewBag.Keyword = searchString;
             var loaiSP = db.LoaiSP.ToList();
             int pageSize = 15;
             int pageNum = page ?? 1;
-            int maloaii = maloai ?? 8;
             SanPhamViewModel sp = new SanPhamViewModel
             {
                 LoaiSPs = loaiSP,
