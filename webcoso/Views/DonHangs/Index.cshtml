@@ -57,17 +57,14 @@
         @if (item.TrangThaiGiaoHang == true)
         {
 <option selected="selected" value="true">Đã giao</option>
-                        <option value="false">Chưa giao</option>
- }
-                    else
-                    {
-<option value="true">Đã giao</option>
-                        <option selected="selected" value="false">Chưa giao</option>
-}
+                        <option value="false">Chưa giao</option> }
+                                            else
+                                            {
+                        <option value="true">Đã giao</option>
+                                                <option selected="selected" value="false">Chưa giao</option>}
     </select>
     @*<input type="submit" value="Cập nhật" class="btn btn-success" />*@
-</td>
-}
+</td>}
             <td>
                 @Html.DisplayFor(modelItem => item.NgayDat)
             </td>
@@ -88,8 +85,7 @@
                 @Html.ActionLink("Chi tiết", "Details", new { id = item.MaDH }, new { @class = "btn btn-info", @style = "margin-left:5px" })
                 @Html.ActionLink("Xóa", "Delete", new { id = item.MaDH }, new { @class = "btn btn-danger", @style = "margin-left:5px" })
             </td>
-        </tr>
-}
+        </tr>}
                 </tbody>
             </table>
             <div style=" margin-bottom:50px;">
