@@ -20,92 +20,71 @@ namespace webcoso.Controllers
         private ApplicationDbContext data = new ApplicationDbContext();
 
         // GET: SanPhams
-        public ActionResult Index(int? page, string searchString, string b, string listb)
+        public ActionResult Index(int? page,int? maloai, string searchString)
         {
             ViewBag.Keyword = searchString;
             var loaiSP = db.LoaiSP.ToList();
-            //if (page == null) page = 1;
-            //var all_sanPham = (from s in db.SanPham select s).OrderBy(m => m.MaSP);
-            int pageSize = 12;
+            int pageSize = 15;
             int pageNum = page ?? 1;
+            int maloaii = maloai ?? 8;
             SanPhamViewModel sp = new SanPhamViewModel
             {
-
                 LoaiSPs = loaiSP,
-                //SanPhams = (PagedList<SanPham>)all_sanPham.ToPagedList(pageNum, pageSize)
                 SanPhams = (PagedList<SanPham>)SanPham.getAll(searchString).ToPagedList(pageNum, pageSize)
             };
-            if (b == "Giá dưới 20 triệu")
-            {
-                SanPhamViewModel sp1 = new SanPhamViewModel
-                {
+            return View(sp);
+        }
 
-                    LoaiSPs = loaiSP,
-                    SanPhams = (PagedList<SanPham>)SanPham.getAllgiaduoi2().ToPagedList(pageNum, pageSize)
-                };
-                return View(sp1);
+        public ActionResult Index1(int? page, string searchString)
+        {
+            var loaiSP = db.LoaiSP.ToList();
+            int pageSize = 15;
+            int pageNum = page ?? 1;
+
+            SanPhamViewModel sp = new SanPhamViewModel
+            {
+                LoaiSPs = loaiSP,
+                SanPhams = (PagedList<SanPham>)SanPham.getAllgiaduoi2().ToPagedList(pageNum, pageSize)
+            };
+            if (searchString != null && searchString != "")
+            {
+                return RedirectToAction("Index", new { @searchString = searchString });
             }
+            return View(sp);
+        }
 
-            if (b == "Giá 20 <- 30 triệu")
+        public ActionResult Index2(int? page, string searchString)
+        {
+            var loaiSP = db.LoaiSP.ToList();
+            int pageSize = 15;
+            int pageNum = page ?? 1;
+
+            SanPhamViewModel sp = new SanPhamViewModel
             {
-                SanPhamViewModel sp2 = new SanPhamViewModel
-                {
-
-                    LoaiSPs = loaiSP,
-                    SanPhams = (PagedList<SanPham>)SanPham.getAllgia23().ToPagedList(pageNum, pageSize)
-                };
-                return View(sp2);
+                LoaiSPs = loaiSP,
+                SanPhams = (PagedList<SanPham>)SanPham.getAllgia23().ToPagedList(pageNum, pageSize)
+            };
+            if (searchString != null && searchString != "")
+            {
+                return RedirectToAction("Index", new { @searchString = searchString });
             }
+            return View(sp);
+        }
 
-            if (b == "Giá trên 30 triệu")
+        public ActionResult Index3(int? page, string searchString)
+        {
+            var loaiSP = db.LoaiSP.ToList();
+            int pageSize = 15;
+            int pageNum = page ?? 1;
+
+            SanPhamViewModel sp = new SanPhamViewModel
             {
-                SanPhamViewModel sp3 = new SanPhamViewModel
-                {
-
-                    LoaiSPs = loaiSP,
-                    SanPhams = (PagedList<SanPham>)SanPham.getAllgiatren3().ToPagedList(pageNum, pageSize)
-                };
-                return View(sp3);
-            }
-            if (listb == "Điện thoại")
+                LoaiSPs = loaiSP,
+                SanPhams = (PagedList<SanPham>)SanPham.getAllgiatren3().ToPagedList(pageNum, pageSize)
+            };
+            if (searchString != null && searchString != "")
             {
-                SanPhamViewModel spdt = new SanPhamViewModel
-                {
-
-                    LoaiSPs = loaiSP,
-                    SanPhams = (PagedList<SanPham>)SanPham.getAlldienthoai().ToPagedList(pageNum, pageSize)
-                };
-                return View(spdt);
-            }
-            if (listb == "Laptop")
-            {
-                SanPhamViewModel splt = new SanPhamViewModel
-                {
-
-                    LoaiSPs = loaiSP,
-                    SanPhams = (PagedList<SanPham>)SanPham.getAlllaptop().ToPagedList(pageNum, pageSize)
-                };
-                return View(splt);
-            }
-            if (listb == "Tablet")
-            {
-                SanPhamViewModel spt = new SanPhamViewModel
-                {
-
-                    LoaiSPs = loaiSP,
-                    SanPhams = (PagedList<SanPham>)SanPham.getAlltablet().ToPagedList(pageNum, pageSize)
-                };
-                return View(spt);
-            }
-            if (listb == "Khác")
-            {
-                SanPhamViewModel sp3 = new SanPhamViewModel
-                {
-
-                    LoaiSPs = loaiSP,
-                    SanPhams = (PagedList<SanPham>)SanPham.getAllkhac().ToPagedList(pageNum, pageSize)
-                };
-                return View(sp3);
+                return RedirectToAction("Index", new { @searchString = searchString });
             }
             return View(sp);
         }
@@ -147,6 +126,23 @@ namespace webcoso.Controllers
                 SanPham = sanPham,
                 BinhLuans = (PagedList<BinhLuan>)sanPham.BinhLuan.ToPagedList(pageNum, pageSize)
             };
+            return View(sp);
+        }
+        public ActionResult sanphamtheomaloai(int? page, int? maloai, string searchString)
+        {
+            var loaiSP = db.LoaiSP.ToList();
+            int pageSize = 15;
+            int pageNum = page ?? 1;
+            int maloaii = maloai ?? 8;
+            SanPhamViewModel sp = new SanPhamViewModel
+            {
+                LoaiSPs = loaiSP,
+                SanPhams = (PagedList<SanPham>)SanPham.getsanphamtheoid(maloaii).ToPagedList(pageNum, pageSize)
+            };
+            if (searchString != null && searchString != "")
+            {
+                return RedirectToAction("Index", new { @searchString = searchString });
+            }
             return View(sp);
         }
 
