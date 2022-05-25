@@ -257,6 +257,8 @@
     <Compile Include="Models\SanPhamViewModel.cs" />
     <Compile Include="Models\ThuongHieu.cs" />
     <Compile Include="Models\WebcosoContext.cs" />
+    <Compile Include="Order\MoMoSecurity.cs" />
+    <Compile Include="Order\PaymentRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Startup.cs" />
