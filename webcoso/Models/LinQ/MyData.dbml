@@ -1,16 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Webcoso" Class="MyDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-1LU7SQG\SQLEXPRESS;Initial Catalog=Webcoso;Persist Security Info=True;User ID=sa;Connect Timeout=0" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="WebcosoConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.BinhLuan" Member="BinhLuans">
-    <Type Name="BinhLuan">
-      <Column Name="MaBinhLuan" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="NoiDung" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="MaSP" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MaKH" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
-      <Column Name="NgayTao" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="AspNetUser_BinhLuan" Member="AspNetUser" ThisKey="MaKH" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
-      <Association Name="SanPham_BinhLuan" Member="SanPham" ThisKey="MaSP" OtherKey="MaSP" Type="SanPham" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.[__MigrationHistory]" Member="__MigrationHistories">
     <Type Name="__MigrationHistory">
       <Column Name="MigrationId" Type="System.String" DbType="NVarChar(150) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -67,23 +56,22 @@
       <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
       <Column Name="Address" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
-      <Association Name="AspNetUser_BinhLuan" Member="BinhLuans" ThisKey="Id" OtherKey="MaKH" Type="BinhLuan" />
       <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUserClaims" ThisKey="Id" OtherKey="UserId" Type="AspNetUserClaim" />
       <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
       <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
-      <Association Name="AspNetUser_BinhLuan1" Member="BinhLuan1s" ThisKey="Id" OtherKey="MaKH" Type="BinhLuan1" />
+      <Association Name="AspNetUser_BinhLuan" Member="BinhLuans" ThisKey="Id" OtherKey="MaKH" Type="BinhLuan" />
       <Association Name="AspNetUser_DonHang" Member="DonHangs" ThisKey="Id" OtherKey="MaKH" Type="DonHang" />
     </Type>
   </Table>
-  <Table Name="dbo.BinhLuan" Member="BinhLuan1s">
-    <Type Name="BinhLuan1">
+  <Table Name="dbo.BinhLuan" Member="BinhLuans">
+    <Type Name="BinhLuan">
       <Column Name="MaBinhLuan" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="NoiDung" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="MaSP" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="MaKH" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
       <Column Name="NgayTao" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="AspNetUser_BinhLuan1" Member="AspNetUser" ThisKey="MaKH" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
-      <Association Name="SanPham_BinhLuan1" Member="SanPham" ThisKey="MaSP" OtherKey="MaSP" Type="SanPham" IsForeignKey="true" />
+      <Association Name="AspNetUser_BinhLuan" Member="AspNetUser" ThisKey="MaKH" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+      <Association Name="SanPham_BinhLuan" Member="SanPham" ThisKey="MaSP" OtherKey="MaSP" Type="SanPham" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ChiTietDonHang" Member="ChiTietDonHangs">
@@ -104,6 +92,7 @@
       <Column Name="NgayGiao" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="MaKH" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="TongTien" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TrangThaiThanhToan" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="DonHang_ChiTietDonHang" Member="ChiTietDonHangs" ThisKey="MaDH" OtherKey="MaDH" Type="ChiTietDonHang" />
       <Association Name="AspNetUser_DonHang" Member="AspNetUser" ThisKey="MaKH" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
     </Type>
@@ -143,7 +132,6 @@
       <Column Name="MaTH" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="MaNhom" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SanPham_BinhLuan" Member="BinhLuans" ThisKey="MaSP" OtherKey="MaSP" Type="BinhLuan" />
-      <Association Name="SanPham_BinhLuan1" Member="BinhLuan1s" ThisKey="MaSP" OtherKey="MaSP" Type="BinhLuan1" />
       <Association Name="SanPham_ChiTietDonHang" Member="ChiTietDonHangs" ThisKey="MaSP" OtherKey="MaSP" Type="ChiTietDonHang" />
       <Association Name="LoaiSP_SanPham" Member="LoaiSP" ThisKey="MaLoai" OtherKey="MaLoai" Type="LoaiSP" IsForeignKey="true" />
       <Association Name="NhomSanPham_SanPham" Member="NhomSanPham" ThisKey="MaNhom" OtherKey="MaNhom" Type="NhomSanPham" IsForeignKey="true" />
