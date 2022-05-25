@@ -28,7 +28,21 @@
                                 <a value="true">Chưa giao</a>
                             </label>}
                     </dd>
-
+                    <dt class="col-md-2">
+                        Trạng thái thanh toán
+                    </dt>
+                    <dd class="col-md-10">
+                        @if (Model.DonHang.TrangThaiThanhToan == true)
+                        {
+                            <label class="list-box tri-state" id="TrangThaiThanhToan" name="TrangThaiThanhToan">
+                                <a value="true">Đã thanh toán</a>
+                            </label> }
+                        else
+                        {
+                            <label class="list-box tri-state" id="TrangThaiThanhToan" name="TrangThaiThanhToan">
+                                <a value="true">Chưa thanh toán</a>
+                            </label>}
+                    </dd>
                     <dt class="col-md-2">
                         Ngày đặt
                     </dt>
@@ -99,7 +113,7 @@
                                     @String.Format("{0:0,0}", item.Gia)
                                 </td>
                             </tr>
-}
+                        }
                     </tbody>
                 </table>
             </div>

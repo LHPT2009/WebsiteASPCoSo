@@ -53,6 +53,28 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <strong class="control-label col-md-2">Trạng thái thanh toán</strong>
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @if (Model.TrangThaiThanhToan == true)
+                                {
+                                    <select class="list-box tri-state" id="TrangThaiThanhToan" name="TrangThaiThanhToan">
+                                        <option selected="selected" value="true">Đã thanh toán</option>
+                                        <option value="false">Chưa thanh toán</option>
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select class="list-box tri-state" id="TrangThaiThanhToan" name="TrangThaiThanhToan">
+                                        <option value="true">Đã thanh toán</option>
+                                        <option selected="selected" value="false">Chưa thanh toán</option>
+                                    </select>
+                                }
+                                @Html.ValidationMessageFor(model => model.TrangThaiThanhToan, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <strong class="control-label col-md-2">Ngày đặt</strong>
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.NgayDat, new { htmlAttributes = new { @class = "form-control" } })

@@ -30,9 +30,6 @@ namespace webcoso.Models.LinQ
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertBinhLuan(BinhLuan instance);
-    partial void UpdateBinhLuan(BinhLuan instance);
-    partial void DeleteBinhLuan(BinhLuan instance);
     partial void Insert__MigrationHistory(__MigrationHistory instance);
     partial void Update__MigrationHistory(__MigrationHistory instance);
     partial void Delete__MigrationHistory(__MigrationHistory instance);
@@ -51,9 +48,9 @@ namespace webcoso.Models.LinQ
     partial void InsertAspNetUser(AspNetUser instance);
     partial void UpdateAspNetUser(AspNetUser instance);
     partial void DeleteAspNetUser(AspNetUser instance);
-    partial void InsertBinhLuan1(BinhLuan1 instance);
-    partial void UpdateBinhLuan1(BinhLuan1 instance);
-    partial void DeleteBinhLuan1(BinhLuan1 instance);
+    partial void InsertBinhLuan(BinhLuan instance);
+    partial void UpdateBinhLuan(BinhLuan instance);
+    partial void DeleteBinhLuan(BinhLuan instance);
     partial void InsertChiTietDonHang(ChiTietDonHang instance);
     partial void UpdateChiTietDonHang(ChiTietDonHang instance);
     partial void DeleteChiTietDonHang(ChiTietDonHang instance);
@@ -104,14 +101,6 @@ namespace webcoso.Models.LinQ
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<BinhLuan> BinhLuans
-		{
-			get
-			{
-				return this.GetTable<BinhLuan>();
-			}
-		}
-		
 		public System.Data.Linq.Table<@__MigrationHistory> @__MigrationHistories
 		{
 			get
@@ -160,11 +149,11 @@ namespace webcoso.Models.LinQ
 			}
 		}
 		
-		public System.Data.Linq.Table<BinhLuan1> BinhLuan1s
+		public System.Data.Linq.Table<BinhLuan> BinhLuans
 		{
 			get
 			{
-				return this.GetTable<BinhLuan1>();
+				return this.GetTable<BinhLuan>();
 			}
 		}
 		
@@ -213,246 +202,6 @@ namespace webcoso.Models.LinQ
 			get
 			{
 				return this.GetTable<ThuongHieu>();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.BinhLuan")]
-	public partial class BinhLuan : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _MaBinhLuan;
-		
-		private string _NoiDung;
-		
-		private System.Nullable<int> _MaSP;
-		
-		private string _MaKH;
-		
-		private System.Nullable<System.DateTime> _NgayTao;
-		
-		private EntityRef<AspNetUser> _AspNetUser;
-		
-		private EntityRef<SanPham> _SanPham;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnMaBinhLuanChanging(int value);
-    partial void OnMaBinhLuanChanged();
-    partial void OnNoiDungChanging(string value);
-    partial void OnNoiDungChanged();
-    partial void OnMaSPChanging(System.Nullable<int> value);
-    partial void OnMaSPChanged();
-    partial void OnMaKHChanging(string value);
-    partial void OnMaKHChanged();
-    partial void OnNgayTaoChanging(System.Nullable<System.DateTime> value);
-    partial void OnNgayTaoChanged();
-    #endregion
-		
-		public BinhLuan()
-		{
-			this._AspNetUser = default(EntityRef<AspNetUser>);
-			this._SanPham = default(EntityRef<SanPham>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaBinhLuan", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MaBinhLuan
-		{
-			get
-			{
-				return this._MaBinhLuan;
-			}
-			set
-			{
-				if ((this._MaBinhLuan != value))
-				{
-					this.OnMaBinhLuanChanging(value);
-					this.SendPropertyChanging();
-					this._MaBinhLuan = value;
-					this.SendPropertyChanged("MaBinhLuan");
-					this.OnMaBinhLuanChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoiDung", DbType="NVarChar(255)")]
-		public string NoiDung
-		{
-			get
-			{
-				return this._NoiDung;
-			}
-			set
-			{
-				if ((this._NoiDung != value))
-				{
-					this.OnNoiDungChanging(value);
-					this.SendPropertyChanging();
-					this._NoiDung = value;
-					this.SendPropertyChanged("NoiDung");
-					this.OnNoiDungChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaSP", DbType="Int")]
-		public System.Nullable<int> MaSP
-		{
-			get
-			{
-				return this._MaSP;
-			}
-			set
-			{
-				if ((this._MaSP != value))
-				{
-					if (this._SanPham.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMaSPChanging(value);
-					this.SendPropertyChanging();
-					this._MaSP = value;
-					this.SendPropertyChanged("MaSP");
-					this.OnMaSPChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaKH", DbType="NVarChar(128)")]
-		public string MaKH
-		{
-			get
-			{
-				return this._MaKH;
-			}
-			set
-			{
-				if ((this._MaKH != value))
-				{
-					if (this._AspNetUser.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMaKHChanging(value);
-					this.SendPropertyChanging();
-					this._MaKH = value;
-					this.SendPropertyChanged("MaKH");
-					this.OnMaKHChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NgayTao", DbType="DateTime")]
-		public System.Nullable<System.DateTime> NgayTao
-		{
-			get
-			{
-				return this._NgayTao;
-			}
-			set
-			{
-				if ((this._NgayTao != value))
-				{
-					this.OnNgayTaoChanging(value);
-					this.SendPropertyChanging();
-					this._NgayTao = value;
-					this.SendPropertyChanged("NgayTao");
-					this.OnNgayTaoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_BinhLuan", Storage="_AspNetUser", ThisKey="MaKH", OtherKey="Id", IsForeignKey=true)]
-		public AspNetUser AspNetUser
-		{
-			get
-			{
-				return this._AspNetUser.Entity;
-			}
-			set
-			{
-				AspNetUser previousValue = this._AspNetUser.Entity;
-				if (((previousValue != value) 
-							|| (this._AspNetUser.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._AspNetUser.Entity = null;
-						previousValue.BinhLuans.Remove(this);
-					}
-					this._AspNetUser.Entity = value;
-					if ((value != null))
-					{
-						value.BinhLuans.Add(this);
-						this._MaKH = value.Id;
-					}
-					else
-					{
-						this._MaKH = default(string);
-					}
-					this.SendPropertyChanged("AspNetUser");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SanPham_BinhLuan", Storage="_SanPham", ThisKey="MaSP", OtherKey="MaSP", IsForeignKey=true)]
-		public SanPham SanPham
-		{
-			get
-			{
-				return this._SanPham.Entity;
-			}
-			set
-			{
-				SanPham previousValue = this._SanPham.Entity;
-				if (((previousValue != value) 
-							|| (this._SanPham.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SanPham.Entity = null;
-						previousValue.BinhLuans.Remove(this);
-					}
-					this._SanPham.Entity = value;
-					if ((value != null))
-					{
-						value.BinhLuans.Add(this);
-						this._MaSP = value.MaSP;
-					}
-					else
-					{
-						this._MaSP = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("SanPham");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -1233,15 +982,13 @@ namespace webcoso.Models.LinQ
 		
 		private string _Address;
 		
-		private EntitySet<BinhLuan> _BinhLuans;
-		
 		private EntitySet<AspNetUserClaim> _AspNetUserClaims;
 		
 		private EntitySet<AspNetUserLogin> _AspNetUserLogins;
 		
 		private EntitySet<AspNetUserRole> _AspNetUserRoles;
 		
-		private EntitySet<BinhLuan1> _BinhLuan1s;
+		private EntitySet<BinhLuan> _BinhLuans;
 		
 		private EntitySet<DonHang> _DonHangs;
 		
@@ -1281,11 +1028,10 @@ namespace webcoso.Models.LinQ
 		
 		public AspNetUser()
 		{
-			this._BinhLuans = new EntitySet<BinhLuan>(new Action<BinhLuan>(this.attach_BinhLuans), new Action<BinhLuan>(this.detach_BinhLuans));
 			this._AspNetUserClaims = new EntitySet<AspNetUserClaim>(new Action<AspNetUserClaim>(this.attach_AspNetUserClaims), new Action<AspNetUserClaim>(this.detach_AspNetUserClaims));
 			this._AspNetUserLogins = new EntitySet<AspNetUserLogin>(new Action<AspNetUserLogin>(this.attach_AspNetUserLogins), new Action<AspNetUserLogin>(this.detach_AspNetUserLogins));
 			this._AspNetUserRoles = new EntitySet<AspNetUserRole>(new Action<AspNetUserRole>(this.attach_AspNetUserRoles), new Action<AspNetUserRole>(this.detach_AspNetUserRoles));
-			this._BinhLuan1s = new EntitySet<BinhLuan1>(new Action<BinhLuan1>(this.attach_BinhLuan1s), new Action<BinhLuan1>(this.detach_BinhLuan1s));
+			this._BinhLuans = new EntitySet<BinhLuan>(new Action<BinhLuan>(this.attach_BinhLuans), new Action<BinhLuan>(this.detach_BinhLuans));
 			this._DonHangs = new EntitySet<DonHang>(new Action<DonHang>(this.attach_DonHangs), new Action<DonHang>(this.detach_DonHangs));
 			OnCreated();
 		}
@@ -1570,19 +1316,6 @@ namespace webcoso.Models.LinQ
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_BinhLuan", Storage="_BinhLuans", ThisKey="Id", OtherKey="MaKH")]
-		public EntitySet<BinhLuan> BinhLuans
-		{
-			get
-			{
-				return this._BinhLuans;
-			}
-			set
-			{
-				this._BinhLuans.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_AspNetUserClaim", Storage="_AspNetUserClaims", ThisKey="Id", OtherKey="UserId")]
 		public EntitySet<AspNetUserClaim> AspNetUserClaims
 		{
@@ -1622,16 +1355,16 @@ namespace webcoso.Models.LinQ
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_BinhLuan1", Storage="_BinhLuan1s", ThisKey="Id", OtherKey="MaKH")]
-		public EntitySet<BinhLuan1> BinhLuan1s
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_BinhLuan", Storage="_BinhLuans", ThisKey="Id", OtherKey="MaKH")]
+		public EntitySet<BinhLuan> BinhLuans
 		{
 			get
 			{
-				return this._BinhLuan1s;
+				return this._BinhLuans;
 			}
 			set
 			{
-				this._BinhLuan1s.Assign(value);
+				this._BinhLuans.Assign(value);
 			}
 		}
 		
@@ -1666,18 +1399,6 @@ namespace webcoso.Models.LinQ
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_BinhLuans(BinhLuan entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetUser = this;
-		}
-		
-		private void detach_BinhLuans(BinhLuan entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetUser = null;
 		}
 		
 		private void attach_AspNetUserClaims(AspNetUserClaim entity)
@@ -1716,13 +1437,13 @@ namespace webcoso.Models.LinQ
 			entity.AspNetUser = null;
 		}
 		
-		private void attach_BinhLuan1s(BinhLuan1 entity)
+		private void attach_BinhLuans(BinhLuan entity)
 		{
 			this.SendPropertyChanging();
 			entity.AspNetUser = this;
 		}
 		
-		private void detach_BinhLuan1s(BinhLuan1 entity)
+		private void detach_BinhLuans(BinhLuan entity)
 		{
 			this.SendPropertyChanging();
 			entity.AspNetUser = null;
@@ -1742,7 +1463,7 @@ namespace webcoso.Models.LinQ
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.BinhLuan")]
-	public partial class BinhLuan1 : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class BinhLuan : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1777,7 +1498,7 @@ namespace webcoso.Models.LinQ
     partial void OnNgayTaoChanged();
     #endregion
 		
-		public BinhLuan1()
+		public BinhLuan()
 		{
 			this._AspNetUser = default(EntityRef<AspNetUser>);
 			this._SanPham = default(EntityRef<SanPham>);
@@ -1892,7 +1613,7 @@ namespace webcoso.Models.LinQ
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_BinhLuan1", Storage="_AspNetUser", ThisKey="MaKH", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_BinhLuan", Storage="_AspNetUser", ThisKey="MaKH", OtherKey="Id", IsForeignKey=true)]
 		public AspNetUser AspNetUser
 		{
 			get
@@ -1909,12 +1630,12 @@ namespace webcoso.Models.LinQ
 					if ((previousValue != null))
 					{
 						this._AspNetUser.Entity = null;
-						previousValue.BinhLuan1s.Remove(this);
+						previousValue.BinhLuans.Remove(this);
 					}
 					this._AspNetUser.Entity = value;
 					if ((value != null))
 					{
-						value.BinhLuan1s.Add(this);
+						value.BinhLuans.Add(this);
 						this._MaKH = value.Id;
 					}
 					else
@@ -1926,7 +1647,7 @@ namespace webcoso.Models.LinQ
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SanPham_BinhLuan1", Storage="_SanPham", ThisKey="MaSP", OtherKey="MaSP", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SanPham_BinhLuan", Storage="_SanPham", ThisKey="MaSP", OtherKey="MaSP", IsForeignKey=true)]
 		public SanPham SanPham
 		{
 			get
@@ -1943,12 +1664,12 @@ namespace webcoso.Models.LinQ
 					if ((previousValue != null))
 					{
 						this._SanPham.Entity = null;
-						previousValue.BinhLuan1s.Remove(this);
+						previousValue.BinhLuans.Remove(this);
 					}
 					this._SanPham.Entity = value;
 					if ((value != null))
 					{
-						value.BinhLuan1s.Add(this);
+						value.BinhLuans.Add(this);
 						this._MaSP = value.MaSP;
 					}
 					else
@@ -2215,6 +1936,8 @@ namespace webcoso.Models.LinQ
 		
 		private System.Nullable<double> _TongTien;
 		
+		private System.Nullable<bool> _TrangThaiThanhToan;
+		
 		private EntitySet<ChiTietDonHang> _ChiTietDonHangs;
 		
 		private EntityRef<AspNetUser> _AspNetUser;
@@ -2235,6 +1958,8 @@ namespace webcoso.Models.LinQ
     partial void OnMaKHChanged();
     partial void OnTongTienChanging(System.Nullable<double> value);
     partial void OnTongTienChanged();
+    partial void OnTrangThaiThanhToanChanging(System.Nullable<bool> value);
+    partial void OnTrangThaiThanhToanChanged();
     #endregion
 		
 		public DonHang()
@@ -2364,6 +2089,26 @@ namespace webcoso.Models.LinQ
 					this._TongTien = value;
 					this.SendPropertyChanged("TongTien");
 					this.OnTongTienChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrangThaiThanhToan", DbType="Bit")]
+		public System.Nullable<bool> TrangThaiThanhToan
+		{
+			get
+			{
+				return this._TrangThaiThanhToan;
+			}
+			set
+			{
+				if ((this._TrangThaiThanhToan != value))
+				{
+					this.OnTrangThaiThanhToanChanging(value);
+					this.SendPropertyChanging();
+					this._TrangThaiThanhToan = value;
+					this.SendPropertyChanged("TrangThaiThanhToan");
+					this.OnTrangThaiThanhToanChanged();
 				}
 			}
 		}
@@ -2720,8 +2465,6 @@ namespace webcoso.Models.LinQ
 		
 		private EntitySet<BinhLuan> _BinhLuans;
 		
-		private EntitySet<BinhLuan1> _BinhLuan1s;
-		
 		private EntitySet<ChiTietDonHang> _ChiTietDonHangs;
 		
 		private EntityRef<LoaiSP> _LoaiSP;
@@ -2775,7 +2518,6 @@ namespace webcoso.Models.LinQ
 		public SanPham()
 		{
 			this._BinhLuans = new EntitySet<BinhLuan>(new Action<BinhLuan>(this.attach_BinhLuans), new Action<BinhLuan>(this.detach_BinhLuans));
-			this._BinhLuan1s = new EntitySet<BinhLuan1>(new Action<BinhLuan1>(this.attach_BinhLuan1s), new Action<BinhLuan1>(this.detach_BinhLuan1s));
 			this._ChiTietDonHangs = new EntitySet<ChiTietDonHang>(new Action<ChiTietDonHang>(this.attach_ChiTietDonHangs), new Action<ChiTietDonHang>(this.detach_ChiTietDonHangs));
 			this._LoaiSP = default(EntityRef<LoaiSP>);
 			this._NhomSanPham = default(EntityRef<NhomSanPham>);
@@ -3168,19 +2910,6 @@ namespace webcoso.Models.LinQ
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SanPham_BinhLuan1", Storage="_BinhLuan1s", ThisKey="MaSP", OtherKey="MaSP")]
-		public EntitySet<BinhLuan1> BinhLuan1s
-		{
-			get
-			{
-				return this._BinhLuan1s;
-			}
-			set
-			{
-				this._BinhLuan1s.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SanPham_ChiTietDonHang", Storage="_ChiTietDonHangs", ThisKey="MaSP", OtherKey="MaSP")]
 		public EntitySet<ChiTietDonHang> ChiTietDonHangs
 		{
@@ -3323,18 +3052,6 @@ namespace webcoso.Models.LinQ
 		}
 		
 		private void detach_BinhLuans(BinhLuan entity)
-		{
-			this.SendPropertyChanging();
-			entity.SanPham = null;
-		}
-		
-		private void attach_BinhLuan1s(BinhLuan1 entity)
-		{
-			this.SendPropertyChanging();
-			entity.SanPham = this;
-		}
-		
-		private void detach_BinhLuan1s(BinhLuan1 entity)
 		{
 			this.SendPropertyChanging();
 			entity.SanPham = null;

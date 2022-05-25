@@ -33,6 +33,9 @@
                             Tổng tiền
                         </th>
                         <th>
+                            Trạng thái thanh toán
+                        </th>
+                        <th>
                             Thao tác
                         </th>
                     </tr>
@@ -42,50 +45,71 @@
                     {
 
 
-        <tr>
+                    <tr>
 
-            <!--<td class="checkbox">
-            @Html.EditorFor(modelItem => item.TrangThaiGiaoHang)-->
-            @*<a href="@Url.Action("Edit","DonHangs",new { @tt = Html.DisplayFor(modelItem => item.TrangThaiGiaoHang), @id = item.MaDH})">Cập nhật</a>*@
-            @*<input type="submit" id="cbTrangThai" name="cbTrangThai"  class="btn btn-danger" style="zoom: 0.8;" />*@
+                        <!--<td class="checkbox">
+    @Html.EditorFor(modelItem => item.TrangThaiGiaoHang)-->
+                        @*<a href="@Url.Action("Edit","DonHangs",new { @tt = Html.DisplayFor(modelItem => item.TrangThaiGiaoHang), @id = item.MaDH})">Cập nhật</a>*@
+                        @*<input type="submit" id="cbTrangThai" name="cbTrangThai"  class="btn btn-danger" style="zoom: 0.8;" />*@
 
-            <!--</td>-->
-            @using (Html.BeginForm("EditTT", "DonHangs", new { @id = item.MaDH }))
-            {
-<td class="checkbox" style="display: flex; justify-content: space-between;">
-    <select class="list-box tri-state" id="item.TrangThaiGiaoHang" name="item.TrangThaiGiaoHang">
-        @if (item.TrangThaiGiaoHang == true)
-        {
-<option selected="selected" value="true">Đã giao</option>
-                        <option value="false">Chưa giao</option> }
-                                            else
-                                            {
-                        <option value="true">Đã giao</option>
-                                                <option selected="selected" value="false">Chưa giao</option>}
-    </select>
-    @*<input type="submit" value="Cập nhật" class="btn btn-success" />*@
-</td>}
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayDat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayGiao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AspNetUser.Address)
-            </td>
-            <td>
-                @String.Format("{0:0,0}", item.TongTien)
-            </td>
-            <td>
-                @Html.ActionLink("Sửa", "Edit", new { id = item.MaDH }, new { @class = "btn btn-warning" })
-                @Html.ActionLink("Chi tiết", "Details", new { id = item.MaDH }, new { @class = "btn btn-info", @style = "margin-left:5px" })
-                @Html.ActionLink("Xóa", "Delete", new { id = item.MaDH }, new { @class = "btn btn-danger", @style = "margin-left:5px" })
-            </td>
-        </tr>}
+                        <!--</td>-->
+                        @using (Html.BeginForm("EditTT", "DonHangs", new { @id = item.MaDH }))
+                        {
+                            <td class="checkbox" style="display: flex; justify-content: space-between;">
+                                <select class="list-box tri-state" id="item.TrangThaiGiaoHang" name="item.TrangThaiGiaoHang">
+                                    @if (item.TrangThaiGiaoHang == true)
+                                    {
+                                        <option selected="selected" value="true">Đã giao</option>
+                                        <option value="false">Chưa giao</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="true">Đã giao</option>
+                                        <option selected="selected" value="false">Chưa giao</option>
+                                    }
+                                </select>
+                                @*<input type="submit" value="Cập nhật" class="btn btn-success" />*@
+                            </td>
+                        }
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NgayDat)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NgayGiao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AspNetUser.Address)
+                        </td>
+                        <td>
+                            @String.Format("{0:0,0}", item.TongTien)
+                        </td>
+                        @using (Html.BeginForm("EditTTT", "DonHangs", new { @id = item.MaDH }))
+                        {
+                            <td class="checkbox" style="display: flex; justify-content: space-between;">
+                                <select class="list-box tri-state " id="item.TrangThaiThanhToan" name="item.TrangThaiThanhToan">
+                                    @if (item.TrangThaiThanhToan == true)
+                                    {
+                                        <option selected="selected" value="true">Đã thanh toán</option>
+                                        <option value="false">Chưa thanh toán</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="true">Đã thanh toán</option>
+                                        <option selected="selected" value="false">Chưa thanh toán</option>
+                                    }
+                                </select>
+                            </td>
+                        }
+                        <td>
+                            @Html.ActionLink("Sửa", "Edit", new { id = item.MaDH }, new { @class = "btn btn-warning" })
+                            @Html.ActionLink("Chi tiết", "Details", new { id = item.MaDH }, new { @class = "btn btn-info", @style = "margin-left:5px" })
+                            @Html.ActionLink("Xóa", "Delete", new { id = item.MaDH }, new { @class = "btn btn-danger", @style = "margin-left:5px" })
+                        </td>
+                    </tr>
+                    }
                 </tbody>
             </table>
             <div style=" margin-bottom:50px;">

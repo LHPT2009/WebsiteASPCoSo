@@ -157,6 +157,7 @@ namespace webcoso.Controllers
             dh.NgayDat = DateTime.Now;
             dh.NgayGiao = DateTime.Parse(ngaygiao);
             dh.TrangThaiGiaoHang = false;
+            dh.TrangThaiThanhToan = false;
             dh.TongTien = TongTien();
 
             data.DonHang.Add(dh);
@@ -233,7 +234,7 @@ namespace webcoso.Controllers
             return Redirect(jmessage.GetValue("payUrl").ToString());
         }
 
-        public ActionResult ReturnUrl()
+        public ActionResult ReturnUrl(FormCollection collection)
         {
             string param = Request.QueryString.ToString().Substring(0, Request.QueryString.ToString().IndexOf("signature") - 1);
             param = Server.UrlDecode(param);
@@ -253,6 +254,35 @@ namespace webcoso.Controllers
             {
                 ViewBag.message = "Thanh toán thành công";
                 Session["GioHang"] = new List<GioHang>();
+                DonHang dh = new DonHang();
+                Models.LinQ.AspNetUser kh = (Models.LinQ.AspNetUser)Session["TaiKhoan"];
+                //SanPham s = new SanPham();
+                List<GioHang> gh = layGioHang();
+                var ngaygiao = String.Format("{0:MM/dd/yyyy}", collection["NgayGiao"]);
+                dh.MaKH = kh.Id;
+                dh.NgayDat = DateTime.Now;
+                dh.NgayGiao = DateTime.Parse(ngaygiao);
+                dh.TrangThaiGiaoHang = false;
+                dh.TrangThaiThanhToan = true;
+                dh.TongTien = TongTien();
+
+                data.DonHang.Add(dh);
+                data.SaveChanges();
+                foreach (var item in gh)
+                {
+                    ChiTietDonHang ctdh = new ChiTietDonHang();
+                    ctdh.MaDH = dh.MaDH;
+                    ctdh.MaSP = item.MaSP;
+                    ctdh.Soluong = item.SoLuong;
+                    ctdh.Gia = item.ThanhTien;
+                    SanPham sanPham = data.SanPham.Single(n => n.MaSP == item.MaSP);
+                    sanPham.SoLuong -= item.SoLuong;
+                    data.SaveChanges();
+                    data.ChiTietDonHang.Add(ctdh);
+                    data.SaveChanges();
+                }
+                Session["GioHang"] = null;
+                return RedirectToAction("XacNhanDonHang", "GioHang");
             }
             return View();
         }
@@ -290,6 +320,11 @@ namespace webcoso.Controllers
 
             }
             return Json("", JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult thanhtoancanhan()
+        {
+            return View();
         }
     }
 }

@@ -70,7 +70,7 @@ namespace webcoso.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaDH,TrangThaiGiaoHang,NgayDat,NgayGiao,MaKH")] Models.DonHang donHang)
+        public ActionResult Create([Bind(Include = "MaDH,TrangThaiGiaoHang,NgayDat,NgayGiao,MaKH,TrangThaiThanhToan")] Models.DonHang donHang)
         {
             if (!AuthAdmin())
                 return RedirectToAction("Error401", "Admin");
@@ -99,6 +99,21 @@ namespace webcoso.Controllers
             }
             return RedirectToAction("Index");
         }
+        public ActionResult EditTTT(int id, FormCollection collection)
+        {
+            if (!AuthAdmin())
+                return RedirectToAction("Error401", "Admin");
+            Models.DonHang donHang = db.DonHang.Find(id);
+            if (donHang != null)
+            {
+                if (collection["item.TrangThaiThanhToan"].ToString() == "true")
+                    donHang.TrangThaiThanhToan = true;
+                else
+                    donHang.TrangThaiThanhToan = false;
+                Edit(donHang);
+            }
+            return RedirectToAction("Index");
+        }
         // GET: DonHangs/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -122,7 +137,7 @@ namespace webcoso.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaDH,TrangThaiGiaoHang,NgayDat,NgayGiao,MaKH,TongTien")] Models.DonHang donHang)
+        public ActionResult Edit([Bind(Include = "MaDH,TrangThaiGiaoHang,NgayDat,NgayGiao,MaKH,TongTien,TrangThaiThanhToan")] Models.DonHang donHang)
         {
             if (!AuthAdmin())
                 return RedirectToAction("Error401", "Admin");
