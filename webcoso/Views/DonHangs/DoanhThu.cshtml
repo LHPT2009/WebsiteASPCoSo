@@ -10,7 +10,8 @@
                 <h1 style="margin:10px">Doanh thu theo ngày</h1>
                 @using (Html.BeginForm("Export", "DonHangs", FormMethod.Post))
                 {
-    <input type="submit" value="Xuất Excel" class="btn btn-success">}
+                    <input type="submit" value="Xuất Excel" class="btn btn-success">
+}
                 <thead class="thead-dark">
                     <tr>
                         <th>
@@ -24,14 +25,15 @@
                 <tbody class="table-light">
                     @for (var i = 0; i < Model.ThangNam.Count - 1; i++)
                     {
-        <tr>
-            <td>
-                @Model.ThangNam[i].Day/@Model.ThangNam[i].Month/@Model.ThangNam[i].Year
-            </td>
-            <td>
-                @String.Format("{0:0,0}", @Model.Result[i])
-            </td>
-        </tr>}
+                        <tr>
+                            <td>
+                                @Model.ThangNam[i].Day/@Model.ThangNam[i].Month/@Model.ThangNam[i].Year
+                            </td>
+                            <td>
+                                @String.Format("{0:0,0}", @Model.Result[i])
+                            </td>
+                        </tr>
+}
                 </tbody>
             </table>
             <div style=" margin-bottom:50px;">
