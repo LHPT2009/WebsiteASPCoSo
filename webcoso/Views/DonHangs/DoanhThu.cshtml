@@ -1,5 +1,5 @@
-﻿@model webcoso.Models.DoanhThuViewModel
-@using PagedList.Mvc
+﻿@model PagedList.PagedList<webcoso.Models.LinQ.DonHang>
+@using PagedList.Mvc;
 @{ ViewBag.Title = "DoanhThu";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; }
 
@@ -11,7 +11,8 @@
                 @using (Html.BeginForm("Export", "DonHangs", FormMethod.Post))
                 {
                     <input type="submit" value="Xuất Excel" class="btn btn-success">
-}
+                }
+
                 <thead class="thead-dark">
                     <tr>
                         <th>
@@ -23,25 +24,29 @@
                     </tr>
                 </thead>
                 <tbody class="table-light">
-                    @for (var i = 0; i < Model.ThangNam.Count - 1; i++)
+                    @foreach (var item in Model.GroupBy(y => y.NgayDat).Distinct().Select(g => new
+                    {
+                        Pla = g.Key,
+                        Total = g.Sum(t => t.TongTien)
+                    }))
                     {
                         <tr>
                             <td>
-                                @Model.ThangNam[i].Day/@Model.ThangNam[i].Month/@Model.ThangNam[i].Year
+                                @item.Pla
                             </td>
                             <td>
-                                @String.Format("{0:0,0}", @Model.Result[i])
+                                @String.Format("{0:0,0}", item.Total)
                             </td>
                         </tr>
-}
+                    }
                 </tbody>
             </table>
             <div style=" margin-bottom:50px;">
                 <div>
-                    Trang @(Model.ThangNam.PageCount < Model.ThangNam.PageNumber ? 0 : Model.ThangNam.PageNumber) / @Model.ThangNam.PageCount
+                    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
                 </div>
                 <div class="MenuTrang">
-                    @Html.PagedListPager(Model.ThangNam, page => Url.Action("Index", new { page = page }))
+                    @Html.PagedListPager(Model, page => Url.Action("DoanhThu", new { page = page }))
                 </div>
             </div>
         </div>
