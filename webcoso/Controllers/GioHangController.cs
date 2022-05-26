@@ -234,12 +234,12 @@ namespace webcoso.Controllers
             return Redirect(jmessage.GetValue("payUrl").ToString());
         }
 
-        public ActionResult ReturnUrl()
+        public ActionResult ReturnUrl(FormCollection collection)
         {
             string param = Request.QueryString.ToString().Substring(0, Request.QueryString.ToString().IndexOf("signature") - 1);
             param = Server.UrlDecode(param);
             MoMoSecurity crypto = new MoMoSecurity();
-            string serectkey = ConfigurationManager.AppSettings["serectkey"].ToString();
+            string serectkey = "sFcbSGRSJjwGxwhhcEktCHWYUuTuPNDB";
             string signature = crypto.signSHA256(param, serectkey);
             if (signature != Request["signature"].ToString())
             {
@@ -252,15 +252,42 @@ namespace webcoso.Controllers
             }
             else
             {
-                ViewBag.message = "Thanh toán thành công";
-                Session["GioHang"] = new List<GioHang>();
-
+                DonHang dh = new DonHang();
+                Models.LinQ.AspNetUser kh = (Models.LinQ.AspNetUser)Session["TaiKhoan"];
+                //SanPham s = new SanPham();
+                List<GioHang> gh = layGioHang();
+                var ngaygiao = String.Format("{0:MM/dd/yyyy}", collection["NgayGiao"]);
+                dh.MaKH = kh.Id;
+                dh.NgayDat = DateTime.Now;
+                dh.NgayGiao = DateTime.Now;
+                dh.TrangThaiGiaoHang = false;
+                dh.TrangThaiThanhToan = true;
+                dh.TongTien = TongTien();
+                if (dh.TongTien != 0) {
+                    data.DonHang.Add(dh);
+                    data.SaveChanges();
+                }
+                foreach (var item in gh)
+                {
+                    ChiTietDonHang ctdh = new ChiTietDonHang();
+                    ctdh.MaDH = dh.MaDH;
+                    ctdh.MaSP = item.MaSP;
+                    ctdh.Soluong = item.SoLuong;
+                    ctdh.Gia = item.ThanhTien;
+                    SanPham sanPham = data.SanPham.Single(n => n.MaSP == item.MaSP);
+                    sanPham.SoLuong -= item.SoLuong;
+                    data.SaveChanges();
+                    data.ChiTietDonHang.Add(ctdh);
+                    data.SaveChanges();
+                }
+                Session["GioHang"] = null;
+                return RedirectToAction("XacNhanDonHang", "GioHang");
             }
             return View();
         }
 
         [HttpPost]
-        public JsonResult NotifyUrl(FormCollection collection)
+        public JsonResult NotifyUrl()
         {
             string param = "";
             param =
@@ -289,34 +316,7 @@ namespace webcoso.Controllers
             }
             else
             {
-                DonHang dh = new DonHang();
-                Models.LinQ.AspNetUser kh = (Models.LinQ.AspNetUser)Session["TaiKhoan"];
-                //SanPham s = new SanPham();
-                List<GioHang> gh = layGioHang();
-                var ngaygiao = String.Format("{0:MM/dd/yyyy}", collection["NgayGiao"]);
-                dh.MaKH = kh.Id;
-                dh.NgayDat = DateTime.Now;
-                dh.NgayGiao = DateTime.Parse(ngaygiao);
-                dh.TrangThaiGiaoHang = false;
-                dh.TrangThaiThanhToan = true;
-                dh.TongTien = TongTien();
 
-                data.DonHang.Add(dh);
-                data.SaveChanges();
-                foreach (var item in gh)
-                {
-                    ChiTietDonHang ctdh = new ChiTietDonHang();
-                    ctdh.MaDH = dh.MaDH;
-                    ctdh.MaSP = item.MaSP;
-                    ctdh.Soluong = item.SoLuong;
-                    ctdh.Gia = item.ThanhTien;
-                    SanPham sanPham = data.SanPham.Single(n => n.MaSP == item.MaSP);
-                    sanPham.SoLuong -= item.SoLuong;
-                    data.SaveChanges();
-                    data.ChiTietDonHang.Add(ctdh);
-                    data.SaveChanges();
-                }
-                Session["GioHang"] = null;
             }
             return Json("", JsonRequestBehavior.AllowGet);
         }

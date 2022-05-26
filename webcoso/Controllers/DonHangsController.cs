@@ -193,36 +193,14 @@ namespace webcoso.Controllers
         {
             if (!AuthAdmin())
                 return RedirectToAction("Error401", "Admin");
-            var ngayDat = data.DonHangs.Select(d => d.NgayDat).Distinct().ToArray();
-            var thangNam = new List<DateTime>
-            {
-                ngayDat[0].Value
-            };
-            for (var i = 0; i < ngayDat.Length; i++)
-            {
-                for (var j = 0; j < thangNam.Count; j++)
-                {
-                    if (thangNam[j].Day != ngayDat[i].Value.Day)
-                        thangNam.Add(ngayDat[i].Value);
-                }
-            }
-            var result = new List<double>();
-            double total = 0;
-            for (var i = 0; i < thangNam.Count; i++)
-            {
-                var tienThang = data.DonHangs.Where(d => thangNam[i].Day == d.NgayDat.Value.Day).Select(d => d.TongTien).Sum();
-                result.Add((double)tienThang);
-                total += (double)tienThang;
-            }
             int pageSize = 10;
             int pageNum = page ?? 1;
-            var viewModel = new DoanhThuViewModel()
+            var list = data.DonHangs.GroupBy(p => p.NgayDat).Distinct().Select(g => new
             {
-                ThangNam = (PagedList<DateTime>)thangNam.ToPagedList(pageNum, pageSize),
-                Result = result,
-                Total = total
-            };
-            return View(viewModel);
+                Pla = g.Key,
+                Total = g.Sum(t => t.TongTien)
+            });
+            return View(list.ToPagedList(pageNum, pageSize));
         }
 
         public FileResult Export()
