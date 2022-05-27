@@ -1,4 +1,4 @@
-﻿@model PagedList.PagedList<webcoso.Models.DonHang>
+﻿﻿@model PagedList.PagedList<webcoso.Models.LinQ.DonHang>
 @using PagedList.Mvc;
 @{ ViewBag.Title = "DoanhThu";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; }
@@ -10,30 +10,35 @@
                 <h1 style="margin:10px">Doanh thu theo ngày</h1>
                 @using (Html.BeginForm("Export", "DonHangs", FormMethod.Post))
                 {
-                    <input type="submit" value="Xuất Excel" class="btn btn-success">
-                }
+    <input type="submit" value="Xuất Excel" class="btn btn-success">
+}
+
                 <thead class="thead-dark">
                     <tr>
                         <th>
-                            Ngày
+                            Ngày/Tháng/năm
                         </th>
                         <th>
-                            Doanh thu ngày
+                            Doanh thu
                         </th>
                     </tr>
                 </thead>
                 <tbody class="table-light">
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.GroupBy(y => y.NgayDat).Distinct().Select(g => new
                     {
-                        <tr>
-                            <td>
-                                @item.NgayDat
-                            </td>
-                            <td>
-                                @item.TongTien
-                            </td>
-                        </tr>
-                    }
+                        Pla = g.Key,
+                        Total = g.Sum(t => t.TongTien)
+                    }))
+                    {
+        <tr>
+            <td>
+                @item.Pla
+            </td>
+            <td>
+                @String.Format("{0:0,0}", item.Total)
+            </td>
+        </tr>
+}
                 </tbody>
             </table>
             <div style=" margin-bottom:50px;">
@@ -47,5 +52,4 @@
         </div>
     </main>
 </div>
-
 

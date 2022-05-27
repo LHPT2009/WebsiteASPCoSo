@@ -193,14 +193,10 @@ namespace webcoso.Controllers
         {
             if (!AuthAdmin())
                 return RedirectToAction("Error401", "Admin");
-            int pageSize = 10;
+            var all_donHang = data.DonHangs.ToList();
+            int pageSize = 7;
             int pageNum = page ?? 1;
-            var list = data.DonHangs.GroupBy(p => p.NgayDat).Distinct().Select(g => new
-            {
-                Pla = g.Key,
-                Total = g.Sum(t => t.TongTien)
-            });
-            return View(list.ToPagedList(pageNum, pageSize));
+            return View(all_donHang.ToPagedList(pageNum, pageSize));
         }
 
         public FileResult Export()
