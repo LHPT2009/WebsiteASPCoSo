@@ -7,6 +7,7 @@ using webcoso.Models;
 using MoMo;
 using Newtonsoft.Json.Linq;
 using System.Configuration;
+using common;
 
 namespace webcoso.Controllers
 {
@@ -176,6 +177,19 @@ namespace webcoso.Controllers
                 data.SaveChanges();
             }
             Session["GioHang"] = null;
+
+            String content = System.IO.File.ReadAllText(Server.MapPath("~/Content/sendmail.html"));
+            content = content.Replace("{{CustomerName}}", kh.Name);
+            content = content.Replace("{{Phone}}", kh.PhoneNumber);
+            content = content.Replace("{{Email}}", kh.Email);
+            content = content.Replace("{{Address}}", kh.Address);
+            content = content.Replace("{{NgayDat}}", dh.NgayDat.ToString());
+            content = content.Replace("{{NgayGiao}}", dh.NgayGiao.ToString());
+            content = content.Replace("{{Total}}", dh.TongTien.ToString());
+            var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+            new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ WebsiteLaptop của Tùng, An, Chuẩn", content);
+
             return RedirectToAction("XacNhanDonHang", "GioHang");
         }
 
@@ -263,7 +277,8 @@ namespace webcoso.Controllers
                 dh.TrangThaiGiaoHang = false;
                 dh.TrangThaiThanhToan = true;
                 dh.TongTien = TongTien();
-                if (dh.TongTien != 0) {
+                if (dh.TongTien != 0)
+                {
                     data.DonHang.Add(dh);
                     data.SaveChanges();
                 }
@@ -281,6 +296,17 @@ namespace webcoso.Controllers
                     data.SaveChanges();
                 }
                 Session["GioHang"] = null;
+                String content = System.IO.File.ReadAllText(Server.MapPath("~/Content/sendmail.html"));
+                content = content.Replace("{{CustomerName}}", kh.Name);
+                content = content.Replace("{{Phone}}", kh.PhoneNumber);
+                content = content.Replace("{{Email}}", kh.Email);
+                content = content.Replace("{{Address}}", kh.Address);
+                content = content.Replace("{{NgayDat}}", dh.NgayDat.ToString());
+                content = content.Replace("{{NgayGiao}}", dh.NgayGiao.ToString());
+                content = content.Replace("{{Total}}", dh.TongTien.ToString());
+                var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+                new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ WebsiteLaptop của Tùng, An, Chuẩn (MoMo)", content);
                 return RedirectToAction("XacNhanDonHang", "GioHang");
             }
             return View();

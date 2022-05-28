@@ -257,6 +257,7 @@
     <Compile Include="Models\SanPhamViewModel.cs" />
     <Compile Include="Models\ThuongHieu.cs" />
     <Compile Include="Models\WebcosoContext.cs" />
+    <Compile Include="Others\common.cs" />
     <Compile Include="Others\MoMoSecurity.cs" />
     <Compile Include="Others\PaymentRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -356,6 +357,7 @@
     <Content Include="Content\js\range.js" />
     <Content Include="Content\js\scrollax.min.js" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\sendmail.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
