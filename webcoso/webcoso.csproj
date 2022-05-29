@@ -357,6 +357,7 @@
     <Content Include="Content\js\range.js" />
     <Content Include="Content\js\scrollax.min.js" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\sendregis.html" />
     <Content Include="Content\sendmail.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
