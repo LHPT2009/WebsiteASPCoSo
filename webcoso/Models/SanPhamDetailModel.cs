@@ -9,5 +9,6 @@ namespace webcoso.Models
     {
         public SanPham SanPham { get; set; }
         public PagedList.PagedList<BinhLuan> BinhLuans { get; set; }
+        public PagedList.PagedList<DanhGia> danhGias { get; set; }
     }
 }
