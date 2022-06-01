@@ -34,7 +34,7 @@ namespace webcoso
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -58,11 +58,11 @@ namespace webcoso
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "853606616692-erf1qle3li9d1qpgmdjqq3cij3qkiotj.apps.googleusercontent.com",
+                ClientSecret = "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"
+            });
         }
     }
 }
