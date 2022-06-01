@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -21,6 +22,7 @@ namespace webcoso.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private MyDataDataContext dataq = new MyDataDataContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -80,6 +82,7 @@ namespace webcoso.Controllers
             {
                 return View(model);
             }
+          
             var user = await UserManager.FindByEmailAsync(model.Email);
             if (user != null)
             {
@@ -228,71 +231,89 @@ namespace webcoso.Controllers
         {
             return View();
         }
-
-        //
-        // POST: /Account/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        public ActionResult ForgotPassword(FormCollection collection)
         {
-            if (ModelState.IsValid)
+            var Email = collection["Email"];
+            AspNetUser kh = dataq.AspNetUsers.SingleOrDefault(n => n.Email == Email);
+            if (kh != null)
             {
-                var user = await UserManager.FindByEmailAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
-                }
-                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string t = RandomString(8, false);
+                String content = System.IO.File.ReadAllText(Server.MapPath("~/Content/sendforgot.html"));
+                content = content.Replace("{{CustomerName}}", kh.Name);
+                content = content.Replace("{{Passcode}}", t);
+                content = content.Replace("{{Emaill}}", kh.Email);
+                new common.MailHelper().sendMail(kh.Email, "Sercurity WebsiteLaptop của Tùng, An, Chuẩn", content);
+                return RedirectToAction("ForgotPasswordConfirmation",new { @Emaill = kh.Email, @Passcode = t,@CustomerName = kh.Name});
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            else
+            {
+                ViewBag.ThongBao = "Email ko ton tai";
+            }
+            return View();
         }
 
         //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
-        public ActionResult ForgotPasswordConfirmation()
+        public ActionResult ForgotPasswordConfirmation(FormCollection collection, string Emaill,string Passcode,string CustomerName)
         {
+            var passcodemail = collection["Passcodepp"];
+            if (passcodemail == Passcode)
+            {
+                return RedirectToAction("ResetPassword", new { @Emaill= Emaill });
+            }
             return View();
         }
 
+        private string RandomString (int size,bool lowerCase)
+        {
+            StringBuilder sb = new StringBuilder();
+            char c;
+            Random rand = new Random();
+            for (int i = 0;i<size;i++) 
+            {
+                c = Convert.ToChar(Convert.ToInt32(rand.Next(65, 87)));
+                sb.Append(c);
+            }
+            if (lowerCase)
+                return sb.ToString().ToLower();
+            return sb.ToString();
+        }
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public ActionResult ResetPassword(FormCollection collection, string Emaill)
         {
-            return code == null ? View("Error") : View();
-        }
-
-        //
-        // POST: /Account/ResetPassword
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
-        {
-            if (!ModelState.IsValid)
+            AspNetUser kh = dataq.AspNetUsers.SingleOrDefault(n => n.Email == Emaill);
+            if (kh != null) 
             {
-                return View(model);
+                if (collection["pass"] == collection["repass"] && collection["pass"] != null)
+                {
+                    string pass = collection["pass"];
+                    //var user = new ApplicationUser { UserName = Emaill, Email = Emaill };
+                    //var result = await UserManager.CreateAsync(user, pass);
+                    kh.Id = kh.Id;
+                    kh.Email = kh.Email;
+                    kh.EmailConfirmed = kh.EmailConfirmed;
+                    kh.PasswordHash = pass;
+                    kh.SecurityStamp = kh.SecurityStamp;
+                    kh.PhoneNumber = kh.PhoneNumber;
+                    kh.PhoneNumberConfirmed = kh.PhoneNumberConfirmed;
+                    kh.TwoFactorEnabled = kh.TwoFactorEnabled;
+                    kh.LockoutEndDateUtc = kh.LockoutEndDateUtc;
+                    kh.LockoutEnabled = kh.LockoutEnabled;
+                    kh.AccessFailedCount = kh.AccessFailedCount;
+                    kh.UserName = kh.UserName;
+                    kh.Name = kh.Name;
+                    kh.Address = kh.Address;
+                    UpdateModel(kh);
+                    dataq.SubmitChanges();
+                    return RedirectToAction("ResetPasswordConfirmation");
+                }
             }
-            var user = await UserManager.FindByEmailAsync(model.Email);
-            if (user == null)
-            {
-                // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-            AddErrors(result);
             return View();
         }
 
