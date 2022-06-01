@@ -164,6 +164,12 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.9\lib\net45\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.3.2.9\lib\net45\WebMatrix.WebData.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -254,6 +260,7 @@
     <Compile Include="Models\LoaiSP.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NhomSanPham.cs" />
+    <Compile Include="Models\ResetPasswordModel.cs" />
     <Compile Include="Models\SanPham.cs" />
     <Compile Include="Models\SanPhamDetailModel.cs" />
     <Compile Include="Models\SanPhamViewModel.cs" />
@@ -362,6 +369,7 @@
     <Content Include="Content\js\scrollax.min.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\AccountConfirmation.html" />
+    <Content Include="Content\sendforgot.html" />
     <Content Include="Content\sendmail.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -606,7 +614,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\test\" />
     <Folder Include="Views\ChiTietDonHangs\" />
     <Folder Include="Views\DanhGias\" />
   </ItemGroup>
