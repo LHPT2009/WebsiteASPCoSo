@@ -72,6 +72,9 @@ namespace webcoso.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietDonHang> ChiTietDonHang { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DanhGia> DanhGia { get; set; }
+
         public virtual LoaiSP LoaiSP { get; set; }
 
         public virtual NhomSanPham NhomSanPham { get; set; }

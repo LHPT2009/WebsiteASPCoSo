@@ -220,6 +220,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BinhLuansController.cs" />
     <Compile Include="Controllers\ChiTietDonHangsController.cs" />
+    <Compile Include="Controllers\DanhGiasController.cs" />
     <Compile Include="Controllers\DonHangsController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BinhLuan.cs" />
     <Compile Include="Models\ChiTietDonHang.cs" />
+    <Compile Include="Models\DanhGia.cs" />
     <Compile Include="Models\DoanhThuViewModel.cs" />
     <Compile Include="Models\DonHang.cs" />
     <Compile Include="Models\DonHangViewModel.cs" />
@@ -604,7 +606,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\test\" />
     <Folder Include="Views\ChiTietDonHangs\" />
+    <Folder Include="Views\DanhGias\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

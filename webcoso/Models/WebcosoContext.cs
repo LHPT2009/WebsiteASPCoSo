@@ -11,7 +11,7 @@ namespace webcoso.Models
             : base("name=WebcosoContext")
         {
         }
-
+        public virtual DbSet<DanhGia> DanhGia { get; set; }
         public virtual DbSet<BinhLuan> BinhLuan { get; set; }
         public virtual DbSet<ChiTietDonHang> ChiTietDonHang { get; set; }
         public virtual DbSet<DonHang> DonHang { get; set; }

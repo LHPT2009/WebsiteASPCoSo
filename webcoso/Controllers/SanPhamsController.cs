@@ -118,12 +118,47 @@ namespace webcoso.Controllers
                 ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(i.MaKH);
                 i.Name = user.Name;
             }
+            ApplicationUser userLogin = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            if(db.DanhGia.Where(p => p.MaKH == userLogin.Id && p.MaSP == id ).Count() > 0 )
+            {
+                ViewBag.ttDanhGia = 1;
+            }
+            else
+            {
+                ViewBag.ttDanhGia = 0;
+            }
+            if( db.DanhGia.Where( p => p.MaSP == id ).Count() != 0)
+            {
+                float star = (float)db.DanhGia.Where(p => p.MaSP == id).Sum(p => p.SoSao) / (float)db.DanhGia.Where(p => p.MaSP == id).Count();
+                float motSao = (float)db.DanhGia.Where(p => p.SoSao == 1 && p.MaSP == id).Count() / (float)db.DanhGia.Where(p => p.MaSP == id).Count();
+                float haiSao = (float)db.DanhGia.Where(p => p.SoSao == 2 && p.MaSP == id).Count() / (float)db.DanhGia.Where(p => p.MaSP == id).Count();
+                float baSao = (float)db.DanhGia.Where(p => p.SoSao == 3 && p.MaSP == id).Count() / (float)db.DanhGia.Where(p => p.MaSP == id).Count();
+                float bonSao = (float)db.DanhGia.Where(p => p.SoSao == 4 && p.MaSP == id).Count() / (float)db.DanhGia.Where(p => p.MaSP == id).Count();
+                float namSao = (float)db.DanhGia.Where(p => p.SoSao == 5 && p.MaSP == id).Count() / (float)db.DanhGia.Where(p => p.MaSP == id).Count();
+                ViewBag.updateStar = star.ToString("0.#");
+                ViewBag.motSao = motSao * 100;
+                ViewBag.haiSao = haiSao * 100;
+                ViewBag.baSao = baSao * 100;
+                ViewBag.bonSao = bonSao * 100;
+                ViewBag.namSao = namSao * 100;
+            }
+            else
+            {
+                ViewBag.updateStar = 0;
+                ViewBag.motSao =0;
+                ViewBag.haiSao = 0;
+                ViewBag.baSao =0;
+                ViewBag.bonSao =0;
+                ViewBag.namSao =0;
+            }
+            
+
             int pageSize = 5;
             int pageNum = page ?? 1;
             SanPhamDetailModel sp = new SanPhamDetailModel
             {
                 SanPham = sanPham,
-                BinhLuans = (PagedList<BinhLuan>)sanPham.BinhLuan.ToPagedList(pageNum, pageSize)
+                BinhLuans = (PagedList<BinhLuan>)sanPham.BinhLuan.OrderByDescending(p => p.NgayTao).ToPagedList(pageNum, pageSize)
             };
             return View(sp);
         }
@@ -169,17 +204,40 @@ namespace webcoso.Controllers
         {
             BinhLuansController addbinhluan = new BinhLuansController();
             BinhLuan binhLuan = new BinhLuan();
-            string content = Request["txtContent"].ToString() + " ";
-            if (content == " ")
+            if( Request["txtContent"] != null)
             {
-                return RedirectToAction("Details");
+                string content = Request["txtContent"].ToString() + " ";
+                if (content == " ")
+                {
+                    return RedirectToAction("Details");
+                }
+                addbinhluan.Create(content, id, binhLuan);
             }
-            addbinhluan.Create(content, id, binhLuan);
+           
+
+            DanhGiasController addDanhGia = new DanhGiasController();
+            DanhGia danhGia = new DanhGia();
+            if( Request["star"] != null)
+            {
+                String soSao = Request["star"].ToString() + " ";
+                if (soSao == " ")
+                {
+                    return RedirectToAction("Details");
+                }
+                int SoSao = Int32.Parse(soSao);
+                addDanhGia.Create(SoSao, id, danhGia);
+            }
+            
+
+
+
             return RedirectToAction("Details");
         }
 
-        // GET: SanPhams/Create
-        public ActionResult Create()
+   
+
+            // GET: SanPhams/Create
+            public ActionResult Create()
         {
             if (!AuthAdmin())
                 return RedirectToAction("Error401", "Admin");

@@ -90,8 +90,7 @@ else
                 <div class="row">
                     <div class="col text-center">
                         <div class="block-27">
-                            @Html.PagedListPager(Model.SanPhams, page => Url.Action(
-                                                                                                                                                        "Index", new { page = page }))
+                            @Html.PagedListPager(Model.SanPhams, page => Url.Action("Index", new { page = page }))
                         </div>
                     </div>
                 </div>
