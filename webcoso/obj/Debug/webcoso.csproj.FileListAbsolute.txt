@@ -1405,3 +1405,5 @@ C:\Users\lehuy\OneDrive\Desktop\Coso2\WebsiteASPCoSo\webcoso\bin\WebMatrix.Data.
 C:\Users\lehuy\OneDrive\Desktop\Coso2\WebsiteASPCoSo\webcoso\bin\WebMatrix.WebData.dll
 C:\Users\lehuy\OneDrive\Desktop\Coso2\WebsiteASPCoSo\webcoso\bin\WebMatrix.Data.xml
 C:\Users\lehuy\OneDrive\Desktop\Coso2\WebsiteASPCoSo\webcoso\bin\WebMatrix.WebData.xml
+C:\Users\lehuy\OneDrive\Desktop\Coso2\WebsiteASPCoSo\webcoso\bin\GoogleRecaptchaMvc.dll
+C:\Users\lehuy\OneDrive\Desktop\Coso2\WebsiteASPCoSo\webcoso\bin\GoogleRecaptcha.dll
