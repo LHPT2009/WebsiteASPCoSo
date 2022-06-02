@@ -14,10 +14,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-
 using webcoso.Models;
 using webcoso.Models.LinQ;
 using webcoso.Others;
+using GoogleRecaptcha;
+using GoogleRecaptchaMvc;
 
 namespace webcoso.Controllers
 {
@@ -80,46 +81,58 @@ namespace webcoso.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+            IRecaptcha<RecaptchaV2Result> recaptcha = new RecaptchaV2(new RecaptchaV2Data() { Secret = "6LeJ3jogAAAAAKLVqcCKaEQVTYj5QGVQWFjWp2hO" });
 
-            var user = await UserManager.FindByEmailAsync(model.Email);
-            if (user != null)
+            // Verify the captcha
+            var resultx = recaptcha.Verify();
+            if (resultx.Success) // Success!!!
             {
-                if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+                if (!ModelState.IsValid)
                 {
-                    ModelState.AddModelError("", "You must have a confirmed email to log on.");
-                    return View();
+                    return View(model);
+                }
+
+                var user = await UserManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+                    {
+                        ModelState.AddModelError("", "You must have a confirmed email to log on.");
+                        return View();
+                    }
+                }
+
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, change to shouldLockout: true
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        {
+                            var kh = context.AspNetUsers.Where(p => p.Email == model.Email).FirstOrDefault();
+                            if (kh.LockoutEnabled == false)
+                            {
+                                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                                return View("Lockout");
+                            }
+                            Session["TaiKhoan"] = kh;
+                            return RedirectToLocal(returnUrl);
+                        }
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
                 }
             }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            else
             {
-                case SignInStatus.Success:
-                    {
-                        var kh = context.AspNetUsers.Where(p => p.Email == model.Email).FirstOrDefault();
-                        if (kh.LockoutEnabled == false)
-                        {
-                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-                            return View("Lockout");
-                        }
-                        Session["TaiKhoan"] = kh;
-                        return RedirectToLocal(returnUrl);
-                    }
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                ViewBag.Thongbao = "Bạn chưa tích xác nhận bên dưới !!!";
             }
+            return View();
         }
 
         //
@@ -180,37 +193,49 @@ namespace webcoso.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            IRecaptcha<RecaptchaV2Result> recaptcha = new RecaptchaV2(new RecaptchaV2Data() { Secret = "6LeJ3jogAAAAAKLVqcCKaEQVTYj5QGVQWFjWp2hO" });
+
+            // Verify the captcha
+            var resultx = recaptcha.Verify();
+            if (resultx.Success) // Success!!!
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.Name, Address = model.Address, PhoneNumber = model.PhoneNumber, LockoutEnabled = false };
-                ApplicationDbContext context = new ApplicationDbContext();
-                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-                if (!roleManager.RoleExists("User"))
+                if (ModelState.IsValid)
                 {
-                    var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                    role.Name = "User";
-                    roleManager.Create(role);
-                }
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    var result1 = UserManager.AddToRole(user.Id, "User");
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    string body = string.Empty;
-                    using (StreamReader reader = new StreamReader(Server.MapPath("~/Content/AccountConfirmation.html")))
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.Name, Address = model.Address, PhoneNumber = model.PhoneNumber, LockoutEnabled = false };
+                    ApplicationDbContext context = new ApplicationDbContext();
+                    var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+                    if (!roleManager.RoleExists("User"))
                     {
-                        body = reader.ReadToEnd();
+                        var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                        role.Name = "User";
+                        roleManager.Create(role);
                     }
-                    body = body.Replace("{ConfirmationLink}", callbackUrl);
-                    body = body.Replace("{UserName}", model.Email);
-                    bool IsSendEmail = SendEmail.EmailSend(model.Email, "Confirm your account", body, true);
-                    if (IsSendEmail)
-                        return RedirectToAction("Login", "Account");
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        var result1 = UserManager.AddToRole(user.Id, "User");
+                        string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        string body = string.Empty;
+                        using (StreamReader reader = new StreamReader(Server.MapPath("~/Content/AccountConfirmation.html")))
+                        {
+                            body = reader.ReadToEnd();
+                        }
+                        body = body.Replace("{ConfirmationLink}", callbackUrl);
+                        body = body.Replace("{UserName}", model.Email);
+                        bool IsSendEmail = SendEmail.EmailSend(model.Email, "Confirm your account", body, true);
+                        if (IsSendEmail)
+                            return RedirectToAction("Login", "Account");
+                    }
+                    AddErrors(result);
                 }
-                AddErrors(result);
+                return View(model);
             }
-            return View(model);
+            else
+            {
+                ViewBag.Thongbao = "Bạn chưa tích xác nhận bên dưới !!!";
+            }
+            return View();
         }
 
         //
@@ -238,21 +263,35 @@ namespace webcoso.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ForgotPassword(FormCollection collection)
         {
-            var Email = collection["Email"];
-            AspNetUser kh = dataq.AspNetUsers.SingleOrDefault(n => n.Email == Email);
-            if (kh != null)
+            IRecaptcha<RecaptchaV2Result> recaptcha = new RecaptchaV2(new RecaptchaV2Data() { Secret = "6LeJ3jogAAAAAKLVqcCKaEQVTYj5QGVQWFjWp2hO" });
+
+            // Verify the captcha
+            var resultx = recaptcha.Verify();
+            if (resultx.Success) // Success!!!
             {
-                string t = RandomString(8, false);
-                String content = System.IO.File.ReadAllText(Server.MapPath("~/Content/sendforgot.html"));
-                content = content.Replace("{{CustomerName}}", kh.Name);
-                content = content.Replace("{{Passcode}}", t);
-                content = content.Replace("{{Emaill}}", kh.Email);
-                new common.MailHelper().sendMail(kh.Email, "Sercurity WebsiteLaptop của Tùng, An, Chuẩn", content);
-                return RedirectToAction("ForgotPasswordConfirmation", new { @Emaill = kh.Email, @Passcode = t, @CustomerName = kh.Name });
+                var Email = collection["Email"];
+                AspNetUser kh = dataq.AspNetUsers.SingleOrDefault(n => n.Email == Email);
+                if (ModelState.IsValid)
+                {
+                    if (kh != null)
+                    {
+                        string t = RandomString(8, false);
+                        String content = System.IO.File.ReadAllText(Server.MapPath("~/Content/sendforgot.html"));
+                        content = content.Replace("{{CustomerName}}", kh.Name);
+                        content = content.Replace("{{Passcode}}", t);
+                        content = content.Replace("{{Emaill}}", kh.Email);
+                        new common.MailHelper().sendMail(kh.Email, "Sercurity WebsiteLaptop của Tùng, An, Chuẩn", content);
+                        return RedirectToAction("ForgotPasswordConfirmation", new { @Emaill = kh.Email, @Passcode = t, @CustomerName = kh.Name });
+                    }
+                    else
+                    {
+                        ViewBag.ThongBao = "Email ko ton tai";
+                    }
+                }
             }
             else
             {
-                ViewBag.ThongBao = "Email ko ton tai";
+                ViewBag.Thongbao = "Bạn chưa tích xác nhận bên dưới !!!";
             }
             return View();
         }
@@ -295,9 +334,6 @@ namespace webcoso.Controllers
                 if (collection["pass"] == collection["repass"] && collection["pass"] != null)
                 {
                     string pass = collection["pass"];
-                    //model.Password = pass;
-                    //var user = new ApplicationUser { UserName = Emaill, Email = Emaill };
-                    //var result = await UserManager.CreateAsync(user, pass);
                     kh.Id = kh.Id;
                     kh.Email = kh.Email;
                     kh.EmailConfirmed = kh.EmailConfirmed;
