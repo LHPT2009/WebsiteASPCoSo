@@ -48,6 +48,7 @@
                                             @Html.ActionLink("Xin chào " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                                         </li>
                                     </ul>
+                                    
                                 }
                             }
                             else
@@ -93,8 +94,14 @@
                     <li class="nav-item active"><a href="@Url.Action("Index","Home")" class="nav-link">Trang chủ</a></li>
                     <li class="nav-item"><a href="@Url.Action("Index","SanPhams")" class="nav-link">Sản phẩm</a></li>
                     <li class="nav-item"><a href="@Url.Action("GioHang","GioHang")" class="nav-link">Giỏ hàng</a></li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="nav-item"><a href="@Url.Action("XemDonMua","DonHangs")" class="nav-link">Xem đơn mua</a></li>
+                    }
+
                     <li class="nav-item"><a href="@Url.Action("About","Home")" class="nav-link">Giới thiệu</a></li>
                     <li class="nav-item"><a href="@Url.Action("Contact","Home")" class="nav-link">Liên hệ</a></li>
+
                 </ul>
             </div>
         </div>
