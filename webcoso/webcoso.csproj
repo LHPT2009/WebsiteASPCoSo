@@ -253,6 +253,7 @@
     <Compile Include="Models\DanhGia.cs" />
     <Compile Include="Models\DoanhThuViewModel.cs" />
     <Compile Include="Models\DonHang.cs" />
+    <Compile Include="Models\DonHangViewList.cs" />
     <Compile Include="Models\DonHangViewModel.cs" />
     <Compile Include="Models\GioHang.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -618,6 +619,7 @@
     <Content Include="Views\SanPhams\Index3.cshtml" />
     <Content Include="Views\SanPhams\sanphamtheomaloai.cshtml" />
     <Content Include="Views\GioHang\thanhtoancanhan.cshtml" />
+    <Content Include="Views\DonHangs\XemDonMua.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

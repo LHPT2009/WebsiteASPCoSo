@@ -119,13 +119,16 @@ namespace webcoso.Controllers
                 i.Name = user.Name;
             }
             ApplicationUser userLogin = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-            if(db.DanhGia.Where(p => p.MaKH == userLogin.Id && p.MaSP == id ).Count() > 0 )
+            if( userLogin != null)
             {
-                ViewBag.ttDanhGia = 1;
-            }
-            else
-            {
-                ViewBag.ttDanhGia = 0;
+                if (db.DanhGia.Where(p => p.MaKH == userLogin.Id && p.MaSP == id).Count() > 0)
+                {
+                    ViewBag.ttDanhGia = 1;
+                }
+                else
+                {
+                    ViewBag.ttDanhGia = 0;
+                }
             }
             if( db.DanhGia.Where( p => p.MaSP == id ).Count() != 0)
             {

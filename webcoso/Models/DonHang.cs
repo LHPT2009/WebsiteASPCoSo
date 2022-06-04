@@ -5,6 +5,7 @@ namespace webcoso.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     [Table("DonHang")]
     public partial class DonHang
@@ -18,7 +19,7 @@ namespace webcoso.Models
         [Key]
         public int MaDH { get; set; }
 
-        public bool? TrangThaiGiaoHang { get; set; }
+        public int TrangThaiGiaoHang { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? NgayDat { get; set; }
@@ -37,5 +38,15 @@ namespace webcoso.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietDonHang> ChiTietDonHang { get; set; }
+
+
+        public static List<DonHang> getAll(String keyWord)
+        {
+            WebcosoContext db = new WebcosoContext();
+            keyWord = keyWord + " ";
+            //List<ChiTietDonHang> list = db.ChiTietDonHang.Where(a => a.SanPham.Ten.Contains(keyWord) && a.Soluong > 0).ToList();
+            return db.DonHang.ToList();
+        }
+       
     }
 }

@@ -13,6 +13,8 @@ using DocumentFormat.OpenXml.Office2013.Drawing.ChartStyle;
 using DataTable = System.Data.DataTable;
 using ClosedXML.Excel;
 using System.IO;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace webcoso.Controllers
 {
@@ -92,9 +94,9 @@ namespace webcoso.Controllers
             if (donHang != null)
             {
                 if (collection["item.TrangThaiGiaoHang"].ToString() == "true")
-                    donHang.TrangThaiGiaoHang = true;
+                    donHang.TrangThaiGiaoHang = 1;
                 else
-                    donHang.TrangThaiGiaoHang = false;
+                    donHang.TrangThaiGiaoHang = 0;
                 Edit(donHang);
             }
             return RedirectToAction("Index");
@@ -237,6 +239,31 @@ namespace webcoso.Controllers
             if (userExist.RoleId != "1")
                 return false;
             return true;
+        }
+
+
+        public ActionResult XemDonMua()
+        {
+           
+            ApplicationUser userLogin = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            List<Models.LinQ.DonHang> all_donHang = data.DonHangs.Where(p => p.MaKH == userLogin.Id).ToList();
+            ViewBag.numberDonHang = all_donHang.Count;
+            List<Models.LinQ.DonHang> all_donHangDangGiao = data.DonHangs.Where(p => p.TrangThaiGiaoHang == 0 && p.MaKH == userLogin.Id).ToList();
+            ViewBag.numberDonHangDangGiao = all_donHangDangGiao.Count;
+            List<Models.LinQ.DonHang> all_donHangDaGiao = data.DonHangs.Where( p => p.TrangThaiGiaoHang == 1 && p.MaKH == userLogin.Id).ToList();
+            ViewBag.numberDonHangDaGiao = all_donHangDaGiao.Count;
+            List<Models.LinQ.DonHang> all_donHangDaHuy = data.DonHangs.Where(p => p.TrangThaiGiaoHang == 2 && p.MaKH == userLogin.Id).ToList();
+            ViewBag.numberDonHangDaHuy = all_donHangDaHuy.Count;
+            List<Models.LinQ.ChiTietDonHang> all_chiTietDonHang = data.ChiTietDonHangs.ToList();
+            DonHangViewList donHangViewList = new DonHangViewList()
+            {
+                listDonHang = all_donHang,
+                listDonHangDaGiao = all_donHangDaGiao,
+                listDonHangDangGiao = all_donHangDangGiao,
+                listDonHangDaHuy = all_donHangDaHuy,
+                chiTietDonHangs = all_chiTietDonHang
+            };
+            return View(donHangViewList);
         }
     }
 }

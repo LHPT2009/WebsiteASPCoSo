@@ -157,7 +157,7 @@ namespace webcoso.Controllers
             dh.MaKH = kh.Id;
             dh.NgayDat = DateTime.Now;
             dh.NgayGiao = DateTime.Parse(ngaygiao);
-            dh.TrangThaiGiaoHang = false;
+            dh.TrangThaiGiaoHang = 0;
             dh.TrangThaiThanhToan = false;
             dh.TongTien = TongTien();
 
@@ -274,7 +274,7 @@ namespace webcoso.Controllers
                 dh.MaKH = kh.Id;
                 dh.NgayDat = DateTime.Now;
                 dh.NgayGiao = DateTime.Now;
-                dh.TrangThaiGiaoHang = false;
+                dh.TrangThaiGiaoHang = 0;
                 dh.TrangThaiThanhToan = true;
                 dh.TongTien = TongTien();
                 if (dh.TongTien != 0)
