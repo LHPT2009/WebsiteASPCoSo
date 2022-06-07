@@ -17,16 +17,21 @@
                         Trạng thái giao hàng
                     </dt>
                     <dd class="col-md-10">
-                        @if (Model.DonHang.TrangThaiGiaoHang == true)
+                        @if (Model.DonHang.TrangThaiGiaoHang == 0)
                         {
-                            <label class="list-box tri-state" id="TrangThaiGiaoHang" name="TrangThaiGiaoHang">
-                                <a value="true">Đã giao</a>
-                            </label> }
+                            <span style="color:orange;font-weight:bold">Đang giao</span>
+                        }
                         else
                         {
-                            <label class="list-box tri-state" id="TrangThaiGiaoHang" name="TrangThaiGiaoHang">
-                                <a value="true">Chưa giao</a>
-                            </label>}
+                            if (Model.DonHang.TrangThaiGiaoHang == 1)
+                            {
+                                <span style="color:limegreen;font-weight:bold">Đã giao</span>
+                            }
+                            else
+                            {
+                                <span style="color:red;font-weight:bold">Đã huỷ</span>
+                            }
+                        }
                     </dd>
                     <dt class="col-md-2">
                         Trạng thái thanh toán
@@ -47,14 +52,14 @@
                         Ngày đặt
                     </dt>
                     <dd class="col-md-10">
-                        @Html.DisplayFor(model => model.DonHang.NgayDat)
+                        @Convert.ToDateTime(Model.DonHang.NgayDat).ToString("dd-MM-yyyy")
                     </dd>
 
                     <dt class="col-md-2">
                         Ngày giao
                     </dt>
                     <dd class="col-md-10">
-                        @Html.DisplayFor(model => model.DonHang.NgayGiao)
+                        @Convert.ToDateTime(Model.DonHang.NgayGiao).ToString("dd-MM-yyyy")
                     </dd>
 
                     <dt class="col-md-2">
