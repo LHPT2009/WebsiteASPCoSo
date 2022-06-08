@@ -313,7 +313,7 @@ namespace webcoso.Controllers
                 
                 return RedirectToAction("XacNhanDonHang", "GioHang");
             }
-            return View();
+            return RedirectToAction("DatHang", "GioHang");
         }
 
         [HttpPost]
