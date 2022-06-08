@@ -34,20 +34,29 @@
                         <strong class="control-label col-md-2">Trạng thái giao hàng</strong>
                         <div class="col-md-10">
                             <div class="checkbox">
-                                @if (Model.TrangThaiGiaoHang == true)
-                                {
-                                    <select class="list-box tri-state" id="TrangThaiGiaoHang" name="TrangThaiGiaoHang">
-                                        <option selected="selected" value="true">Đã giao</option>
-                                        <option value="false">Chưa giao</option>
-                                    </select>
-                                }
-                                else
-                                {
-                                    <select class="list-box tri-state" id="TrangThaiGiaoHang" name="TrangThaiGiaoHang">
-                                        <option value="true">Đã giao</option>
-                                        <option selected="selected" value="false">Chưa giao</option>
-                                    </select>
-                                }
+                                <select name="TrangThaiGiaoHang">
+                                    @if (Model.TrangThaiGiaoHang == 0)
+                                    {
+                                        <option selected="selected" value="0">Đang giao</option>
+                                        <option value="1">Đã giao</option>
+                                        <option value="2">Đã huỷ</option>
+                                    }
+                                    else
+                                    {
+                                        if (Model.TrangThaiGiaoHang == 1)
+                                        {
+                                            <option value="0">Đang giao</option>
+                                            <option selected="selected" value="1">Đã giao</option>
+                                            <option value="2">Đã huỷ</option>
+                                        }
+                                        else
+                                        {
+                                            <option selected="selected" value="0">Đang giao</option>
+                                            <option value="1">Đã giao</option>
+                                            <option selected="selected" value="2">Đã huỷ</option>
+                                        }
+                                    }
+                                </select>
                                 @Html.ValidationMessageFor(model => model.TrangThaiGiaoHang, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -58,10 +67,8 @@
                             <div class="checkbox">
                                 @if (Model.TrangThaiThanhToan == true)
                                 {
-                                    <select class="list-box tri-state" id="TrangThaiThanhToan" name="TrangThaiThanhToan">
-                                        <option selected="selected" value="true">Đã thanh toán</option>
-                                        <option value="false">Chưa thanh toán</option>
-                                    </select>
+                                    <span>Đã thanh toán</span>
+                                    @Html.HiddenFor(model => model.TrangThaiThanhToan)
                                 }
                                 else
                                 {
@@ -77,24 +84,25 @@
                     <div class="form-group">
                         <strong class="control-label col-md-2">Ngày đặt</strong>
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.NgayDat, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.NgayDat, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.NgayDat, new { htmlAttributes = new { @class = "form-control", @style = "display:none" } })
+                            @Convert.ToDateTime(Model.NgayDat).ToString("dd-MM-yyyy")
                         </div>
                     </div>
 
                     <div class="form-group">
                         <strong class="control-label col-md-2">Ngày giao</strong>
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.NgayGiao, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.NgayGiao, "", new { @class = "text-danger" })
+                            <input type="date" name="NgayGiao" value="@Model.NgayGiao.Value.ToString("yyyy-MM-dd")" />
+                            @*@Html.EditorFor(model => model.NgayGiao, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NgayGiao, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <strong class="control-label col-md-2">Mã khách hàng</strong>
+                        <strong class="control-label col-md-2">Tên khách hàng</strong>
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.MaKH, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.MaKH, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.MaKH, new { htmlAttributes = new { @class = "form-control", @style = "display:none" } })
+                            @ViewBag.TenKH
                         </div>
                     </div>
 

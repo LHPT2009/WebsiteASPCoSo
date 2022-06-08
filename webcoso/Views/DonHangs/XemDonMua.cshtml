@@ -16,9 +16,7 @@
 
                 <span class="menu">Đã hủy(@ViewBag.numberDonHangDaHuy)</span>
         </div>
-    </div>
-    
-  
+    </div>  
 
     <div class="searchForm">
         <input class="search-form" type="search" placeholder="Tìm kiếm theo tên sản phẩm" />
@@ -38,14 +36,11 @@
                             }
                             else if (item.TrangThaiGiaoHang == 2)
                             {
-
-
                                 <h5 style="border-left: solid 1px; padding-left: 15px; ">Đơn bị hủy</h5>
                             }
                             else
                             {
                                 <h5 style="border-left: solid 1px; padding-left: 15px; ">Đang giao</h5>
-
                             }
                         </div>
                         <hr />
@@ -370,11 +365,15 @@ body {
 }
 
 
-.footer-order {
-    display: flex;
-    flex-direction: row;
-    justify-content: right;
-}
+    .footer-order {
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+    }
+
+    span:hover{
+            cursor:pointer;
+             }
 </style>
 
 

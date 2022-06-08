@@ -58,6 +58,8 @@ namespace webcoso.Controllers
             return View(donHangViewModel);
         }
 
+
+
         // GET: DonHangs/Create
         public ActionResult Create()
         {
@@ -86,36 +88,36 @@ namespace webcoso.Controllers
             return View(donHang);
         }
 
-        public ActionResult EditTT(int id, FormCollection collection)
-        {
-            if (!AuthAdmin())
-                return RedirectToAction("Error401", "Admin");
-            Models.DonHang donHang = db.DonHang.Find(id);
-            if (donHang != null)
-            {
-                if (collection["item.TrangThaiGiaoHang"].ToString() == "true")
-                    donHang.TrangThaiGiaoHang = 1;
-                else
-                    donHang.TrangThaiGiaoHang = 0;
-                Edit(donHang);
-            }
-            return RedirectToAction("Index");
-        }
-        public ActionResult EditTTT(int id, FormCollection collection)
-        {
-            if (!AuthAdmin())
-                return RedirectToAction("Error401", "Admin");
-            Models.DonHang donHang = db.DonHang.Find(id);
-            if (donHang != null)
-            {
-                if (collection["item.TrangThaiThanhToan"].ToString() == "true")
-                    donHang.TrangThaiThanhToan = true;
-                else
-                    donHang.TrangThaiThanhToan = false;
-                Edit(donHang);
-            }
-            return RedirectToAction("Index");
-        }
+        //public ActionResult EditTT(int id, FormCollection collection)
+        //{
+        //    if (!AuthAdmin())
+        //        return RedirectToAction("Error401", "Admin");
+        //    Models.DonHang donHang = db.DonHang.Find(id);
+        //    if (donHang != null)
+        //    {
+        //        if (collection["item.TrangThaiGiaoHang"].ToString() == "true")
+        //            donHang.TrangThaiGiaoHang = 1;
+        //        else
+        //            donHang.TrangThaiGiaoHang = 0;
+        //        Edit(donHang);
+        //    }
+        //    return RedirectToAction("Index");
+        //}
+        //public ActionResult EditTTT(int id, FormCollection collection)
+        //{
+        //    if (!AuthAdmin())
+        //        return RedirectToAction("Error401", "Admin");
+        //    Models.DonHang donHang = db.DonHang.Find(id);
+        //    if (donHang != null)
+        //    {
+        //        if (collection["item.TrangThaiThanhToan"].ToString() == "true")
+        //            donHang.TrangThaiThanhToan = true;
+        //        else
+        //            donHang.TrangThaiThanhToan = false;
+        //        Edit(donHang);
+        //    }
+        //    return RedirectToAction("Index");
+        //}
         // GET: DonHangs/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -126,11 +128,18 @@ namespace webcoso.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Models.DonHang donHang = db.DonHang.Find(id);
+
+            var user = data.AspNetUsers.Where(p => p.Id == donHang.MaKH).FirstOrDefault();
+
+            ViewBag.TenKH = user.Name;
+            ViewBag.DiaChi = user.Address;
+
+            //DonHangViewModel donHangViewModel = data.DonHangs.Where(p => p.MaDH == id).FirstOrDefault();
             if (donHang == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.MaKH = new SelectList(data.AspNetUsers, "Id", "Email");
+            //  ViewBag.MaKH = new SelectList(data.AspNetUsers, "Id", "Email");
             return View(donHang);
         }
 
@@ -244,13 +253,13 @@ namespace webcoso.Controllers
 
         public ActionResult XemDonMua()
         {
-           
+
             ApplicationUser userLogin = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
             List<Models.LinQ.DonHang> all_donHang = data.DonHangs.Where(p => p.MaKH == userLogin.Id).ToList();
             ViewBag.numberDonHang = all_donHang.Count;
             List<Models.LinQ.DonHang> all_donHangDangGiao = data.DonHangs.Where(p => p.TrangThaiGiaoHang == 0 && p.MaKH == userLogin.Id).ToList();
             ViewBag.numberDonHangDangGiao = all_donHangDangGiao.Count;
-            List<Models.LinQ.DonHang> all_donHangDaGiao = data.DonHangs.Where( p => p.TrangThaiGiaoHang == 1 && p.MaKH == userLogin.Id).ToList();
+            List<Models.LinQ.DonHang> all_donHangDaGiao = data.DonHangs.Where(p => p.TrangThaiGiaoHang == 1 && p.MaKH == userLogin.Id).ToList();
             ViewBag.numberDonHangDaGiao = all_donHangDaGiao.Count;
             List<Models.LinQ.DonHang> all_donHangDaHuy = data.DonHangs.Where(p => p.TrangThaiGiaoHang == 2 && p.MaKH == userLogin.Id).ToList();
             ViewBag.numberDonHangDaHuy = all_donHangDaHuy.Count;

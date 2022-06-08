@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
-                                <h6><span>@Model.SanPhams.Count()</span> Sản phẩm</h6>
+                                <h5 style="text-align: center; margin: 15px; color: #a66f35; "><span>@Model.SanPhams.Count()</span> sản phẩm</h5>
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,6 @@
             <div class="product d-flex flex-column">
                 <a href="#" class="img-prod">
                     <img class="img-fluid" src="@item.Hinh" alt="Colorlib Template">
-                    <div class="overlay"></div>
                 </a>
                 <div class="text py-3 pb-4 px-3">
                     <div class="d-flex">
@@ -89,9 +88,8 @@ else
                 </div>
                 <div class="row">
                     <div class="col text-center">
-                        <div class="block-27">
-                            @Html.PagedListPager(Model.SanPhams, page => Url.Action(
-                                                                                                                                                                                           "Index1", new { page = page }))
+                        <div class="block-27" style="display: flex; flex-direction: row; justify-content: center;">
+                            @Html.PagedListPager(Model.SanPhams, page => Url.Action(                                                                                                                                                                                           "Index1", new { page = page }))
                         </div>
                     </div>
                 </div>
@@ -105,13 +103,11 @@ else
                                 <div class="panel panel-default">
                                     <div class="panel-heading" role="tab" id="headingOne">
                                         <h4 class="panel-title">
-                                            <form class="form-inline">
                                                 @{ foreach (var item in Model.LoaiSPs)
                                                     {
                                         <ul>
                                             <li><a href="@Url.Action("sanphamtheomaloai", "SanPhams", new { @maloai = item.MaLoai })" class="btn btn-success my-2 my-sm-0" style="margin-left: 10px; height: 40px; font-size: 16px;" width="50">@item.TenLoai</a></li>
                                         </ul> } }
-                                            </form>
                                         </h4>
                                     </div>
                                 </div>

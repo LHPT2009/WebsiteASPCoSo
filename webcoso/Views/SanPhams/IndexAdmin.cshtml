@@ -88,7 +88,7 @@
                 <div>
                     Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
                 </div>
-                <div class="MenuTrang">
+                <div class="MenuTrang" style="display: flex; flex-direction: row; justify-content: center;">
                     @Html.PagedListPager(Model, page => Url.Action("IndexAdmin", new { page = page }))
                 </div>
             </div>

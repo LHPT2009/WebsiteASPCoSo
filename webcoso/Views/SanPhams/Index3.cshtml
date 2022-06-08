@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
-                                <h6><span>@Model.SanPhams.Count()</span> Sản phẩm</h6>
+                                <h5 style="text-align: center; margin: 15px; color: #a66f35; "><span>@Model.SanPhams.Count()</span> sản phẩm</h5>
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,6 @@
             <div class="product d-flex flex-column">
                 <a href="#" class="img-prod">
                     <img class="img-fluid" src="@item.Hinh" alt="Colorlib Template">
-                    <div class="overlay"></div>
                 </a>
                 <div class="text py-3 pb-4 px-3">
                     <div class="d-flex">
@@ -89,7 +88,7 @@ else
                 </div>
                 <div class="row">
                     <div class="col text-center">
-                        <div class="block-27">
+                        <div class="block-27" style="display: flex; flex-direction: row; justify-content: center;">
                             @Html.PagedListPager(Model.SanPhams, page => Url.Action(
                                                                                                                                                                                                                "Index3", new { page = page }))
                         </div>
