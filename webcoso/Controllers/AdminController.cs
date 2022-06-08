@@ -8,18 +8,21 @@ using System.Web;
 using System.Web.Mvc;
 using webcoso.Models;
 using PagedList;
+using webcoso.Models.LinQ;
 
 namespace webcoso.Controllers
 {
     public class AdminController : Controller
     {
         private ApplicationDbContext data = new ApplicationDbContext();
+        MyDataDataContext context = new MyDataDataContext();
         // GET: Admin
         public ActionResult Index()
         {
             if (!AuthAdmin())
                 return RedirectToAction("Error401", "Admin");
-            return View();
+            var kh = data.Users.ToList();
+            return View(kh);
         }
         public ActionResult Error401()
         {
@@ -36,6 +39,13 @@ namespace webcoso.Controllers
             if (userExist.RoleId != "1")
                 return false;
             return true;
+        }
+        public ActionResult GetData()
+        {
+            var data = context.DonHangs
+                .GroupBy(p => p.NgayDat)
+                .Select(g => new { Ngay = g.Key, tongtien = g.Sum(n => n.TongTien) }).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
     }
 }
