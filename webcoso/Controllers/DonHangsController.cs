@@ -173,8 +173,8 @@ namespace webcoso.Controllers
         {
             if (!AuthAdmin())
                 return RedirectToAction("Error401", "Admin");
-            var all_donHang = data.DonHangs.ToList();
-            int pageSize = 10;
+            var all_donHang = data.DonHangs.Where(t => t.TrangThaiThanhToan == true).ToList();
+            int pageSize = 7;
             int pageNum = page ?? 1;
             return View(all_donHang.ToPagedList(pageNum, pageSize));
         }
@@ -186,7 +186,7 @@ namespace webcoso.Controllers
                 new DataColumn("Ngày"),
                 new DataColumn("Tổng Doanh Thu")
             });
-            var emps = data.DonHangs.GroupBy(p => p.NgayDat).Distinct().Select(g => new
+            var emps = data.DonHangs.Where(t => t.TrangThaiThanhToan == true).GroupBy(p => p.NgayDat).Distinct().Select(g => new
             {
                 Pla = g.Key,
                 Total = g.Sum(t => t.TongTien)
