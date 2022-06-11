@@ -19,6 +19,8 @@ namespace webcoso.Models
         public virtual DbSet<NhomSanPham> NhomSanPham { get; set; }
         public virtual DbSet<SanPham> SanPham { get; set; }
         public virtual DbSet<ThuongHieu> ThuongHieu { get; set; }
+        public virtual DbSet<LienHe> LienHe { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

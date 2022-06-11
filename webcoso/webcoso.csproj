@@ -237,6 +237,7 @@
     <Compile Include="Controllers\DonHangsController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LienHesController.cs" />
     <Compile Include="Controllers\LoaiSPsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NhomSanPhamsController.cs" />
@@ -257,6 +258,7 @@
     <Compile Include="Models\DonHangViewModel.cs" />
     <Compile Include="Models\GioHang.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LienHe.cs" />
     <Compile Include="Models\LinQ\MyData.cs">
       <DependentUpon>MyData.dbml</DependentUpon>
     </Compile>
@@ -303,6 +305,7 @@
     <Content Include="Content\css\flaticon.css" />
     <Content Include="Content\css\icomoon.css" />
     <Content Include="Content\css\ionicons.min.css" />
+    <Content Include="Content\css\jquery.fancybox.css" />
     <Content Include="Content\css\jquery.timepicker.css" />
     <Content Include="Content\css\magnific-popup.css" />
     <Content Include="Content\css\open-iconic-bootstrap.min.css" />
@@ -366,6 +369,7 @@
     <Content Include="Content\js\jquery-migrate-3.0.1.min.js" />
     <Content Include="Content\js\jquery.animateNumber.min.js" />
     <Content Include="Content\js\jquery.easing.1.3.js" />
+    <Content Include="Content\js\jquery.fancybox.js" />
     <Content Include="Content\js\jquery.magnific-popup.min.js" />
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\jquery.stellar.min.js" />
@@ -620,6 +624,11 @@
     <Content Include="Views\SanPhams\sanphamtheomaloai.cshtml" />
     <Content Include="Views\GioHang\thanhtoancanhan.cshtml" />
     <Content Include="Views\DonHangs\XemDonMua.cshtml" />
+    <Content Include="Views\LienHes\Create.cshtml" />
+    <Content Include="Views\LienHes\Delete.cshtml" />
+    <Content Include="Views\LienHes\Details.cshtml" />
+    <Content Include="Views\LienHes\Edit.cshtml" />
+    <Content Include="Views\LienHes\LienHeAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
