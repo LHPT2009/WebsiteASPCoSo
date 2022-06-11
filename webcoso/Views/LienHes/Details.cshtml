@@ -1,43 +1,56 @@
 ﻿@model webcoso.Models.LienHe
-
+@using Microsoft.AspNet.Identity.Owin;
+@using Microsoft.AspNet.Identity;
+@using webcoso.Models;
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+    <div id="layoutSidenav_content">
+        @{
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(Model.IdUser);
+        }
+        <div>
+            <h4>LienHe</h4>
+            <hr/>
+            <dl class="dl-horizontal">
+                <dt>
+                    Tên Khách Hàng:
+                </dt>
 
-<h2>Chi Tiết Liên Hệ</h2>
+                <dd>
+                    @user.Name
+                </dd>
 
-<div>
-    <h4>LienHe</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayGui)
-        </dt>
+                <dt>
+                    Số điện thoại
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NgayGui)
-        </dd>
+                <dd>
+                   @user.PhoneNumber
+                </dd> 
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NoiDung)
-        </dt>
+                <dt>
+                    Ngày gửi
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NoiDung)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.NgayGui)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IdUser)
-        </dt>
+                <dt>
+                    Nội dung
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IdUser)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.NoiDung)
+                </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdLienHe }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            </dl>
+        </div>
+        <div class="col-md-offset-2 col-md-10" style="margin-bottom:15px">
+            <a class="btn btn-success" href='@Url.Action("LienHeAdmin", "LienHes")' style="margin: 30px 0;">
+                Trở về
+            </a>
+        </div>
+    </div>

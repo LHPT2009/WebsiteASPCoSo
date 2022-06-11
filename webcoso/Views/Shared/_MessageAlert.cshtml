@@ -1,0 +1,13 @@
+﻿@using webcoso.Message
+
+@if (Notification.has_flash())
+{
+    ModelNotification Notifi = Notification.get_flash();
+<script>
+        swal(
+            'Thông báo!',
+            '@Notifi.mgs',
+            '@Notifi.mgs_type.ToString()'
+    )
+</script>
+}
