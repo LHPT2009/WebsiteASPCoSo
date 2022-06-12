@@ -8,7 +8,7 @@ using MoMo;
 using Newtonsoft.Json.Linq;
 using System.Configuration;
 using common;
-
+using webcoso.Message;
 namespace webcoso.Controllers
 {
     public class GioHangController : Controller
@@ -34,11 +34,13 @@ namespace webcoso.Controllers
             {
                 sanPham = new GioHang(id);
                 lstGioHang.Add(sanPham);
+                Notification.set_flash("Added to cart!", "success");
                 return Redirect(strURL);
             }
             else
             {
                 sanPham.SoLuong++;
+                Notification.set_flash("Added to cart!", "success");
                 return Redirect(strURL);
             }
         }
@@ -100,6 +102,7 @@ namespace webcoso.Controllers
             if (sanPham != null)
             {
                 lstGioHang.RemoveAll(n => n.MaSP == id);
+                Notification.set_flash("Deleted form cart!", "success");
                 return RedirectToAction("GioHang");
             }
             return RedirectToAction("GioHang");
@@ -124,6 +127,7 @@ namespace webcoso.Controllers
         {
             List<GioHang> lstGioHang = layGioHang();
             lstGioHang.Clear();
+            Notification.set_flash("Deleted all all from cart!", "success");
             return RedirectToAction("GioHang");
         }
 
@@ -310,7 +314,7 @@ namespace webcoso.Controllers
 
                     new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ WebsiteLaptop của Tùng, An, Chuẩn (MoMo)", content);
                 }
-                
+
                 return RedirectToAction("XacNhanDonHang", "GioHang");
             }
             return RedirectToAction("DatHang", "GioHang");

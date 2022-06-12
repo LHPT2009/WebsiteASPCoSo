@@ -1,0 +1,70 @@
+﻿@model PagedList.PagedList<webcoso.Models.LienHe>
+@using Microsoft.AspNet.Identity.Owin;
+@using Microsoft.AspNet.Identity;
+@using webcoso.Models;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <div style="display: flex; margin-top: 20px; justify-content: center">
+                <h2 style="font-weight:bold;color:red;">Liên Hệ Của Khách Hàng</h2>
+            </div>
+            <table class="table table-bordered table-dark text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            Tên KH
+                        </th>
+                        <th>
+                            SĐT
+                        </th>
+                        <th>
+                            Ngày Gửi
+                        </th>
+                        <th>
+                            Nội dung
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="table-light">
+                    @foreach (var item in Model)
+                    {
+                        ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(item.IdUser);
+                        <tr>
+                            <td style="vertical-align:middle">
+                                @user.Name
+                            </td>
+                            <td style="vertical-align:middle">
+                                @user.PhoneNumber
+                            </td>
+                            <td style="vertical-align:middle">
+                                @item.NgayGui
+                            </td>
+                            <td style="vertical-align:middle">
+                                @item.NoiDung
+                            </td>
+                            <td style="vertical-align:middle">
+                                @Html.ActionLink("Chi tiết", "Details", new { id = item.IdLienHe }, new { @class = "btn btn-warning", @style = "margin-left:5px;font-weight:bold;" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div>
+                <div>
+                    <div>
+                        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                    </div>
+                    <div class="MenuTrang" style="display: flex; flex-direction: row; justify-content: center; color: white">
+                        @Html.PagedListPager(Model, page => Url.Action("LienHeAdmin", new { page = page }))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

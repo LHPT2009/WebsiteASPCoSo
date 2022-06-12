@@ -237,6 +237,7 @@
     <Compile Include="Controllers\DonHangsController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LienHesController.cs" />
     <Compile Include="Controllers\LoaiSPsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NhomSanPhamsController.cs" />
@@ -247,6 +248,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Message\ModelNotification.cs" />
+    <Compile Include="Message\Notification.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BinhLuan.cs" />
     <Compile Include="Models\ChiTietDonHang.cs" />
@@ -257,6 +260,7 @@
     <Compile Include="Models\DonHangViewModel.cs" />
     <Compile Include="Models\GioHang.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LienHe.cs" />
     <Compile Include="Models\LinQ\MyData.cs">
       <DependentUpon>MyData.dbml</DependentUpon>
     </Compile>
@@ -298,11 +302,13 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap\bootstrap-grid.css" />
     <Content Include="Content\css\bootstrap\bootstrap-reboot.css" />
+    <Content Include="Content\css\button-neon.css" />
     <Content Include="Content\css\css\bootstrap-reboot.css" />
     <Content Include="Content\css\css\mixins\_text-hide.css" />
     <Content Include="Content\css\flaticon.css" />
     <Content Include="Content\css\icomoon.css" />
     <Content Include="Content\css\ionicons.min.css" />
+    <Content Include="Content\css\jquery.fancybox.css" />
     <Content Include="Content\css\jquery.timepicker.css" />
     <Content Include="Content\css\magnific-popup.css" />
     <Content Include="Content\css\open-iconic-bootstrap.min.css" />
@@ -366,6 +372,7 @@
     <Content Include="Content\js\jquery-migrate-3.0.1.min.js" />
     <Content Include="Content\js\jquery.animateNumber.min.js" />
     <Content Include="Content\js\jquery.easing.1.3.js" />
+    <Content Include="Content\js\jquery.fancybox.js" />
     <Content Include="Content\js\jquery.magnific-popup.min.js" />
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\jquery.stellar.min.js" />
@@ -379,6 +386,8 @@
     <Content Include="Content\AccountConfirmation.html" />
     <Content Include="Content\sendforgot.html" />
     <Content Include="Content\sendmail.html" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -507,6 +516,8 @@
     <Content Include="Content\scss\bootstrap\_utilities.scss" />
     <Content Include="Content\scss\bootstrap\_variables.scss" />
     <Content Include="Content\scss\style.scss" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="Models\LinQ\MyData.dbml.layout">
       <DependentUpon>MyData.dbml</DependentUpon>
     </None>
@@ -521,6 +532,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\sweetalert-dev.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -534,6 +549,7 @@
     <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Styles\sweetalert.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -620,6 +636,12 @@
     <Content Include="Views\SanPhams\sanphamtheomaloai.cshtml" />
     <Content Include="Views\GioHang\thanhtoancanhan.cshtml" />
     <Content Include="Views\DonHangs\XemDonMua.cshtml" />
+    <Content Include="Views\LienHes\Create.cshtml" />
+    <Content Include="Views\LienHes\Delete.cshtml" />
+    <Content Include="Views\LienHes\Edit.cshtml" />
+    <Content Include="Views\LienHes\LienHeAdmin.cshtml" />
+    <Content Include="Views\LienHes\Details.cshtml" />
+    <Content Include="Views\Shared\_MessageAlert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

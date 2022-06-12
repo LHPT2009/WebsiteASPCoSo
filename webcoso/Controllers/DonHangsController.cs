@@ -88,37 +88,6 @@ namespace webcoso.Controllers
             return View(donHang);
         }
 
-        //public ActionResult EditTT(int id, FormCollection collection)
-        //{
-        //    if (!AuthAdmin())
-        //        return RedirectToAction("Error401", "Admin");
-        //    Models.DonHang donHang = db.DonHang.Find(id);
-        //    if (donHang != null)
-        //    {
-        //        if (collection["item.TrangThaiGiaoHang"].ToString() == "true")
-        //            donHang.TrangThaiGiaoHang = 1;
-        //        else
-        //            donHang.TrangThaiGiaoHang = 0;
-        //        Edit(donHang);
-        //    }
-        //    return RedirectToAction("Index");
-        //}
-        //public ActionResult EditTTT(int id, FormCollection collection)
-        //{
-        //    if (!AuthAdmin())
-        //        return RedirectToAction("Error401", "Admin");
-        //    Models.DonHang donHang = db.DonHang.Find(id);
-        //    if (donHang != null)
-        //    {
-        //        if (collection["item.TrangThaiThanhToan"].ToString() == "true")
-        //            donHang.TrangThaiThanhToan = true;
-        //        else
-        //            donHang.TrangThaiThanhToan = false;
-        //        Edit(donHang);
-        //    }
-        //    return RedirectToAction("Index");
-        //}
-        // GET: DonHangs/Edit/5
         public ActionResult Edit(int? id)
         {
             if (!AuthAdmin())
@@ -215,7 +184,7 @@ namespace webcoso.Controllers
             DataTable dt = new DataTable("Grib");
             dt.Columns.AddRange(new DataColumn[] {
                 new DataColumn("Ngày"),
-                new DataColumn("Tổng số tiền")
+                new DataColumn("Tổng Doanh Thu")
             });
             var emps = data.DonHangs.Where(t => t.TrangThaiThanhToan == true).GroupBy(p => p.NgayDat).Distinct().Select(g => new
             {

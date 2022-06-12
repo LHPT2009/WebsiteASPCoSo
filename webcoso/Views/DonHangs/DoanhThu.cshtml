@@ -10,8 +10,8 @@
                 <h1 style="margin:10px">Doanh thu theo ngày</h1>
                 @using (Html.BeginForm("Export", "DonHangs", FormMethod.Post))
                 {
-    <input type="submit" value="Xuất Excel" class="btn btn-success">
-}
+                    <input type="submit" value="Xuất Excel" class="btn btn-success">
+                }
 
                 <thead class="thead-dark">
                     <tr>
@@ -30,15 +30,15 @@
                         Total = g.Sum(t => t.TongTien)
                     }))
                     {
-        <tr>
-            <td>
-                @item.Pla
-            </td>
-            <td>
-                @String.Format("{0:0,0}", item.Total)
-            </td>
-        </tr>
-}
+                        <tr>
+                            <td>
+                                @item.Pla
+                            </td>
+                            <td>
+                                @String.Format("{0:0,0}", item.Total)
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
             <div style=" margin-bottom:50px;">
