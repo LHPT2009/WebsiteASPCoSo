@@ -38,7 +38,7 @@ namespace webcoso.Controllers
                 return RedirectToAction("Error401", "Admin");
             int pageSize = 10;
             int pageNum = page ?? 1;
-            return View(db.LienHe.ToList().ToPagedList(pageNum, pageSize));
+            return View(db.LienHe.ToList().OrderByDescending(p => p.NgayGui).ToPagedList(pageNum, pageSize));
         }
 
         // GET: LienHes/Details/5

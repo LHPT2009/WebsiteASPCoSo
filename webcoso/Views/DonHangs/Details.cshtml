@@ -3,18 +3,27 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
+<style>
+    dl dt{
+        padding-left:17% !important;
+        text-align:start;
+        min-width:40%;
+    }
+    dl dd{
+        text-align:start;
+        min-width:50%;
+        max-width:50% !important;
+    }
+</style>
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4" style=" margin-top:20px;">
-            <h2>Thông tin chi tiết</h2>
-            <div>
-                <h4>Đơn hàng</h4>
+            <div class="d-flex justify-content-center align-items-center flex-column">
+                <h2 style="text-align: center; margin-top: 20px; font-weight: bold; color: red;">Thông Tin Đơn hàng</h2>
                 <hr />
-                @Html.ActionLink("Xuất hóa đơn", "Index", "Report", new { id = Model.DonHang.MaDH }, new { @class = "btn btn-success" })
-                <dl class="dl-horizontal" style="display:flex;flex-wrap:wrap">
+                <dl class="dl-horizontal" style="display:flex;flex-wrap:wrap;justify-content:center ;width:65%">
                     <dt class="col-md-2">
-                        Trạng thái giao hàng
+                        Trạng thái giao hàng:
                     </dt>
                     <dd class="col-md-10">
                         @if (Model.DonHang.TrangThaiGiaoHang == 0)
@@ -34,63 +43,67 @@
                         }
                     </dd>
                     <dt class="col-md-2">
-                        Trạng thái thanh toán
+                        Trạng thái thanh toán:
                     </dt>
                     <dd class="col-md-10">
                         @if (Model.DonHang.TrangThaiThanhToan == true)
                         {
                             <label class="list-box tri-state" id="TrangThaiThanhToan" name="TrangThaiThanhToan">
-                                <a  value="true">Đã thanh toán</a>
+                                <a value="true">Đã thanh toán</a>
                             </label> }
                         else
                         {
-                            <label class="list-box tri-state" id="TrangThaiThanhToan" name="TrangThaiThanhToan">
+                            <label class="list-box tri-state" id="TrangThaiThanhToan" name="TrangThaiThanhToan" style="font-weight:bold;color:red">
                                 <a value="true">Chưa thanh toán</a>
                             </label>
-                            }
+                        }
                     </dd>
                     <dt class="col-md-2">
-                        Ngày đặt
+                        Ngày đặt:
                     </dt>
-                    <dd class="col-md-10">
+                    <dd class="col-md-10" style="font-weight:bold">
                         @Convert.ToDateTime(Model.DonHang.NgayDat).ToString("dd-MM-yyyy")
                     </dd>
 
                     <dt class="col-md-2">
-                        Ngày giao
+                        Ngày giao:
                     </dt>
-                    <dd class="col-md-10">
+                    <dd class="col-md-10" style="font-weight:bold">
                         @Convert.ToDateTime(Model.DonHang.NgayGiao).ToString("dd-MM-yyyy")
                     </dd>
 
                     <dt class="col-md-2">
-                        Email
+                        Email:
                     </dt>
                     <dd class="col-md-10">
                         @Html.DisplayFor(model => model.DonHang.AspNetUser.Email)
                     </dd>
 
                     <dt class="col-md-2">
-                        Số điện thoại
+                        Số điện thoại:
                     </dt>
                     <dd class="col-md-10">
                         @Html.DisplayFor(model => model.DonHang.AspNetUser.PhoneNumber)
                     </dd>
 
                     <dt class="col-md-2">
-                        Địa chỉ
+                        Địa chỉ:
                     </dt>
                     <dd class="col-md-10">
                         @Html.DisplayFor(model => model.DonHang.AspNetUser.Address)
                     </dd>
 
                     <dt class="col-md-2">
-                        Tổng tiền
+                        Tổng tiền:
                     </dt>
-                    <dd class="col-md-10">
-                        @String.Format("{0:0,0}", Model.DonHang.TongTien)
+                    <dd class="col-md-10" style="color:red;font-weight:bold">
+                        @String.Format("{0:0,0}", Model.DonHang.TongTien) VNĐ
                     </dd>
                 </dl>
+            </div>
+            <div>
+                @Html.ActionLink("Xuất hóa đơn", "Index", "Report", new { id = Model.DonHang.MaDH }, new { @class = "btn btn-success" })
+                <hr />
                 <table class="table table-bordered table-dark">
                     <thead class="thead-dark">
                         <tr>
@@ -120,7 +133,7 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Soluong)
-                                </td> 
+                                </td>
                                 <td>
                                     <strong style="color:red"> @String.Format("{0:0,0}", item.Gia) VNĐ</strong>
                                 </td>
@@ -130,8 +143,8 @@
                 </table>
             </div>
             <p>
-                @Html.ActionLink("Sửa", "Edit", new { id = Model.DonHang.MaDH }, new { @class = "btn btn-warning" })
-                <a class="btn btn-warning" href='@Url.Action("Index", "DonHangs")' style="margin:10px 0px;">
+                @Html.ActionLink("Chỉnh Sửa", "Edit", new { id = Model.DonHang.MaDH }, new { @class = "btn btn-warning" })
+                <a class="btn btn-info" href='@Url.Action("Index", "DonHangs")' style="margin:10px 0px;">
                     Trở về
                 </a>
             </p>

@@ -7,14 +7,20 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4">
-            <div style="display: flex; margin-top: 20px; justify-content: space-between">
-                <h2>Danh sách khách hàng</h2>
-                <form>
-                    <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Tìm kiếm theo email..." aria-label="Tìm kiếm theo email..." value="@ViewBag.Keyword" name="searchString" aria-describedby="btnNavbarSearch" />
-                        <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
-                    </div>
-                </form>
+            <div>
+                <div>
+                    <h2 style="text-align: center; margin-top: 20px; font-weight: bold; color: red;">
+                        Danh sách khách hàng
+                    </h2>
+                </div>
+                <div style="display:flex;justify-content:right;margin:10px">
+                    <form>
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Tìm kiếm theo email..." aria-label="Tìm kiếm theo email..." value="@ViewBag.Keyword" name="searchString" aria-describedby="btnNavbarSearch" />
+                            <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
             </div>
             <table class="table table-bordered table-dark">
                 <thead class="thead-dark">
@@ -43,32 +49,32 @@
                 <tbody class="table-light" style="font-size: medium;">
                     @foreach (var item in Model)
                     {
-        <tr>
-            <td style="vertical-align:middle">
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td style="vertical-align:middle">
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td style="vertical-align:middle">
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td style="vertical-align:middle">
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td style="vertical-align:middle">
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td style="vertical-align:middle">
-                @Html.DisplayFor(modelItem => item.LockoutEnabled)
-            </td>
+                        <tr>
+                            <td style="vertical-align:middle">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td style="vertical-align:middle">
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td style="vertical-align:middle">
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td style="vertical-align:middle">
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td style="vertical-align:middle">
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td style="vertical-align:middle">
+                                @Html.DisplayFor(modelItem => item.LockoutEnabled)
+                            </td>
 
-            <td>
-                @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-info" })
-                @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }, new { @class = "btn btn-warning", @style = "margin-left:5px" })
-                @*@Html.ActionLink("Xóa", "Delete", new { id = item.Id }, new { @class = "btn btn-danger", @style = "margin-left:5px" })*@
-            </td>
-        </tr>}
+                            <td>
+                                @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-info" })
+                                @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }, new { @class = "btn btn-warning", @style = "margin-left:5px" })
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
 

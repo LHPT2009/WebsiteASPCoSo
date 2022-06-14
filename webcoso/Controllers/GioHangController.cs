@@ -34,13 +34,13 @@ namespace webcoso.Controllers
             {
                 sanPham = new GioHang(id);
                 lstGioHang.Add(sanPham);
-                Notification.set_flash("Added to cart!", "success");
+                Notification.set_flash("Đã thêm sản phẩm vào giỏ hàng!", "success");
                 return Redirect(strURL);
             }
             else
             {
                 sanPham.SoLuong++;
-                Notification.set_flash("Added to cart!", "success");
+                Notification.set_flash("Đã thêm sản phẩm vào giỏ hàng!", "success");
                 return Redirect(strURL);
             }
         }
@@ -102,7 +102,8 @@ namespace webcoso.Controllers
             if (sanPham != null)
             {
                 lstGioHang.RemoveAll(n => n.MaSP == id);
-                Notification.set_flash("Deleted form cart!", "success");
+                Notification.set_flash("Đã xoá sản phẩm khỏi giỏ hàng!", "success");
+                //Notification.set_flash("Deleted form cart!", "success");
                 return RedirectToAction("GioHang");
             }
             return RedirectToAction("GioHang");
@@ -127,7 +128,7 @@ namespace webcoso.Controllers
         {
             List<GioHang> lstGioHang = layGioHang();
             lstGioHang.Clear();
-            Notification.set_flash("Deleted all all from cart!", "success");
+            Notification.set_flash("Đã xoá tất cả sản phẩm trong giỏ hàng!", "success");
             return RedirectToAction("GioHang");
         }
 
@@ -136,6 +137,11 @@ namespace webcoso.Controllers
         [HttpGet]
         public ActionResult DatHang()
         {
+            if (TongTien() == 0)
+            {
+                var tong = TongTien();
+                return RedirectToAction("GioHang");
+            }
             if (Session["TaiKhoan"] == null || Session["TaiKhoan"].ToString() == "")
             {
                 return RedirectToAction("Login", "Account");
@@ -153,6 +159,7 @@ namespace webcoso.Controllers
         }
         public ActionResult DatHang(FormCollection collection)
         {
+
             DonHang dh = new DonHang();
             Models.LinQ.AspNetUser kh = (Models.LinQ.AspNetUser)Session["TaiKhoan"];
             //SanPham s = new SanPham();
@@ -193,13 +200,13 @@ namespace webcoso.Controllers
             var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
             new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ WebsiteLaptop của Tùng, An, Chuẩn", content);
-
             return RedirectToAction("XacNhanDonHang", "GioHang");
         }
 
         public ActionResult XacNhanDonHang()
         {
-            return View();
+            Notification.set_flash("Đặt hàng thành công!", "success");
+            return Redirect("/");
         }
         public ActionResult ThanhToan()
         {
@@ -314,7 +321,7 @@ namespace webcoso.Controllers
 
                     new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ WebsiteLaptop của Tùng, An, Chuẩn (MoMo)", content);
                 }
-
+                Notification.set_flash("Thanh toán thành công!", "success");
                 return RedirectToAction("XacNhanDonHang", "GioHang");
             }
             return RedirectToAction("DatHang", "GioHang");

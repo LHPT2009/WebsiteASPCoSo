@@ -5,11 +5,37 @@
 }
 @Html.Partial("_MessageAlert")
 
-<div class="hero-wrap hero-bread" style="background: #dad0d057">
+<style>
+    .btn-cart {
+        background: #e4d6437a;
+        color: #f12121c7;
+    }
+        .btn-cart:hover {
+            background: #ead820c7;
+            color: #2351cfd9;
+        }
+    .style-btn{
+        transition:0.5s;
+    }
+        .style-btn:hover {
+            background: #4dc250 !important;
+            color: #ffd00f !important;
+            box-shadow: -1px 2px 20px 1px #ffca009e;
+            transform: scale(1.05);
+            transition: 0.5s;
+        }
+    .bread {
+       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
+           Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 
+           'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 
+           'Noto Color Emoji' !important;
+    }
+</style>
+
+<div class="hero-wrap hero-bread" style="background-color: #b9cb431f; ">
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Giỏ</a></span> <span>hàng</span></p>
                 <h1 class="mb-0 bread">Giỏ hàng của bạn</h1>
             </div>
         </div>
@@ -24,7 +50,7 @@
                             <table class="table">
                                 <thead class="thead-primary">
                                     <tr class="text-center">
-                                        <th>&nbsp;</th>
+                                        <th width="70">STT</th>
                                         <th>Hình ảnh</th>
                                         <th>Tên sản phẩm</th>
                                         <th>Giá</th>
@@ -34,50 +60,58 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr class="text-center">
-                                            <td class="product-remove"><a href="@Url.Action("XoaGioHang", "GioHang", new { @id = item.MaSP })"><span class="ion-ios-close"></span></a></td>
+                                    @{
+                                        int stt = 0;
+                                        foreach (var item in Model)
+                                        {
+                                            stt += 1;
+                                            <tr class="text-center">
+                                                <td>@stt</td>
 
-                                            <td class="image-prod"><div class="img" style="background-image: url(@item.Hinh);"></div></td>
+                                                <td class="image-prod"><div class="img" style="background-image: url(@item.Hinh);"></div></td>
 
-                                            <td class="product-name">
-                                                <h3>@Html.DisplayFor(modelItem => item.Ten)</h3>
-                                            </td>
-                                            @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @id = item.MaSP }))
-                                            {
-                                                <td class="price">
-                                                    @String.Format("{0:0,0}", item.Gia) VNĐ
+                                                <td class="product-name">
+                                                    <h3>@Html.DisplayFor(modelItem => item.Ten)</h3>
                                                 </td>
+                                                @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @id = item.MaSP }))
+                                                {
+                                                    <td class="price">
+                                                        @String.Format("{0:0,0}", item.Gia) VNĐ
+                                                    </td>
 
-                                                <td class="quantity">
-                                                    <div class="input-group mb-3">
-                                                        <input type="number" name="txtSolg" class="quantity form-control input-number" value="@item.SoLuong" min="1" max="100">
-                                                    </div>
-                                                </td>
-                                                <td class="total">
-                                                    @String.Format("{0:0,0}", item.ThanhTien) VNĐ
-                                                </td>
-                                                <td> <input type="submit" value="Cập nhật" class="btn btn-success" /> </td>
-                                            }
-                                        </tr>
+                                                    <td class="quantity">
+                                                        <div class="input-group mb-3">
+                                                            <input type="number" name="txtSolg" class="quantity form-control input-number" value="@item.SoLuong" min="1" max="100" onchange="this.form.submit()">
+                                                        </div>
+                                                    </td>
+                                                    <td class="total" style="color:red;font-weight:bold">
+                                                        @String.Format("{0:0,0}", item.ThanhTien) VNĐ
+                                                    </td>
+
+                                                }
+                                                <td class="product-remove"><a href="@Url.Action("XoaGioHang", "GioHang", new { @id = item.MaSP })"><i class="fa fa-solid fa-trash-can" style="margin-right:10px"></i>Xóa</a></td>
+                                            </tr>
+                                        }
                                     }
                                 </tbody>
                             </table>
+                            <div class="text-right" style="margin:20px">
+                                <a class="btn btn-primary py-3 px-4 style-btn" href="@Url.Action("XoaTatCaGioHang","GioHang")">Xoá tất cả</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-start">
-                    <div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
+                <div class="row justify-content-center">
+                    <div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate" style=" border: 3px solid rgb(211 92 92 / 94%); box-shadow: 1px 3px 20px 3px #00b1ff91;">
                         <div class="cart-total mb-3">
-                            <h3>Tổng giỏ hàng của bạn</h3>
+                            <h3 class="text-center">Tổng giỏ hàng của bạn</h3>
                             <hr>
                             <p class="d-flex total-price">
                                 <span>Tổng Tiền</span>
-                                <span>@String.Format("{0:0,0}", @ViewBag.TongTien) VNĐ</span>
+                                <span style="color:red;font-weight:bold">@String.Format("{0:0,0}", @ViewBag.TongTien) VNĐ</span>
                             </p>
                         </div>
-                        <p class="text-center"><a href="/GioHang/DatHang" class="btn btn-primary py-3 px-4">TIẾN HÀNH THANH TOÁN</a></p>
+                        <p class="text-center"><a href="/GioHang/DatHang" class="btn btn-primary py-3 px-4 style-btn">TIẾN HÀNH THANH TOÁN</a></p>
                     </div>
                 </div>
             }
@@ -86,14 +120,12 @@
                 <div style="display: flex; flex-direction: column;align-items:center">
                     <br />
                     <div>
-                        <img src="~/Content/images/shopping-cart-trolley.png" alt="thumbnail" width="300" style="margin: auto" />
+                        <img src="~/Content/img/icon-cart.png" alt="thumbnail" width="300" style="margin: auto" />
                     </div>
-                    <h3>Bạn chưa có sản phẩm nào!</h3>
-                    <h3 style="margin: 20px auto">
-                        <div class="btn btn-secondary" style="padding:20px; font-size:14px">
-                            <a class="icon icon-cart-plus" href="@Url.Action("Index","SanPhams")" class="nav-link"> Mua sắm thôi!!!</a>
-                        </div>
-                    </h3>
+                    <h2 style="color: #d45353e8; font-weight: 550;">Oops! Chưa có sản phầm nào!</h2>
+                    <h2 style="margin: 20px auto">
+                        <a class="btn btn-cart py-3 px-4" style="font-weight:550;font-size:14px;" href="@Url.Action("Index","SanPhams")"><i class="icon icon-cart-plus"></i>&nbsp; Mua sắm ngay thôi!!!</a>
+                    </h2>
                 </div>
             }
         </div>

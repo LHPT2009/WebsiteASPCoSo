@@ -51,7 +51,7 @@
                         {
                             <div class="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex">
                                 <div class="product d-flex flex-column">
-                                    <a href="#" class="img-prod">
+                                    <a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })" class="img-prod">
                                         <img class="img-fluid" src="@item.Hinh" alt="Colorlib Template">
                                     </a>
                                     <div class="text py-3 pb-4 px-3">
@@ -95,9 +95,9 @@
                 </div>
             </div>
             <div class="col-md-4 col-lg-2">
-                <div class="sidebar">
+                <div class="sidebar" style="border-style: double; border-radius: 10px; padding: 10px; box-shadow: 4px 4px 17px 0px #735858">
                     <div class="sidebar-box-2">
-                        <h2 class="heading">Loại sản phẩm</h2>
+                        <h2 class="heading text-center">Các loại</h2>
                         <div class="fancy-collapse-panel">
                             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                                 <div class="panel panel-default">

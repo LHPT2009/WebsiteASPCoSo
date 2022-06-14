@@ -1,7 +1,11 @@
 ﻿@using webcoso.Models
-@using Microsoft.AspNet.Identity.Owin;
-@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin
+@using Microsoft.AspNet.Identity
+@{
 
+    ApplicationUser userLogin = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,7 +59,6 @@
                 }
     </style>
 </head>
-@Html.Action("_MessageAlert")
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
@@ -72,7 +75,7 @@
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0 d-none d-md-inline-block">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">@userLogin.Name &nbsp;<i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                     {
@@ -89,6 +92,10 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Danh mục</div>
+                        <a class="nav-link" href='@Url.Action("Index", "Admin")'>
+                            <div class="sb-nav-link-icon"><i class="fa fa-light fa-chart-line"></i></div>
+                            Dash Board
+                        </a>
                         <a class="nav-link" href='@Url.Action("Index", "DonHangs")'>
                             <div class="sb-nav-link-icon"><i class="fa fa-solid fa-cart-arrow-down"></i></div>
                             Đơn hàng
@@ -133,14 +140,7 @@
                         })</script>
                 </div>
                 <div class="sb-sidenav-footer">
-                    <div class="small">Tài khoản đăng nhập:</div>
 
-                    @{
-
-                        ApplicationUser userLogin = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-
-                    }
-                    @userLogin.Name
                 </div>
             </nav>
         </div>
