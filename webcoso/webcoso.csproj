@@ -636,16 +636,12 @@
     <Content Include="Views\SanPhams\sanphamtheomaloai.cshtml" />
     <Content Include="Views\GioHang\thanhtoancanhan.cshtml" />
     <Content Include="Views\DonHangs\XemDonMua.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Views\Users\userDetail.cshtml" />
-=======
     <Content Include="Views\LienHes\Create.cshtml" />
     <Content Include="Views\LienHes\Delete.cshtml" />
     <Content Include="Views\LienHes\Edit.cshtml" />
     <Content Include="Views\LienHes\LienHeAdmin.cshtml" />
     <Content Include="Views\LienHes\Details.cshtml" />
     <Content Include="Views\Shared\_MessageAlert.cshtml" />
->>>>>>> be39bef84da8434affe7a835a2a4b7c645deee6d
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
