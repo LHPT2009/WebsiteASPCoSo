@@ -1,0 +1,291 @@
+﻿
+@{
+    ViewBag.Title = "userDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="body" id="show-data">
+    <div class="form" >
+        
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4 style="display: flex; flex-direction: row; justify-content: center; color: #dbcc8f;">Hồ sơ của tôi</h4>
+                    <input type="hidden" id="idUserLogin" value="@ViewBag.idUser" />
+                    <div class="r">
+                        <div class="title">
+                            <label>Tên đăng nhập:</label>
+                        </div>
+                        <div class="content" >
+                            <div style="width: 100vw;">
+                                <label style="color: black; height: 100%;" id="userName"></label>
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="r">
+                        <div class="title">
+                            <label>Tên:</label>
+                        </div>
+                        <div class="content" style="color: black;" id="name"></div>
+                        <button class="change" data-toggle="modal" data-target="#modalName"><i class="fa fa-edit"></i></button>
+                    </div>
+                    <hr />
+                    <div class="r">
+                        <div class="title">
+                            <label>Email:</label>
+                        </div>
+                        <div class="content" style="color: black;" id="email"></div>
+                    </div>
+                    <hr />
+                    <div class="r">
+                        <div class="title">
+                            <label>Số điện thoại:</label>
+                        </div>
+                        <div class="content" style="color: black;" id="phoneNumber"></div>
+                        <button class="change" data-toggle="modal" data-target="#modalPhoneNumber"><i class="fa fa-edit"></i></button>
+                    </div>
+                    <hr />
+                    <div class="r">
+                        <div class="title">
+                            <label>Địa chỉ:</label>
+                        </div>
+                        <div class="content" style="color: black;" id="address"></div>
+                        <button class="change" data-toggle="modal" data-target="#modalAddress"><i class="fa fa-edit"></i></button>
+                    </div>
+                </div>
+            </div>
+      
+        
+    </div>
+
+</div>
+
+<!-- Modal change name -->
+<div class="modal fade" id="modalName" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thay đổi tên</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label>Tên</label>
+                <input type="text" id="nameInput" placeholder="Nhập tên..." />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <a href="@Url.Action("userDetail", "Users")" type="button" id="submitChangeName" class="btn btn-primary">Lưu thay đổi</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal change phone number -->
+<div class="modal fade" id="modalPhoneNumber" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thay đổi số điện thoại</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label>Số điện thoại</label>
+                <input type="text" id="phoneInput" placeholder="Nhập số điện thoại..." />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <a href="@Url.Action("userDetail", "Users")" type="button" id="submitChangePhone" class="btn btn-primary">Lưu thay đổi</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal change address -->
+<div class="modal fade" id="modalAddress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thay đổi địa chỉ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label>Địa chỉ</label>
+                <input type="text" id="addressInput" placeholder="Nhập địa chỉ..." />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <a href="@Url.Action("userDetail", "Users")" type="button" id="submitChangeAddress" class="btn btn-primary">Lưu thay đổi</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .body {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        height: 650px;
+        padding-top: 70px;
+        background: rgb(219 204 143 / 0.42);
+    }
+
+    .form {
+        width: 70%;
+        background: white;
+        margin: 30px 0;
+        padding: 30px;
+    }
+
+    .r {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .title {
+        display: flex;
+        width: 20%;
+        margin-right: 3%;
+        justify-content: right;
+    }
+
+    .content {
+        width: 77%;
+    }
+
+    input {
+        width: 50%;
+    }
+
+    .col-lg-4 {
+        border-left: 1px solid rgb(128 128 128 / 0.18);
+    }
+
+    button {
+        border: none;
+        border-radius: 30px;
+        background: #dbcc8f;
+    }
+
+    .change {
+        cursor: pointer;
+    }
+
+    .modal {
+        background: rgb(0 0 0 / 0.43);
+    }
+
+    .modal-body input {
+        width: 100%;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        loadUserDetail();
+    });
+
+    $('#submitChangeName').click(function () {
+        let idUserLogin = $('#idUserLogin').val().trim();
+        let nameUser = $('#nameInput').val();
+        $.ajax({
+            url: '/Users/editName',
+            type: 'post',
+            data: {
+                id: idUserLogin,
+                name: nameUser
+            },
+            success: function (data) {
+                if (data.code == 200) {
+                    alert(data.msg);
+                } else {
+                    alert(data.msg);
+                }
+            }
+
+        });
+
+    });
+
+    $('#submitChangePhone').click(function () {
+        let idUserLogin = $('#idUserLogin').val().trim();
+        let phoneUser = $('#phoneInput').val();
+        $.ajax({
+            url: '/Users/editPhone',
+            type: 'post',
+            data: {
+                id: idUserLogin,
+                phone: phoneUser
+            },
+            success: function (data) {
+                if (data.code == 200) {
+                    alert(data.msg);
+                } else {
+                    alert(data.msg);
+                }
+            }
+
+        });
+
+    });
+
+    $('#submitChangeAddress').click(function () {
+        let idUserLogin = $('#idUserLogin').val().trim();
+        let addressUser = $('#addressInput').val();
+        $.ajax({
+            url: '/Users/editAddress',
+            type: 'post',
+            data: {
+                id: idUserLogin,
+                address: addressUser
+            },
+            success: function (data) {
+                if (data.code == 200) {
+                    alert(data.msg);
+                } else {
+                    alert(data.msg);
+                }
+            }
+
+        });
+
+    });
+
+    function loadUserDetail() {
+        $.ajax({
+            url: '/Users/getUserDetail',
+            type: 'get',
+            success: function (data) {
+                if (data.code == 200) {
+                        
+                    let userName = data.userLogin.Email;
+                    let name = data.userLogin.Name;
+                    let email = data.userLogin.Email;
+                    let phoneNumber = data.userLogin.PhoneNumber;
+                    let address = data.userLogin.Address;
+
+
+                    $("#userName").append(userName);
+                    $("#name").append(name);
+                    $("#email").append(email);
+                    $("#phoneNumber").append(phoneNumber);
+                    $("#address").append(address);
+                    $('#nameInput').val(name);
+                    $('#phoneInput').val(phoneNumber);
+                    $('#addressInput').val(address);
+                        
+                }
+            }
+
+        });
+    }
+
+</script>

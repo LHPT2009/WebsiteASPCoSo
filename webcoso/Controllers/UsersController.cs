@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using webcoso.Models;
 using PagedList;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace webcoso.Controllers
 {
@@ -163,6 +165,79 @@ namespace webcoso.Controllers
             if (userExist.RoleId != "1")
                 return false;
             return true;
+        }
+
+        public ActionResult userDetail ()
+        {
+            ApplicationUser userLogin = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            ViewBag.idUser = userLogin.Id;
+            return View();
+        }
+
+        [HttpGet]
+        public JsonResult getUserDetail()
+        {
+            try
+            {
+                ApplicationUser userLogin = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+                return Json(new { code = 200, userLogin = userLogin}, JsonRequestBehavior.AllowGet);
+            }catch( Exception ex)
+            {
+                return Json(new { code = 500, msg = "Lấy thông tin cá nhân thất bại:" + ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+ 
+        [HttpPost]
+        public JsonResult editName( string id, string name)
+        {
+            try
+            {
+                var user = db.Users.SingleOrDefault(x => x.Id == id);
+                user.Name = name;
+                db.SaveChanges();
+
+                return Json(new { code = 200, msg = "Cật nhật tên thành công" }, JsonRequestBehavior.AllowGet);
+            }catch( Exception ex)
+            {
+                return Json(new { code = 500, msg = "Cật nhật tên thất bại:" + ex.Message }, JsonRequestBehavior.AllowGet);
+
+            }
+        }
+
+        [HttpPost]
+        public JsonResult editAddress(string id, string address)
+        {
+            try
+            {
+                var user = db.Users.SingleOrDefault(x => x.Id == id);
+                user.Address = address;
+                db.SaveChanges();
+
+                return Json(new { code = 200, msg = "Cật nhật địa chỉ thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { code = 500, msg = "Cật nhật địa chỉ thất bại:" + ex.Message }, JsonRequestBehavior.AllowGet);
+
+            }
+        }
+
+        [HttpPost]
+        public JsonResult editPhone(string id, string phone)
+        {
+            try
+            {
+                var user = db.Users.SingleOrDefault(x => x.Id == id);
+                user.PhoneNumber = phone;
+                db.SaveChanges();
+
+                return Json(new { code = 200, msg = "Cật nhật số điện thoại thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { code = 500, msg = "Cật nhật số điện thoại thất bại:" + ex.Message }, JsonRequestBehavior.AllowGet);
+
+            }
         }
     }
 }
