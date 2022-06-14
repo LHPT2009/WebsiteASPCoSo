@@ -620,6 +620,7 @@
     <Content Include="Views\SanPhams\sanphamtheomaloai.cshtml" />
     <Content Include="Views\GioHang\thanhtoancanhan.cshtml" />
     <Content Include="Views\DonHangs\XemDonMua.cshtml" />
+    <Content Include="Views\Users\userDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
