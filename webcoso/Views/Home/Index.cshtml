@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Home Page";
 }
+@Html.Partial("_MessageAlert")
 <section id="home-section" class="hero">
     <div class="home-slider owl-carousel">
         <div class="slider-item js-fullheight">
@@ -123,12 +124,12 @@
                 {
                     <div class="col-sm-12 col-md-6 col-lg-3 ftco-animate d-flex">
                         <div class="product d-flex flex-column">
-                            <a class="img-prod" href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })"  style="display: flex; flex-direction: row; justify-content: center;">
+                            <a class="img-prod" href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })" style="display: flex; flex-direction: row; justify-content: center;">
                                 <img class="img-fluid" style="width:90%; padding: 10px;" src="@item.Hinh" alt="Colorlib Template">
                                 <div class="overlay" style="background: #ffff;"></div>
                             </a>
                             <div class="text py-3 pb-4 px-3">
-                               
+
                                 <h3 style="padding-top: 20px;"><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
                                 <div class="pricing">
                                     <p class="price"><span>@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
@@ -178,7 +179,7 @@
                                 <div class="overlay" style="background: #ffff;"></div>
                             </a>
                             <div class="text py-3 pb-4 px-3">
-                               
+
                                 <h3 style="padding-top: 20px;"><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
                                 <div class="pricing">
                                     <p class="price"><span>@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
@@ -226,7 +227,7 @@
                                 <div class="overlay" style="background: #ffff;"></div>
                             </a>
                             <div class="text py-3 pb-4 px-3">
-                               
+
                                 <h3 style="padding-top: 20px;"><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
                                 <div class="pricing">
                                     <p class="price"><span>@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
@@ -301,12 +302,12 @@
                 {
                     <div class="col-sm-12 col-md-6 col-lg-3 ftco-animate d-flex">
                         <div class="product d-flex flex-column">
-                            <a class="img-prod" href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })"  style="display: flex; flex-direction: row; justify-content: center;">
+                            <a class="img-prod" href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })" style="display: flex; flex-direction: row; justify-content: center;">
                                 <img class="img-fluid" style="width:90%; padding: 10px;" src="@item.Hinh" alt="Colorlib Template">
                                 <div class="overlay" style="background: #ffff;"></div>
                             </a>
                             <div class="text py-3 pb-4 px-3">
-                               
+
                                 <h3 style="padding-top: 20px;"><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
                                 <div class="pricing">
                                     <p class="price"><span>@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
@@ -380,12 +381,12 @@
                 {
                     <div class="col-sm-12 col-md-6 col-lg-3 ftco-animate d-flex">
                         <div class="product d-flex flex-column">
-                            <a class="img-prod" href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })"  style="display: flex; flex-direction: row; justify-content: center;">
+                            <a class="img-prod" href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })" style="display: flex; flex-direction: row; justify-content: center;">
                                 <img class="img-fluid" style="width:90%; padding: 10px;" src="@item.Hinh" alt="Colorlib Template">
                                 <div class="overlay" style="background: #ffff;"></div>
                             </a>
                             <div class="text py-3 pb-4 px-3">
-                               
+
                                 <h3 style="padding-top: 20px;"><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
                                 <div class="pricing">
                                     <p class="price"><span>@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>

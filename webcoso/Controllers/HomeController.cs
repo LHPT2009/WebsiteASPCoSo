@@ -41,10 +41,27 @@ namespace webcoso.Controllers
         {
             return View();
         }
+
         public ActionResult Contact()
         {
             return View();
         }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Contact(string id)
+        {
+            LienHesController addLienHe = new LienHesController();
+            LienHe lienHe = new LienHe();
+            if (Request["txtNoiDung"] != null)
+            {
+                string content = Request["txtNoiDung"].ToString() + " ";
+                addLienHe.Create(content, lienHe);
+            }
+            return RedirectToAction("Contact");
+        }
+
         public ActionResult ShopDetails()
         {
             return View();

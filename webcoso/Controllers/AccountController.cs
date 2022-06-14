@@ -233,7 +233,7 @@ namespace webcoso.Controllers
             }
             else
             {
-                ViewBag.Thongbao = "Bạn chưa tích xác nhận bên dưới !!!";
+                ViewBag.Thongbao = "Vui lòng xác minh bạn không phải là \"robot\" !!!";
             }
             return View();
         }

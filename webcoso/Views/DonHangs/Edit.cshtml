@@ -72,14 +72,22 @@
                                 }
                                 else
                                 {
-                                    <select class="list-box tri-state" id="TrangThaiThanhToan" name="TrangThaiThanhToan">
-                                        <option value="true">Đã thanh toán</option>
-                                        <option selected="selected" value="false">Chưa thanh toán</option>
-                                    </select>
-                                }
+                                    <div>
+                                        <div>
+                                            <input name="TrangThaiThanhToan" id="yes" value="true" type="radio" />&nbsp;<label for="yes">Đã thanh toán</label>
+                                        </div>
+                                        <div>
+                                            <input checked name="TrangThaiThanhToan" id="no" value="false" type="radio" />&nbsp;<label for="no">Chưa thanh toán</label>
+                                        </div>
+                                    </div>
+                                        @*<select class="list-box tri-state" id="TrangThaiThanhToan" name="TrangThaiThanhToan">
+                    <option value="true">Đã thanh toán</option>
+                    <option selected="selected" value="false">Chưa thanh toán</option>
+                </select>*@
+                                    }
                                 @Html.ValidationMessageFor(model => model.TrangThaiThanhToan, "", new { @class = "text-danger" })
                             </div>
-                        </div>
+                            </div>
                     </div>
                     <div class="form-group">
                         <strong class="control-label col-md-2">Ngày đặt</strong>

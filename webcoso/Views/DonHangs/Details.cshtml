@@ -40,13 +40,14 @@
                         @if (Model.DonHang.TrangThaiThanhToan == true)
                         {
                             <label class="list-box tri-state" id="TrangThaiThanhToan" name="TrangThaiThanhToan">
-                                <a value="true">Đã thanh toán</a>
+                                <a  value="true">Đã thanh toán</a>
                             </label> }
                         else
                         {
                             <label class="list-box tri-state" id="TrangThaiThanhToan" name="TrangThaiThanhToan">
                                 <a value="true">Chưa thanh toán</a>
-                            </label>}
+                            </label>
+                            }
                     </dd>
                     <dt class="col-md-2">
                         Ngày đặt
@@ -97,6 +98,9 @@
                                 Tên sản phẩm
                             </th>
                             <th>
+                                Hình ảnh
+                            </th>
+                            <th>
                                 Số lượng
                             </th>
                             <th>
@@ -112,10 +116,13 @@
                                     @Html.DisplayFor(modelItem => item.SanPham.Ten)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Soluong)
+                                    <img src="@item.SanPham.Hinh" alt="Alternate Text" width="200" />
                                 </td>
                                 <td>
-                                    @String.Format("{0:0,0}", item.Gia)
+                                    @Html.DisplayFor(modelItem => item.Soluong)
+                                </td> 
+                                <td>
+                                    <strong style="color:red"> @String.Format("{0:0,0}", item.Gia) VNĐ</strong>
                                 </td>
                             </tr>
                         }
