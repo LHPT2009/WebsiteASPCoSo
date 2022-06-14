@@ -1,4 +1,7 @@
 ﻿@model webcoso.Models.BinhLuan
+@using webcoso.Models
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin
 @{
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -7,11 +10,9 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4">
-            <h2>Xóa bình luận</h2>
 
             <h3>Bạn có chắc chắn muốn xóa?</h3>
             <div>
-                <h4>Bình luận</h4>
                 <hr />
                 <dl class="dl-horizontal">
                     <dt>
@@ -31,11 +32,14 @@
                     </dd>
 
                     <dt>
-                        Mã khách hàng
+                       Tên Khách Hàng
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.MaKH)
+                        @{
+                            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(Model.MaKH);
+                        }
+                        @user.Name
                     </dd>
 
                     <dt>

@@ -32,7 +32,7 @@ namespace webcoso.Controllers
             var all_donHang = data.DonHangs.ToList();
             int pageSize = 10;
             int pageNum = page ?? 1;
-            return View(all_donHang.ToPagedList(pageNum, pageSize));
+            return View(all_donHang.OrderByDescending(p => p.NgayDat).ToPagedList(pageNum, pageSize));
         }
 
         // GET: DonHangs/Details/5

@@ -3,11 +3,13 @@
 @if (Notification.has_flash())
 {
     ModelNotification Notifi = Notification.get_flash();
-<script>
-        swal(
+    string message = Notifi.mgs.ToString();
+    string type = Notifi.mgs_type.ToString();
+    <script>
+        Swal.fire(
             'Thông báo!',
-            '@Notifi.mgs',
-            '@Notifi.mgs_type.ToString()'
+            '@message',
+            '@type',
     )
-</script>
+    </script>
 }

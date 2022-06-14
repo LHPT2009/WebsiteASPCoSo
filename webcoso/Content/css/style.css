@@ -11783,7 +11783,6 @@ a.text-dark:focus {
 }
 
 body {
-  font-family: 'Open Sans', Arial, sans-serif;
   background: #fff;
   font-size: 15px;
   line-height: 1.8;
@@ -11916,7 +11915,7 @@ h5,
 }
 
 .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover {
-  color: #ff0000a1;
+  color: #ff0000a1 !important;
 }
 
 @media (max-width: 991.98px) {

@@ -4,6 +4,18 @@
 @{
     ViewBag.Title = "Log in";
 }
+<style>
+    .zoom {
+        transition:0.5s;
+    }
+        .zoom:hover {
+            transition:0.5s;
+            transform:scale(1.05);
+        }
+    .link:hover {
+        color: #00efff;
+    }
+</style>
 <script src='https://www.google.com/recaptcha/api.js' type="text/javascript"></script>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -36,25 +48,25 @@
                                         <div class="form-group" style="width: 75%; min-width: 60%;">
                                             @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Mật khẩu", @style = "height:50px" })
                                         </div>
+                                        <div class="d-flex justify-content-between" style="margin-bottom:10px; width:75%">
+                                            @Html.ActionLink("Quên mật khẩu?", "ForgotPassword", routeValues: null, htmlAttributes: new { @class="zoom link" ,@style = "font-size: 14px; text-decoration:none;" })
+                                            @Html.ActionLink("Chưa có tài khoản? Đăng ký", "Register", routeValues: null, htmlAttributes: new { @class = "zoom link", @style = "font-size: 14px; text-decoration:none;" })
+                                        </div>
                                         <div class="form-group" style="display: flex; align-items: center;">
                                             @Html.CheckBoxFor(m => m.RememberMe)
-                                            @Html.LabelFor(m => m.RememberMe, new { @style = "margin-bottom: unset;margin-left: 10px;font-size:11px;font-weight: 500;" })
+                                            @Html.LabelFor(m => m.RememberMe, "Ghi nhớ đăng nhập", new { @style = "margin-bottom: unset;margin-left: 10px;font-size:14px;font-weight: 500;" })
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-blue btn-block zoom" value="Đăng nhập" style="background-color: #44c5ee; font-size: 18px; padding:10px 20px;" />
                                         </div>
                                         <div>@Html.RecaptchaV2("6LeJ3jogAAAAAGmMJi3Bzqev9W5Nw_blm8_75lL6")</div>
-                                        <div class="form-group">
-                                            <input type="submit" class="btn btn-blue btn-block" value="Đăng nhập" style="background-color: #44c5ee;" />
-                                        </div>
                                         <div class="text-center">
-                                            @Html.ActionLink("Chưa có tài khoản? Đăng ký", "Register", routeValues: null, htmlAttributes: new { @style = "margin-top:10px; font-size: 14px; text-decoration:none;" })
-                                        </div>
-                                        <div class="text-center">
-                                            @Html.ActionLink("Quên mật khẩu?", "ForgotPassword", routeValues: null, htmlAttributes: new { @style = "margin-top:10px; font-size: 14px; text-decoration:none;" })
                                         </div>
                                     </div>
                                 </div>
                             }
                             <div class="col-md-offset-1 d-flex justify-content-center" style="width:500px;">
-                                <section id="socialLoginForm">
+                                <section id="socialLoginForm" class="zoom">
                                     @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
                                 </section>
                             </div>

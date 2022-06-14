@@ -6,6 +6,7 @@ namespace webcoso.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
     using System.Linq;
+    using LinQ;
 
     [Table("BinhLuan")]
     public partial class BinhLuan
@@ -25,7 +26,7 @@ namespace webcoso.Models
 
         public virtual SanPham SanPham { get; set; }
 
-        public string Name;
+        public string Name { get; set; }
         public static List<BinhLuan> getAll(string searchKey)
         {
             WebcosoContext db = new WebcosoContext();

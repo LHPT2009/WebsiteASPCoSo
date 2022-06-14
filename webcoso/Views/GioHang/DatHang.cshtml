@@ -1,8 +1,46 @@
 ﻿@model IEnumerable<webcoso.Models.GioHang>
+@using webcoso.Models.LinQ;
+@{ AspNetUser kh = (AspNetUser)Session["TaiKhoan"]; }
+
 @{
     ViewBag.Title = "DatHang";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<style>
+    table tbody tr td .info-order {
+        font-weight:normal;
+        min-width: 150px;
+        text-align: right !important;
+    }
+    table tbody tr td .detail-info {
+        max-width:500px;
+        font-weight: bold;
+        text-align:left !important;
+    }
+    .modal-body table tbody tr td {
+        padding: 10px; 
+    }
+
+    .momo {
+        color: #af2070
+    }
+        .momo:hover {
+            color: #dbcc8f
+        }
+    h5 {
+        font-weight: 500;
+    }
+    .btn-back-to-cart {
+        background: #e4d6437a;
+        color: #f12121c7;
+        border-radius: 20px;
+    }
+        .btn-back-to-cart:hover {
+            background: #ead820c7;
+            color: #2351cfd9;
+        }
+</style>
 <div class="hero-wrap hero-bread" style="background-image: url('/Content/images/banner/laptop-tot-nhat-1638390226558.jpg'); ">
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -70,53 +108,84 @@
 
     <tr style="font-weight:bold;color:yellow;text-align:right;">
         <td colspan="6">
-            <a href="/GioHang/GioHang" class="primary-btn" style="text-decoration:none">Trở Về Giỏ Hàng</a>
+            <!-- Button trigger modal -->
+            <button style="padding: 10px 15px" type="button" class="btn text-white btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                <i class="fa fa-money-bill"></i> Đặt hàng
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content" style="min-width:30vw;color:black">
+                        <div class="modal-header">
+                            <h5 class="modal-title" style="width:100%; padding-left:50px;color:red;font-weight:bold;" id="exampleModalLongTitle">Đặt Hàng</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @using (Html.BeginForm())
+                        {
+                            <div class="modal-body">
+                                <table align="center" style="font-size: 15px;">
+                                    @Html.ValidationSummary(true)
+                                    <tr style="height:40px">
+                                        <td class="info-order">Họ tên KH: </td>
+                                        <td class="detail-info">&emsp; @kh.Name</td>
+                                    </tr>
+                                    <tr style="height:40px">
+                                        <td class="info-order">Email: </td>
+                                        <td class="detail-info">&emsp; @kh.Email</td>
+                                    </tr>
+                                    <tr style="height:40px">
+                                        <td class="info-order">Địa chỉ: </td>
+                                        <td class="detail-info" style="font-weight: bold">&emsp; @kh.Address</td>
+                                    </tr>
+                                    <tr style-"height:40px">
+                                        <td class="info-order">Điện thoại: </td>
+                                        <td class="detail-info" style="font-weight: bold">&emsp; @kh.PhoneNumber</td>
+                                    </tr>
+                                    <tr style-"height:40px">
+                                        <td class="info-order">Ngày đặt: </td>
+                                        <td class="detail-info">&emsp; @DateTime.Now.ToShortDateString()</td>
+                                    </tr>
+                                    <tr style-"height: 40px">
+                                        <td class="info-order">Ngày giao: </td>
+                                        <td class="detail-info">
+                                            &emsp;<input style="color:red;font-weight:600" type="date" name="NgayGiao" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div>
+                                <div style="font-weight:bold;width:100%;padding:5px 40px;height:200px;">
+                                    <div>
+                                        <h5>Thanh Toán Khi Nhận Hàng</h5>
+                                        <input style="font-size:15px;font-weight:500" type="submit" value="Đặt Hàng" class="btn btn-success" />
+                                    </div>
+                                    <hr />
+                                    <h5>Ví Điện Tử</h5>
+                                    <div style="display:flex;justify-content:space-between;">
+                                        <div>
+                                            <a style="margin:10px;" class="primary-btn momo" href="@Url.Action("ThanhToan", "GioHang")"><img src="~/Content/img/momo.png" alt="Momo" width="20" /> Thanh toan MoMo</a>
+                                        </div>
+                                        <div>
+                                            <a class="primary-btn momo" href="@Url.Action("thanhtoancanhan", "GioHang")"><img src="~/Content/img/momo.png" alt="Momo" width="20" /> Thanh toán MoMo nhanh</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="modal-footer">
+
+                        </div>
+                    </div>
+                </div>
+            </div><br /><br />
+            <div>
+                <a href="/GioHang/GioHang" class="btn-back-to-cart py-3 px-4" style="text-decoration:none"><i class="fa fa-solid fa-bag-shopping"></i> Trở Về Giỏ Hàng</a>
+            </div>
         </td>
     </tr>
 </table>
-@using webcoso.Models.LinQ;
-<h2 style="text-align:center;margin-top:20px;color:red;font-weight:bold;">Thông Tin Đặt Hàng</h2>
-@{ AspNetUser kh = (AspNetUser)Session["TaiKhoan"]; }
 
-<table align="center" style="font-size: 15px;">
-    @using (Html.BeginForm())
-    {
-        @Html.ValidationSummary(true)
-        <tr style="height:40px">
-            <td>Họ tên khách hàng: </td>
-            <td style="font-weight:bold">&emsp; @kh.Name</td>
-        </tr>
-        <tr style="height:40px">
-            <td>Email: </td>
-            <td style="font-weight:bold">&emsp; @kh.Email</td>
-        </tr>
-        <tr style="height:40px">
-            <td>Địa chỉ: </td>
-            <td style="font-weight: bold">&emsp; @kh.Address</td>
-        </tr>
-        <tr style-"height:40px">
-            <td>Điện thoại: </td>
-            <td style="font-weight: bold">&emsp; @kh.PhoneNumber</td>
-        </tr>
-        <tr style-"height:40px">
-            <td>Ngày đặt: </td>
-            <td style="font-weight:bold">&emsp; @DateTime.Now.ToShortDateString()</td>
-        </tr>
-        <tr style-"height: 40px">
-            <td>Ngày giao: </td>
-            <td style="font-weight:bold">
-                &emsp;<input type="date" name="NgayGiao" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
-            </td>
-        </tr>
-        <tr style-"height:40px">
-            <td></td>
-            <td style="font-weight:bold;">
-                <br />
-                <input type="submit" value="Xác nhận" class="primary-btn" />
-                <a class="primary-btn" href="@Url.Action("ThanhToan", "GioHang")">Thanh toan MoMo</a>
-                <a class="primary-btn" href="@Url.Action("thanhtoancanhan", "GioHang")">Thanh toan MoMo nhanh</a>
-            </td>
-        </tr>
-    }
-</table>
 
