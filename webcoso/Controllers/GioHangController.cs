@@ -39,6 +39,7 @@ namespace webcoso.Controllers
             }
             else
             {
+                sanPham.updateGiamGia(id);
                 sanPham.SoLuong++;
                 Notification.set_flash("Đã thêm sản phẩm vào giỏ hàng!", "success");
                 return Redirect(strURL);
@@ -120,6 +121,7 @@ namespace webcoso.Controllers
                 if (sp.SoLuong < soLuong)
                     return RedirectToAction("GioHang");
                 sanPham.SoLuong = soLuong;
+                sanPham.giamGia = double.Parse((soLuong * sp.GiamGia).ToString());
             }
             return RedirectToAction("GioHang");
         }
@@ -210,6 +212,12 @@ namespace webcoso.Controllers
         }
         public ActionResult ThanhToan()
         {
+            if (TongTien() >= 45000000)
+            {
+                Notification.set_flash("Số tiền quá 45 triệu! Vui lòng chọn thanh toán khi nhận hàng!", "warning");
+                return RedirectToAction("DatHang", "GioHang");
+            }
+
             List<GioHang> gioHang = Session["GioHang"] as List<GioHang>;
             string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
             string partnerCode = "MOMOOJOI20210710";

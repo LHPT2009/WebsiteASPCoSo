@@ -167,7 +167,7 @@ namespace webcoso.Controllers
             return true;
         }
 
-        public ActionResult userDetail ()
+        public ActionResult userDetail()
         {
             ApplicationUser userLogin = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
             ViewBag.idUser = userLogin.Id;
@@ -180,15 +180,16 @@ namespace webcoso.Controllers
             try
             {
                 ApplicationUser userLogin = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-                return Json(new { code = 200, userLogin = userLogin}, JsonRequestBehavior.AllowGet);
-            }catch( Exception ex)
+                return Json(new { code = 200, userLogin = userLogin }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
             {
                 return Json(new { code = 500, msg = "Lấy thông tin cá nhân thất bại:" + ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
- 
+
         [HttpPost]
-        public JsonResult editName( string id, string name)
+        public JsonResult editName(string id, string name)
         {
             try
             {
@@ -197,7 +198,8 @@ namespace webcoso.Controllers
                 db.SaveChanges();
 
                 return Json(new { code = 200, msg = "Cật nhật tên thành công" }, JsonRequestBehavior.AllowGet);
-            }catch( Exception ex)
+            }
+            catch (Exception ex)
             {
                 return Json(new { code = 500, msg = "Cật nhật tên thất bại:" + ex.Message }, JsonRequestBehavior.AllowGet);
 

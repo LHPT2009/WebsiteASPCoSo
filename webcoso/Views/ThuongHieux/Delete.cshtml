@@ -9,35 +9,35 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4">
-            <h2>Xóa bình luận</h2>
+            <h2 style="text-align: center; margin-top: 20px; font-weight: bold; color: red;">Xóa Thương Hiệu</h2>
 
-            <h3>Bạn có chắc chắn muốn xóa?</h3>
+            <h3 class="text-center">Bạn có chắc chắn muốn xóa?</h3>
             <div>
-                <h4>Bình luận</h4>
                 <hr />
-                <dl class="dl-horizontal">
+                <div></div>
+                <dl class="dl-horizontal" style="display:flex;justify-content:center;align-items:center;flex-direction:column">
                     <dt>
-                        @Html.DisplayNameFor(model => model.TenTH)
+                        <strong>Tên Thương Hiệu</strong>
                     </dt>
-
-                    <dd>
+                    <dd style="font-size:20px">
                         @Html.DisplayFor(model => model.TenTH)
                     </dd>
 
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <p>
+                                <input type="submit" value="Xóa" class="btn btn-danger" /> |
+                                <a class="btn btn-success" href='@Url.Action("Index", "ThuongHieux")' style="margin:10px 0px;">
+                                    Trở về
+                                </a>
+                            </p>
+                        </div>
+                    }
                 </dl>
 
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
-
-                    <div class="form-actions no-color">
-                        <p>
-                            <input type="submit" value="Xóa" class="btn btn-danger" /> |
-                            <a class="btn btn-success" href='@Url.Action("Index", "ThuongHieux")' style="margin:10px 0px;">
-                                Trở về
-                            </a>
-                        </p>
-                    </div>}
             </div>
         </div>
     </main>

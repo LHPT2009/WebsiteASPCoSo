@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using webcoso.Models;
 using webcoso.Models.LinQ;
 using PagedList;
+using webcoso.Message;
 
 namespace websitelaptop.Controllers
 {
@@ -59,6 +60,7 @@ namespace websitelaptop.Controllers
             {
                 db.ThuongHieu.Add(thuongHieu);
                 db.SaveChanges();
+                Notification.set_flash("Thêm thương hiệu \' " + thuongHieu.TenTH + " \' thành công!", "success");
                 return RedirectToAction("Index");
             }
 
@@ -89,6 +91,7 @@ namespace websitelaptop.Controllers
         {
             if (ModelState.IsValid)
             {
+                Notification.set_flash("Chỉnh sửa thành công!", "success");
                 db.Entry(thuongHieu).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -117,8 +120,14 @@ namespace websitelaptop.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             webcoso.Models.ThuongHieu thuongHieu = db.ThuongHieu.Find(id);
+            if (db.SanPham.Where(p => p.MaTH == thuongHieu.MaTH).FirstOrDefault() != null)
+            {
+                Notification.set_flash("Không thể xoá thương hiệu \' " + thuongHieu.TenTH + " \'!", "error");
+                return RedirectToAction("Index");
+            }
             db.ThuongHieu.Remove(thuongHieu);
             db.SaveChanges();
+            Notification.set_flash("Đã xoá thương hiệu \' " + thuongHieu.TenTH + " \'!", "success");
             return RedirectToAction("Index");
         }
 

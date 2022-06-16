@@ -173,7 +173,7 @@ namespace webcoso.Controllers
         {
             if (!AuthAdmin())
                 return RedirectToAction("Error401", "Admin");
-            var all_donHang = data.DonHangs.Where(t => t.TrangThaiThanhToan == true).ToList();
+            var all_donHang = data.DonHangs.Where(t => t.TrangThaiThanhToan == true && t.TrangThaiGiaoHang == 1).ToList();
             int pageSize = 7;
             int pageNum = page ?? 1;
             return View(all_donHang.ToPagedList(pageNum, pageSize));

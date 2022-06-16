@@ -6,51 +6,83 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-    <div id="layoutSidenav_content">
-        @{
-            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(Model.IdUser);
+<style>
+    table tbody tr td.info-order {
+        width:10%;
+        font-weight: normal;
+        min-width: 215px;
+        text-align: right !important;
+    }
+
+    table tbody tr td.detail-info {
+        max-width: 500px;
+        font-weight: bold;
+        text-align: left !important;
+    }
+
+    .modal-body table tbody tr td {
+        padding: 10px;
+    }
+    .btn-back{
+        background: #e4d6437a;
+        color: #f12121c7;
+        border-radius: 20px;
+    }
+
+        .btn-back:hover {
+            background: #ead820c7;
+            color: #2351cfd9;
         }
-        <div>
-            <h4>LienHe</h4>
-            <hr/>
-            <dl class="dl-horizontal">
-                <dt>
-                    Tên Khách Hàng:
-                </dt>
+</style>
+<div id="layoutSidenav_content" style="background: #bdbecc26 ">
+    @{
+        ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(Model.IdUser);
+    }
 
-                <dd>
-                    @user.Name
-                </dd>
+    <!-- Modal -->
+    <div class="modal fade show" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:block !important;">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="min-width:40vw;color:black">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="width:100%; padding-left:50px;color:red;font-weight:bold;text-align:center" id="exampleModalLongTitle">Chi Tiết Liên Hệ</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-                <dt>
-                    Số điện thoại
-                </dt>
+                <div class="modal-body">
+                    <div>
+                        <table align="center" style="font-size: 15px;">
+                            <tr style="height:40px">
+                                <td class="info-order">Họ tên KH: </td>
+                                <td class="detail-info">&emsp; @user.Name</td>
+                            </tr>
+                            <tr style="height:40px">
+                                <td class="info-order">SĐT: </td>
+                                <td class="detail-info">&emsp;   @user.PhoneNumber</td>
+                            </tr>
+                            <tr style="height:40px">
+                                <td class="info-order"> Ngày gửi: </td>
+                                <td class="detail-info" style="font-weight: bold">&emsp;  @Model.NgayGui </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <hr />
+                    <div style="display:flex;justify-content:center;align-items:center;flex-direction:column">
+                        <h5 style="font-weight:500">Nội dung</h5>
+                        <h6 style="word-wrap: break-word;width:80%;">@Model.NoiDung</h6>
+                    </div>
+                    <hr />
+                </div>
+                <div style="display:flex;justify-content:center;align-items:center;flex-direction:column;height:20px;margin-bottom:20px">
+                    <a class="btn-back py-2 px-3" href='@Url.Action("LienHeAdmin", "LienHes")'>
+                        Trở về
+                    </a>
+                </div>
+                <div class="modal-footer">
 
-                <dd>
-                   @user.PhoneNumber
-                </dd> 
-
-                <dt>
-                    Ngày gửi
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.NgayGui)
-                </dd>
-
-                <dt>
-                    Nội dung
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.NoiDung)
-                </dd>
-
-            </dl>
-        </div>
-        <div class="col-md-offset-2 col-md-10" style="margin-bottom:15px">
-            <a class="btn btn-success" href='@Url.Action("LienHeAdmin", "LienHes")' style="margin: 30px 0;">
-                Trở về
-            </a>
+                </div>
+            </div>
         </div>
     </div>
+</div>
