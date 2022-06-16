@@ -57,7 +57,7 @@
                             }
                             else
                             {
-                                <span style="color:red;font-weight:bold">Đã huỷ</span>
+                                <span style="color:red;font-weight:bold">Đã hủy đơn</span>
                             }
                         }
                     </dd>
@@ -135,6 +135,9 @@
                                 Đơn giá
                             </th>
                             <th>
+                                Giảm giá
+                            </th>
+                            <th>
                                 Thành tiền
                             </th>
                         </tr>
@@ -153,6 +156,7 @@
                                     @Html.DisplayFor(modelItem => item.Soluong)
                                 </td>
                                 <td><strong>@String.Format("{0:0,0}",item.SanPham.Gia) VNĐ</strong> </td>
+                                <td><strong>@String.Format("{0:0,0}",item.SanPham.GiamGia*item.Soluong) VNĐ</strong> </td>
                                 <td>
                                     <strong style="color:red"> @String.Format("{0:0,0}", item.Gia) VNĐ</strong>
                                 </td>

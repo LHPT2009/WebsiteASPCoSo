@@ -8,14 +8,13 @@
     <main>
         <div class="container-fluid px-4">
 
-            <h2 style=" margin-top:20px;">Thêm loại sản phẩm mới</h2>
+            <h2 style="text-align: center; margin-top: 20px; font-weight: bold; color: red; text-transform: capitalize;">Thêm loại sản phẩm </h2>
 
             @using (Html.BeginForm())
             {
 @Html.AntiForgeryToken()
 
                 <div class="form-horizontal">
-                    <h4>Loại sản phẩm</h4>
                     <hr />
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
@@ -29,7 +28,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Thêm" class="btn btn-success" />   |
-                            <a class="btn btn-success" href='@Url.Action("Index", "LoaiSPs")' style="margin:10px 0px;">
+                            <a class="btn btn-info" href='@Url.Action("Index", "LoaiSPs")' style="margin:10px 0px;">
                                 Trở về
                             </a>
                         </div>

@@ -70,10 +70,10 @@
             <strong>Giá</strong>
         </th>
         <th>
-            <strong>Giảm giá</strong>
+            <strong>Số lượng</strong>
         </th>
         <th>
-            <strong>Số lượng</strong>
+            <strong>Giảm giá</strong>
         </th>
         <th>
             <strong>Thành tiền</strong>
@@ -83,30 +83,31 @@
 
     @foreach (var item in Model)
     {
-        <tr style="font-size:14px">
+<tr style="font-size:14px">
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Ten)
-            </td>
-            <td>
-                <img src="@item.Hinh" alt="Ảnh món ăn" width="40" />
-            </td>
-            @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.MaSP }))
-            {
-                <td style="vertical-align:middle;">
-                    @String.Format("{0:0,0}", item.Gia) VNĐ
-                </td>
-                <td style="vertical-align:middle;">
-                    @String.Format("{0:0,0}", item.giamGia) VNĐ
-                </td>
-                <td style="vertical-align:middle;">
-                    @Html.DisplayFor(modelItem => item.SoLuong)
-                </td>
-                <td style="vertical-align:middle;color:red;font-weight:bold">
-                    @String.Format("{0:0,0}",item.ThanhTien) VNĐ
-                </td>
-            }
-        </tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Ten)
+    </td>
+    <td>
+        <img src="@item.Hinh" alt="Ảnh món ăn" width="40" />
+    </td>
+    @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.MaSP }))
+    {
+        <td style="vertical-align:middle;">
+            @String.Format("{0:0,0}", item.Gia) VNĐ
+        </td>
+
+        <td style="vertical-align:middle;">
+            @Html.DisplayFor(modelItem => item.SoLuong)
+        </td>
+        <td style="vertical-align:middle;">
+            @String.Format("{0:0,0}", item.giamGia) VNĐ
+        </td>
+        <td style="vertical-align:middle;color:red;font-weight:bold">
+            @String.Format("{0:0,0}", item.ThanhTien) VNĐ
+        </td>
+    }
+</tr>
     }
     <tr style="font-weight:bold;text-align:right;color:red;font-size:18px;">
         <td colspan="2">Tổng số lượng sản phẩm: @ViewBag.TongSoLuong</td>
