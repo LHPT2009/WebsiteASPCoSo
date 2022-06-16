@@ -26,7 +26,7 @@ namespace webcoso.Models
 
         public virtual SanPham SanPham { get; set; }
 
-        public string Name { get; set; }
+        public string Name;
         public static List<BinhLuan> getAll(string searchKey)
         {
             WebcosoContext db = new WebcosoContext();

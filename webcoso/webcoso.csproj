@@ -643,6 +643,7 @@
     <Content Include="Views\LienHes\LienHeAdmin.cshtml" />
     <Content Include="Views\LienHes\Details.cshtml" />
     <Content Include="Views\Shared\_MessageAlert.cshtml" />
+    <Content Include="Views\Users\userDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

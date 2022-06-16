@@ -25,7 +25,7 @@ namespace webcoso.Controllers
             //var all_loaiSP = (from s in db.BinhLuan select s).OrderBy(m => m.NgayTao);
             int pageSize = 10;
             int pageNum = page ?? 1;
-            return View(BinhLuan.getAll(searchString).ToPagedList(pageNum, pageSize));
+            return View(BinhLuan.getAll(searchString).OrderByDescending(p => p.NgayTao).ToPagedList(pageNum, pageSize));
         }
 
         // GET: BinhLuans/Details/5

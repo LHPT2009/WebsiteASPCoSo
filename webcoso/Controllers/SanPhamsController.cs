@@ -119,7 +119,7 @@ namespace webcoso.Controllers
                 i.Name = user.Name;
             }
             ApplicationUser userLogin = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-            if( userLogin != null)
+            if (userLogin != null)
             {
                 if (db.DanhGia.Where(p => p.MaKH == userLogin.Id && p.MaSP == id).Count() > 0)
                 {
@@ -130,7 +130,7 @@ namespace webcoso.Controllers
                     ViewBag.ttDanhGia = 0;
                 }
             }
-            if( db.DanhGia.Where( p => p.MaSP == id ).Count() != 0)
+            if (db.DanhGia.Where(p => p.MaSP == id).Count() != 0)
             {
                 float star = (float)db.DanhGia.Where(p => p.MaSP == id).Sum(p => p.SoSao) / (float)db.DanhGia.Where(p => p.MaSP == id).Count();
                 float motSao = (float)db.DanhGia.Where(p => p.SoSao == 1 && p.MaSP == id).Count() / (float)db.DanhGia.Where(p => p.MaSP == id).Count();
@@ -148,13 +148,13 @@ namespace webcoso.Controllers
             else
             {
                 ViewBag.updateStar = 0;
-                ViewBag.motSao =0;
+                ViewBag.motSao = 0;
                 ViewBag.haiSao = 0;
-                ViewBag.baSao =0;
-                ViewBag.bonSao =0;
-                ViewBag.namSao =0;
+                ViewBag.baSao = 0;
+                ViewBag.bonSao = 0;
+                ViewBag.namSao = 0;
             }
-            
+
 
             int pageSize = 5;
             int pageNum = page ?? 1;
@@ -207,7 +207,7 @@ namespace webcoso.Controllers
         {
             BinhLuansController addbinhluan = new BinhLuansController();
             BinhLuan binhLuan = new BinhLuan();
-            if( Request["txtContent"] != null)
+            if (Request["txtContent"] != null)
             {
                 string content = Request["txtContent"].ToString() + " ";
                 if (content == " ")
@@ -216,11 +216,11 @@ namespace webcoso.Controllers
                 }
                 addbinhluan.Create(content, id, binhLuan);
             }
-           
+
 
             DanhGiasController addDanhGia = new DanhGiasController();
             DanhGia danhGia = new DanhGia();
-            if( Request["star"] != null)
+            if (Request["star"] != null)
             {
                 String soSao = Request["star"].ToString() + " ";
                 if (soSao == " ")
@@ -230,17 +230,17 @@ namespace webcoso.Controllers
                 int SoSao = Int32.Parse(soSao);
                 addDanhGia.Create(SoSao, id, danhGia);
             }
-            
+
 
 
 
             return RedirectToAction("Details");
         }
 
-   
 
-            // GET: SanPhams/Create
-            public ActionResult Create()
+
+        // GET: SanPhams/Create
+        public ActionResult Create()
         {
             if (!AuthAdmin())
                 return RedirectToAction("Error401", "Admin");

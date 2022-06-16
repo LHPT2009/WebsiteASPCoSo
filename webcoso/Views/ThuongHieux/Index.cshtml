@@ -6,24 +6,26 @@
 }
 
 
-
+@Html.Partial("_MessageAlert")
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4">
-            <div style="display: flex; margin-top: 20px; justify-content: space-between">
-                <h2 style="text-align: center; margin-top: 20px; font-weight: bold; color: red;">Trang Thương Hiệu</h2>
-                <form>
-                    <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Tìm kiếm theo nội dung..." aria-label="Tìm kiếm theo nội dung..." value="@ViewBag.Keyword" name="searchString" aria-describedby="btnNavbarSearch" />
-                        <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
-                    </div>
-                </form>
+            <div>
+                <div>
+                    <h2 style="text-align: center; margin-top: 20px; font-weight: bold; color: red;">Trang Thương Hiệu</h2>
+                </div>
+                <div style="display:flex;justify-content:right;margin:10px">
+                    <form>
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Tìm kiếm theo nội dung..." aria-label="Tìm kiếm theo nội dung..." value="@ViewBag.Keyword" name="searchString" aria-describedby="btnNavbarSearch" />
+                            <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            @Html.ActionLink("Tạo mới thương hiệu", "Create")
-            @*<p>
-                    @Html.ActionLink("Tạo bình luận", "Create")
-                </p>*@
+            @Html.ActionLink("Thêm thương hiệu", "Create", "", new { @class = "btn btn-success", @style = "margin:10px" })
             <table class="table table-bordered table-dark">
+
                 <thead class="thead-dark">
                     <tr>
                         <th>
@@ -40,8 +42,7 @@
                                 @Html.DisplayFor(modelItem => item.TenTH)
                             </td>
                             <td>
-                                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.MaTH }, new { @class = "btn btn-danger", @style = "margin-left:5px" }) |
-                                @Html.ActionLink("Chi tiết", "Details", new { id = item.MaTH }, new { @class = "btn btn-danger", @style = "margin-left:5px" }) |
+                                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.MaTH }, new { @class = "btn btn-warning", @style = "margin-left:5px" }) |
                                 @Html.ActionLink("Xóa", "Delete", new { id = item.MaTH }, new { @class = "btn btn-danger", @style = "margin-left:5px" })
                             </td>
                         </tr>

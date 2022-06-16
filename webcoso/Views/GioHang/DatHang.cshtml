@@ -8,39 +8,46 @@
 }
 
 <style>
-    table tbody tr td .info-order {
-        font-weight:normal;
+    table tbody tr td.info-order {
+        font-weight: normal;
         min-width: 150px;
         text-align: right !important;
     }
-    table tbody tr td .detail-info {
-        max-width:500px;
+
+    table tbody tr td.detail-info {
+        max-width: 500px;
         font-weight: bold;
-        text-align:left !important;
+        text-align: left !important;
     }
+
     .modal-body table tbody tr td {
-        padding: 10px; 
+        padding: 10px;
     }
 
     .momo {
         color: #af2070
     }
+
         .momo:hover {
             color: #dbcc8f
         }
+
     h5 {
         font-weight: 500;
     }
+
     .btn-back-to-cart {
         background: #e4d6437a;
         color: #f12121c7;
         border-radius: 20px;
     }
+
         .btn-back-to-cart:hover {
             background: #ead820c7;
             color: #2351cfd9;
         }
 </style>
+@Html.Partial("_MessageAlert")
 <div class="hero-wrap hero-bread" style="background-image: url('/Content/images/banner/laptop-tot-nhat-1638390226558.jpg'); ">
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -51,7 +58,7 @@
         </div>
     </div>
 </div>
-<table class="table" style="margin-left:20px;margin-right:20px;font-size:16px;">
+<table class="table" style="margin: 50px 20px 0;font-size:16px;">
     <tr>
         <th>
             <strong>Tên SP</strong>
@@ -90,21 +97,22 @@
                     @String.Format("{0:0,0}", item.Gia) VNĐ
                 </td>
                 <td style="vertical-align:middle;">
-                    @String.Format("{0:0,0}", item.GiamGia) VNĐ
+                    @String.Format("{0:0,0}", item.giamGia) VNĐ
                 </td>
                 <td style="vertical-align:middle;">
                     @Html.DisplayFor(modelItem => item.SoLuong)
                 </td>
-                <td style="vertical-align:middle;">
-                    @String.Format("{0:0,0}", @Html.DisplayFor(modelItem => item.ThanhTien)) VNĐ
+                <td style="vertical-align:middle;color:red;font-weight:bold">
+                    @String.Format("{0:0,0}",item.ThanhTien) VNĐ
                 </td>
             }
         </tr>
     }
     <tr style="font-weight:bold;text-align:right;color:red;font-size:18px;">
-        <td colspan="2">Tổng số lượng món ăn: @ViewBag.TongSoLuong</td>
+        <td colspan="2">Tổng số lượng sản phẩm: @ViewBag.TongSoLuong</td>
         <td colspan="2">Tổng Tiền: @String.Format("{0:0,0}", @ViewBag.TongTien) VNĐ</td>
     </tr>
+
 
     <tr style="font-weight:bold;color:yellow;text-align:right;">
         <td colspan="6">
@@ -164,12 +172,9 @@
                                     </div>
                                     <hr />
                                     <h5>Ví Điện Tử</h5>
-                                    <div style="display:flex;justify-content:space-between;">
+                                    <div style="display:flex;justify-content:center;">
                                         <div>
                                             <a style="margin:10px;" class="primary-btn momo" href="@Url.Action("ThanhToan", "GioHang")"><img src="~/Content/img/momo.png" alt="Momo" width="20" /> Thanh toan MoMo</a>
-                                        </div>
-                                        <div>
-                                            <a class="primary-btn momo" href="@Url.Action("thanhtoancanhan", "GioHang")"><img src="~/Content/img/momo.png" alt="Momo" width="20" /> Thanh toán MoMo nhanh</a>
                                         </div>
                                     </div>
                                 </div>
@@ -187,5 +192,6 @@
         </td>
     </tr>
 </table>
+
 
 

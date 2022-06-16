@@ -22,7 +22,7 @@ namespace webcoso.Models
         public double Gia { get; set; }
 
         [Display(Name = "Giảm giá")]
-        public double GiamGia { get; set; }
+        public double giamGia { get; set; }
 
         [Display(Name = "Số lượng")]
         public int SoLuong { get; set; }
@@ -30,7 +30,7 @@ namespace webcoso.Models
         [Display(Name = "Thành tiền")]
         public double ThanhTien
         {
-            get { return SoLuong * (Gia - GiamGia); }
+            get { return SoLuong * Gia - giamGia; }
         }
 
         public GioHang(int id)
@@ -41,7 +41,7 @@ namespace webcoso.Models
             Hinh = sp.Hinh;
             Gia = double.Parse(sp.Gia.ToString());
             SoLuong = 1;
-            GiamGia = 0;
+            giamGia = double.Parse(sp.GiamGia.ToString());
         }
         public GioHang()
         {
@@ -50,7 +50,14 @@ namespace webcoso.Models
             Hinh = "";
             Gia = 1000;
             SoLuong = 2;
-            GiamGia = 3;
+            giamGia = 3;
+        }
+
+        public void updateGiamGia(int id)
+        {
+            SanPham sp = data.SanPham.Single(n => n.MaSP == MaSP);
+            giamGia += double.Parse(sp.GiamGia.ToString());
+            var giamgia = giamGia;
         }
     }
 }

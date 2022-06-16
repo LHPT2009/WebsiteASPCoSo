@@ -66,7 +66,14 @@
                                 @Html.DisplayFor(modelItem => item.UserName)
                             </td>
                             <td style="vertical-align:middle">
-                                @Html.DisplayFor(modelItem => item.LockoutEnabled)
+                                @if (item.LockoutEnabled)
+                                {
+                                    <i class="fa fa-regular fa-lock-open" style="color:limegreen;font-weight:bold"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa-regular fa-lock" style="color:red;font-weight:bold;font-size:20px"></i>
+                                }
                             </td>
 
                             <td>

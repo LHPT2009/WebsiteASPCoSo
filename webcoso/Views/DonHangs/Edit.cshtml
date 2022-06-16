@@ -9,196 +9,138 @@
     <main>
         <div class="container-fluid px-4">
 
-            <h2 style="text-align: center; margin-top: 20px; font-weight: bold; color: red;">Chỉnh Sửa Đơn Hàng</h2>
 
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-
-                <div class="form-horizontal">
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.MaDH)
-
-                    @*<div class="form-group">
-                            @Html.LabelFor(model => model.TrangThaiGiaoHang, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                <div class="checkbox">
-                                    @Html.EditorFor(model => model.TrangThaiGiaoHang)
-                                    @Html.ValidationMessageFor(model => model.TrangThaiGiaoHang, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>*@
-                    <div class="form-group">
-                        <strong class="control-label col-md-2">Trạng thái giao hàng</strong>
-                        <div class="col-md-10">
-                            <div class="checkbox">
-                                <select name="TrangThaiGiaoHang">
-                                    @if (Model.TrangThaiGiaoHang == 0)
-                                    {
-                                        <option selected="selected" value="0">Đang giao</option>
-                                        <option value="1">Đã giao</option>
-                                        <option value="2">Đã huỷ</option>
-                                    }
-                                    else
-                                    {
-                                        if (Model.TrangThaiGiaoHang == 1)
-                                        {
-                                            <option value="0">Đang giao</option>
-                                            <option selected="selected" value="1">Đã giao</option>
-                                            <option value="2">Đã huỷ</option>
-                                        }
-                                        else
-                                        {
-                                            <option selected="selected" value="0">Đang giao</option>
-                                            <option value="1">Đã giao</option>
-                                            <option selected="selected" value="2">Đã huỷ</option>
-                                        }
-                                    }
-                                </select>
-                                @Html.ValidationMessageFor(model => model.TrangThaiGiaoHang, "", new { @class = "text-danger" })
-                            </div>
+            <div class="modal fade show" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:block !important;">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content" style="min-width:30vw;color:black">
+                        <div class="modal-header">
+                            <h5 class="modal-title" style="width:100%; padding-left:50px;color:red;font-weight:bold;text-align:center" id="exampleModalLongTitle">Chỉnh Sửa Đơn Hàng</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <strong class="control-label col-md-2">Trạng thái thanh toán</strong>
-                        <div class="col-md-10">
-                            <div class="checkbox">
-                                @if (Model.TrangThaiThanhToan == true)
-                                {
-                                    <span>Đã thanh toán</span>
-                                    @Html.HiddenFor(model => model.TrangThaiThanhToan)
-                                }
-                                else
-                                {
-                                    <div>
-                                        <div>
-                                            <input name="TrangThaiThanhToan" id="yes" value="true" type="radio" />&nbsp;<label for="yes">Đã thanh toán</label>
-                                        </div>
-                                        <div>
-                                            <input checked name="TrangThaiThanhToan" id="no" value="false" type="radio" />&nbsp;<label for="no">Chưa thanh toán</label>
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.MaDH)
+                            <div class="modal-body d-flex justify-content-center">
+                                <div class="form-horizontal" style="width:50%">
+                                    <div class="form-group">
+                                        <strong class="control-label col-md-2">Trạng thái giao hàng</strong>
+                                        <div class="col-md-10">
+                                            <div class="checkbox">
+
+                                                @if (Model.TrangThaiGiaoHang == 0)
+                                                {
+                                                    <select name="TrangThaiGiaoHang">
+                                                        <option selected="selected" value="0">Đang giao</option>
+                                                        <option value="1">Đã giao</option>
+                                                        <option value="2">Huỷ đơn</option>
+                                                    </select>
+
+                                                }
+                                                else
+                                                {
+                                                    if (Model.TrangThaiGiaoHang == 1)
+                                                    {
+                                                        <span style="color:limegreen">Đã giao hàng</span>
+                                                        @Html.HiddenFor(p => p.TrangThaiGiaoHang)
+                                                    }
+                                                    else
+                                                    {
+                                                        <select name="TrangThaiGiaoHang">
+
+                                                            <option selected="selected" value="0">Đang giao</option>
+                                                            <option value="1">Đã giao</option>
+                                                            <option selected="selected" value="2">Huỷ đơn</option>
+                                                        </select>
+                                                    }
+                                                }
+                                                @Html.ValidationMessageFor(model => model.TrangThaiGiaoHang, "", new { @class = "text-danger" })
+                                            </div>
                                         </div>
                                     </div>
-                                        @*<select class="list-box tri-state" id="TrangThaiThanhToan" name="TrangThaiThanhToan">
-                    <option value="true">Đã thanh toán</option>
-                    <option selected="selected" value="false">Chưa thanh toán</option>
-                </select>*@
-                                    }
-                                @Html.ValidationMessageFor(model => model.TrangThaiThanhToan, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        <strong class="control-label col-md-2">Trạng thái thanh toán</strong>
+                                        <div class="col-md-10">
+                                            <div class="checkbox">
+                                                @if (Model.TrangThaiThanhToan == true)
+                                                {
+                                                    <span>Đã thanh toán</span>
+                                                    @Html.HiddenFor(model => model.TrangThaiThanhToan)
+                                                }
+                                                else
+                                                {
+                                                    <div>
+                                                        <div>
+                                                            <input name="TrangThaiThanhToan" id="yes" value="true" type="radio" />&nbsp;<label for="yes">Đã thanh toán</label>
+                                                        </div>
+                                                        <div>
+                                                            <input checked name="TrangThaiThanhToan" id="no" value="false" type="radio" />&nbsp;<label for="no">Chưa thanh toán</label>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                @Html.ValidationMessageFor(model => model.TrangThaiThanhToan, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <strong class="control-label col-md-2">Ngày đặt</strong>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.NgayDat, new { htmlAttributes = new { @class = "form-control", @style = "display:none" } })
+                                            @Convert.ToDateTime(Model.NgayDat).ToString("dd-MM-yyyy")
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <strong class="control-label col-md-2">Ngày giao</strong>
+                                        <div class="col-md-10">
+                                            @if (Model.TrangThaiGiaoHang == 1)
+                                            {
+                                                @Html.EditorFor(model => model.NgayGiao, new { htmlAttributes = new { @class = "form-control", @style = "display:none" } })
+                                                @Convert.ToDateTime(Model.NgayGiao).ToString("dd-MM-yyyy")
+                                            }
+                                            else
+                                            {
+                                                <input type="date" name="NgayGiao" value="@Model.NgayGiao.Value.ToString("yyyy-MM-dd")" />
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <strong class="control-label col-md-2">Tên khách hàng</strong>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.MaKH, new { htmlAttributes = new { @class = "form-control", @style = "display:none" } })
+                                            @ViewBag.TenKH
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" style="display:none;">
+                                        <strong class="control-label col-md-2">Tổng tiền</strong>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.TongTien, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" value="Cập nhật" class="btn btn-success" />
+                                            <a class="btn btn-info" href='@Url.Action("Index", "DonHangs")' style="margin:10px 0px;">
+                                                Trở về
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            </div>
-                    </div>
-                    <div class="form-group">
-                        <strong class="control-label col-md-2">Ngày đặt</strong>
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.NgayDat, new { htmlAttributes = new { @class = "form-control", @style = "display:none" } })
-                            @Convert.ToDateTime(Model.NgayDat).ToString("dd-MM-yyyy")
-                        </div>
-                    </div>
+                        }
+                        <div class="modal-footer">
 
-                    <div class="form-group">
-                        <strong class="control-label col-md-2">Ngày giao</strong>
-                        <div class="col-md-10">
-                            <input type="date" name="NgayGiao" value="@Model.NgayGiao.Value.ToString("yyyy-MM-dd")" />
-                            @*@Html.EditorFor(model => model.NgayGiao, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.NgayGiao, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <strong class="control-label col-md-2">Tên khách hàng</strong>
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.MaKH, new { htmlAttributes = new { @class = "form-control", @style = "display:none" } })
-                            @ViewBag.TenKH
-                        </div>
-                    </div>
-
-                    <div class="form-group" style="display:none;">
-                        <strong class="control-label col-md-2">Tổng tiền</strong>
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.TongTien, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Cập nhật" class="btn btn-success" />
-                            <a class="btn btn-info" href='@Url.Action("Index", "DonHangs")' style="margin:10px 0px;">
-                                Trở về
-                            </a>
-                        </div>
-                    </div>
-                </div>}
+                </div>
+            </div>
         </div>
     </main>
 </div>
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-
-@*<div id="layoutSidenav_content">
-        <main>
-            <div class="container-fluid px-4">
-
-                <h2 style=" margin-top:20px;">Sửa đơn hàng</h2>
-
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
-
-                    <div class="form-horizontal">
-                        <h4>Đơn hàng</h4>
-                        <hr />
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        @Html.HiddenFor(model => model.MaDH)
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.TrangThaiGiaoHang, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                <div class="checkbox">
-                                    @Html.EditorFor(model => model.TrangThaiGiaoHang)
-                                    @Html.ValidationMessageFor(model => model.TrangThaiGiaoHang, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <strong class="control-label col-md-2">Ngày đặt</strong>
-                            <div class="col-md-10">
-                                <input class="form-control text-box single-line" data-val="true" data-val-date="The field NgayDat must be a date." id="NgayDat" name="NgayDat" type="date" value="@DateTime.ParseExact(@Model.NgayDat.ToString(), "M/d/yyyy hh:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd")">
-                                @Html.ValidationMessageFor(model => model.NgayDat, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <strong class="control-label col-md-2">Ngày giao</strong>
-                            <div class="col-md-10">
-                                <input class="form-control text-box single-line" data-val="true" data-val-date="The field NgayGiao must be a date." id="NgayGiao" name="NgayGiao" type="date" value="@DateTime.ParseExact(@Model.NgayGiao.ToString(), "M/d/yyyy hh:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd")">
-                                @Html.ValidationMessageFor(model => model.NgayGiao, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <strong class="control-label col-md-2">Khách hàng</strong>
-                            <div class="col-md-10">
-                                @Html.DropDownList("MaKH", null, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.MaKH, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Cập nhật" class="btn btn-info" />
-                                <a class="btn btn-info" href='@Url.Action("Index", "DonHangs")' style="margin:10px 0px;">
-                                    Trở về
-                                </a>
-                            </div>
-                        </div>
-                    </div>}
-            </div>
-        </main>
-    </div>*@
-

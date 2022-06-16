@@ -132,7 +132,9 @@
 
                                 <h3 style="padding-top: 20px;"><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
                                 <div class="pricing">
-                                    <p class="price"><span>@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                                    <p class="price" style="font-weight:500"> Giá gốc: <span style=" text-decoration: line-through;font-weight:bold">@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                                    <p class="price" style="font-weight:500"> Giảm: <span style="font-weight:bold">@String.Format("{0:0,0}", @item.GiamGia) VNĐ</span></p>
+                                    <p style="font-size: 17px;font-weight:bold" class="price">Chỉ còn: <span style="color:red">@String.Format("{0:0,0}", @item.Gia - item.GiamGia) VNĐ</span></p>
                                 </div>
                                 @if (item.SoLuong > 0)
                                 {
@@ -182,7 +184,9 @@
 
                                 <h3 style="padding-top: 20px;"><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
                                 <div class="pricing">
-                                    <p class="price"><span>@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                                    <p class="price" style="font-weight:500"> Giá gốc: <span style=" text-decoration: line-through;font-weight:bold">@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                                    <p class="price" style="font-weight:500"> Giảm: <span style="font-weight:bold">@String.Format("{0:0,0}", @item.GiamGia) VNĐ</span></p>
+                                    <p style="font-size: 17px;font-weight:bold" class="price">Chỉ còn: <span style="color:red">@String.Format("{0:0,0}", @item.Gia - item.GiamGia) VNĐ</span></p>
                                 </div>
                                 @if (item.SoLuong > 0)
                                 {
@@ -230,7 +234,9 @@
 
                                 <h3 style="padding-top: 20px;"><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
                                 <div class="pricing">
-                                    <p class="price"><span>@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                                    <p class="price" style="font-weight:500"> Giá gốc: <span style=" text-decoration: line-through;font-weight:bold">@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                                    <p class="price" style="font-weight:500"> Giảm: <span style="font-weight:bold">@String.Format("{0:0,0}", @item.GiamGia) VNĐ</span></p>
+                                    <p style="font-size: 17px;font-weight:bold" class="price">Chỉ còn: <span style="color:red">@String.Format("{0:0,0}", @item.Gia - item.GiamGia) VNĐ</span></p>
                                 </div>
                                 @if (item.SoLuong > 0)
                                 {
@@ -310,7 +316,9 @@
 
                                 <h3 style="padding-top: 20px;"><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
                                 <div class="pricing">
-                                    <p class="price"><span>@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                                    <p class="price" style="font-weight:500"> Giá gốc: <span style=" text-decoration: line-through;font-weight:bold">@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                                    <p class="price" style="font-weight:500"> Giảm: <span style="font-weight:bold">@String.Format("{0:0,0}", @item.GiamGia) VNĐ</span></p>
+                                    <p style="font-size: 17px;font-weight:bold" class="price">Chỉ còn: <span style="color:red">@String.Format("{0:0,0}", @item.Gia - item.GiamGia) VNĐ</span></p>
                                 </div>
                                 @if (item.SoLuong > 0)
                                 {
@@ -389,7 +397,9 @@
 
                                 <h3 style="padding-top: 20px;"><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
                                 <div class="pricing">
-                                    <p class="price"><span>@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                                    <p class="price" style="font-weight:500"> Giá gốc: <span style=" text-decoration: line-through;font-weight:bold">@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                                    <p class="price" style="font-weight:500"> Giảm: <span style="font-weight:bold">@String.Format("{0:0,0}", @item.GiamGia) VNĐ</span></p>
+                                    <p style="font-size: 17px;font-weight:bold" class="price">Chỉ còn: <span style="color:red">@String.Format("{0:0,0}", @item.Gia - item.GiamGia) VNĐ</span></p>
                                 </div>
 
                                 @if (item.SoLuong > 0)
