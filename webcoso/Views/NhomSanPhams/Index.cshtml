@@ -9,19 +9,24 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4">
-            <div style="display: flex; margin-top: 20px; justify-content: space-between">
-                <h2 style="text-align: center; margin-top: 20px; font-weight: bold; color: red;">Trang Nhóm Sản Phẩm</h2>
-                <form>
-                    <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Tìm kiếm theo nội dung..." aria-label="Tìm kiếm theo nội dung..." value="@ViewBag.Keyword" name="searchString" aria-describedby="btnNavbarSearch" />
-                        <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
-                    </div>
-                </form>
+            <div>
+                <div>
+                    <h2 style="text-align: center; margin-top: 20px; font-weight: bold; color: red; text-transform: capitalize;">Danh sách nhóm sản phẩm</h2>
+                </div>
+                <div style="display:flex;justify-content:right;margin:10px">
+                    <form>
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Tìm kiếm theo nội dung..." aria-label="Tìm kiếm theo nội dung..." value="@ViewBag.Keyword" name="searchString" aria-describedby="btnNavbarSearch" />
+                            <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
             </div>
 
-            <p>
-                @Html.ActionLink("Create New", "Create")
-            </p>
+            <a class="btn btn-success" href="@Url.Action("Create", "NhomSanPhams")" style="margin:10px 0px;">
+                Thêm nhóm sản phẩm
+            </a>
+           
             <table class="table table-bordered table-dark">
                 <thead class="thead-dark">
                     <tr>
@@ -39,8 +44,7 @@
                                 @Html.DisplayFor(modelItem => item.TenNhom)
                             </td>
                             <td>
-                                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.MaNhom }, new { @class = "btn btn-danger", @style = "margin-left:5px" }) |
-                                @Html.ActionLink("Chi tiết", "Details", new { id = item.MaNhom }, new { @class = "btn btn-danger", @style = "margin-left:5px" }) |
+                                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.MaNhom }, new { @class = "btn btn-warning", @style = "margin-left:5px" }) |
                                 @Html.ActionLink("Xóa", "Delete", new { id = item.MaNhom }, new { @class = "btn btn-danger", @style = "margin-left:5px" })
                             </td>
                         </tr>

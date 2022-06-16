@@ -9,7 +9,7 @@
         <div class="container-fluid px-4">
             <div>
                 <div>
-                    <h2 style="text-align: center; margin-top: 20px; font-weight: bold; color: red;">Danh sách sản phẩm</h2>
+                    <h2 style="text-align: center; margin-top: 20px; font-weight: bold; color: red; text-transform: capitalize;">Danh sách sản phẩm</h2>
                 </div>
                 <div style="display:flex;justify-content:right;margin:10px">
                     <form>
@@ -28,36 +28,54 @@
                 <div class="alert alert-success">
                     <strong>Success !</strong> @TempData["AlertMessage"]
                 </div>      }
-            <table class="table table-bordered table-dark text-center">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>
-                            Loại
-                        </th>
-                        <th>
-                            Tên sản phẩm
-                        </th>
-                        <th>
-                            Mô tả
-                        </th>
-                        <th>
-                            Giá
-                        </th>
-                        <th>
-                            Số lượng
-                        </th>
-                        <th>
-                            Giảm giá
-                        <th>
-                            Hình
-                        </th>
-                        <th>Thao tác</th>
-                    </tr>
-                </thead>
+        <table class="table table-bordered table-dark text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        STT
+                    </th>
+                    <th>
+                        Thương hiệu
+                    </th> 
+                    <th>
+                       Nhóm sản phẩm
+                    </th>
+                    <th>
+                        Loại
+                    </th>
+                    <th>
+                        Tên sản phẩm
+                    </th>
+                    <th>
+                        Giá
+                    </th>
+                    <th>
+                        Số lượng
+                    </th>
+                    <th>
+                        Giảm giá
+                    <th>
+                        Hình
+                    </th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            @{ int stt = 0;
                 <tbody class="table-light">
                     @foreach (var item in Model)
                     {
+                        stt += 1;
                         <tr>
+
+                            <td>
+                                <strong> @stt</strong>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ThuongHieu.TenTH)
+                            </td>  
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NhomSanPham.TenNhom)
+                            </td>
                             <td style="vertical-align:middle">
                                 @Html.DisplayFor(modelItem => item.LoaiSP.TenLoai)
                             </td>
@@ -65,29 +83,27 @@
                                 @Html.DisplayFor(modelItem => item.Ten)
                             </td>
                             <td style="vertical-align:middle">
-                                @Html.DisplayFor(modelItem => item.MoTa)
-                            </td>
-                            <td style="vertical-align:middle">
-                                @Html.DisplayFor(modelItem => item.Gia)
+                                @Html.DisplayFor(modelItem => item.Gia) VNĐ
                             </td>
                             <td style="vertical-align:middle">
                                 @Html.DisplayFor(modelItem => item.SoLuong)
                             </td>
                             <td style="vertical-align:middle">
-                                @Html.DisplayFor(modelItem => item.GiamGia)
+                                @Html.DisplayFor(modelItem => item.GiamGia) VNĐ
                             </td>
                             <td style="vertical-align:middle">
                                 <img src="@item.Hinh" alt="thumbnail" width="150" />
                             </td>
                             <td style="vertical-align:middle">
-                                @Html.ActionLink("Sửa", "Edit", new { id = item.MaSP }, new { @class = "btn btn-info" })
-                                @Html.ActionLink("Chi tiết", "DetailsAdmin", new { id = item.MaSP }, new { @class = "btn btn-warning", @style = "margin-left:5px" })
+                                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.MaSP }, new { @class = "btn btn-warning" })
+                                @Html.ActionLink("Chi tiết", "DetailsAdmin", new { id = item.MaSP }, new { @class = "btn btn-info", @style = "margin-left:5px" })
                                 @Html.ActionLink("Xóa", "Delete", new { id = item.MaSP }, new { @class = "btn btn-danger", @style = "margin-left:5px" })
                             </td>
                         </tr>
                     }
                 </tbody>
-            </table>
+            }
+        </table>
             <div>
                 <div>
                     Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount

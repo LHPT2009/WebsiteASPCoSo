@@ -8,8 +8,6 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4">
-
-
             <div class="modal fade show" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:block !important;">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content" style="min-width:30vw;color:black">
@@ -44,7 +42,7 @@
                                                 {
                                                     if (Model.TrangThaiGiaoHang == 1)
                                                     {
-                                                        <span style="color:limegreen">Đã giao hàng</span>
+                                                        <span style="color:limegreen;font-weight:500">Đã giao hàng</span>
                                                         @Html.HiddenFor(p => p.TrangThaiGiaoHang)
                                                     }
                                                     else
@@ -67,7 +65,7 @@
                                             <div class="checkbox">
                                                 @if (Model.TrangThaiThanhToan == true)
                                                 {
-                                                    <span>Đã thanh toán</span>
+                                                    <span style="color:limegreen;font-weight:500">Đã thanh toán</span>
                                                     @Html.HiddenFor(model => model.TrangThaiThanhToan)
                                                 }
                                                 else
