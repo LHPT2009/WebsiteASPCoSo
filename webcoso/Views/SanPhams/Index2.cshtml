@@ -72,9 +72,18 @@
                                         </div>
                                         <h3><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSP })">@item.Ten</a></h3>
                                         <div class="pricing">
-                                            <p class="price" style="font-weight:500"> Giá gốc: <span style=" text-decoration: line-through;font-weight:bold">@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
-                                            <p class="price" style="font-weight:500"> Giảm: <span style="font-weight:bold">@String.Format("{0:0,0}", @item.GiamGia) VNĐ</span></p>
-                                            <p style="font-size: 17px;font-weight:bold" class="price">Chỉ còn: <span style="color:red">@String.Format("{0:0,0}", @item.Gia - item.GiamGia) VNĐ</span></p>
+                                            @if (item.GiamGia > 0)
+                                            {
+
+                                                <p class="price" style="font-weight:500"> Giá gốc: <span style=" text-decoration: line-through;font-weight:bold">@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+                                                <p class="price" style="font-weight:500"> Giảm: <span style="font-weight:bold">@String.Format("{0:0,0}", @item.GiamGia) VNĐ</span></p>
+                                                <p style="font-size: 17px;font-weight:bold" class="price">Chỉ còn: <span style="color:red">@String.Format("{0:0,0}", @item.Gia - item.GiamGia) VNĐ</span></p>
+                                            }
+                                            else
+                                            {
+                                                <p class="price" style="font-weight:500"> Giá: <span style="font-weight:bold">@String.Format("{0:0,0}", @item.Gia) VNĐ</span></p>
+
+                                            }
                                         </div>
                                         <p class="bottom-area d-flex px-3">
                                             <a href="@Url.Action("ThemGioHang", "GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString() })" class="add-to-cart text-center py-2 mr-1"><span>Thêm vào giỏ hàng <i class="ion-ios-add ml-1"></i></span></a>

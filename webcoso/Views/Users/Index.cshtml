@@ -9,7 +9,7 @@
         <div class="container-fluid px-4">
             <div>
                 <div>
-                    <h2 style="text-align: center; margin-top: 20px; font-weight: bold; color: red;">
+                    <h2 style="text-align: center; margin-top: 20px; font-weight: bold; color: red; text-transform: capitalize;">
                         Danh sách khách hàng
                     </h2>
                 </div>
@@ -77,8 +77,8 @@
                             </td>
 
                             <td>
-                                @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-info" })
-                                @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }, new { @class = "btn btn-warning", @style = "margin-left:5px" })
+                                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })
+                                @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }, new { @class = "btn btn-info", @style = "margin-left:5px" })
                             </td>
                         </tr>
                     }

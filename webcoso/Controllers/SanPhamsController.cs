@@ -245,6 +245,8 @@ namespace webcoso.Controllers
             if (!AuthAdmin())
                 return RedirectToAction("Error401", "Admin");
             ViewBag.MaLoai = new SelectList(db.LoaiSP, "MaLoai", "TenLoai");
+            ViewBag.MaTH = new SelectList(db.ThuongHieu, "MaTH", "TenTH");
+            ViewBag.MaNhom = new SelectList(db.NhomSanPham, "MaNhom", "TenNhom");
             return View();
         }
 
@@ -253,7 +255,7 @@ namespace webcoso.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaSP,MaLoai,Ten,MoTa,Gia,SoLuong,DonVi,GiamGia,Hinh")] SanPham sanPham)
+        public ActionResult Create([Bind(Include = "MaSP,MaLoai,MaTH,MaNhom,Ten,MoTa,Gia,SoLuong,DonVi,GiamGia,Hinh")] SanPham sanPham)
         {
             if (!AuthAdmin())
                 return RedirectToAction("Error401", "Admin");
@@ -266,6 +268,8 @@ namespace webcoso.Controllers
             }
 
             ViewBag.MaLoai = new SelectList(db.LoaiSP, "MaLoai", "TenLoai", sanPham.MaLoai);
+            ViewBag.MaTH = new SelectList(db.ThuongHieu, "MaTH", "TenTH", sanPham.ThuongHieu);
+            ViewBag.MaNhom = new SelectList(db.NhomSanPham, "MaNhom", "TenNhom", sanPham.NhomSanPham);
             return View(sanPham);
         }
 
@@ -284,6 +288,9 @@ namespace webcoso.Controllers
                 return HttpNotFound();
             }
             ViewBag.MaLoai = new SelectList(db.LoaiSP, "MaLoai", "TenLoai", sanPham.MaLoai);
+            ViewBag.MaTH = new SelectList(db.ThuongHieu, "MaTH", "TenTH", sanPham.ThuongHieu);
+            ViewBag.MaNhom = new SelectList(db.NhomSanPham, "MaNhom", "TenNhom", sanPham.NhomSanPham);
+
             return View(sanPham);
         }
 
@@ -292,7 +299,7 @@ namespace webcoso.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaSP,MaLoai,Ten,MoTa,Gia,SoLuong,DonVi,GiamGia,Hinh")] SanPham sanPham)
+        public ActionResult Edit([Bind(Include = "MaSP,MaLoai,MaTH,MaNhom,Ten,MoTa,Gia,SoLuong,DonVi,GiamGia,Hinh")] SanPham sanPham)
         {
             if (!AuthAdmin())
                 return RedirectToAction("Error401", "Admin");
@@ -304,6 +311,8 @@ namespace webcoso.Controllers
                 return RedirectToAction("IndexAdmin");
             }
             ViewBag.MaLoai = new SelectList(db.LoaiSP, "MaLoai", "TenLoai", sanPham.MaLoai);
+            ViewBag.MaTH = new SelectList(db.ThuongHieu, "MaTH", "TenTH", sanPham.ThuongHieu);
+            ViewBag.MaNhom = new SelectList(db.NhomSanPham, "MaNhom", "TenNhom", sanPham.NhomSanPham);
             return View(sanPham);
         }
 
