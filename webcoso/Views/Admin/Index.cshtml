@@ -118,6 +118,7 @@
                                         for (var i = 0; i < data.length; i++) {
                                             motngay.push(data[i].Ngay);
                                             tongmotngay.push(data[i].tongtien);
+                                            var stringTong1ngay = tongmotngay.toString() + "VNĐ"
                                         }
                                         ////
                                         const chart = Highcharts.chart('container', {
@@ -125,16 +126,17 @@
                                                 text: 'Bảng doanh thu theo ngày'
                                             },
                                             subtitle: {
-                                                text: 'WebsiteLaptop'
+                                                text: 'Điện Tử Chính Hãng - ATC'
                                             },
                                             xAxis: {
-                                                categories: motngay
+                                                categories: motngay,
                                             },
                                             series: [{
                                                 type: 'column',
                                                 colorByPoint: true,
                                                 data: tongmotngay,
-                                                showInLegend: false
+                                                showInLegend: false,
+                                                name:"Tổng thu nhập"
                                             }]
                                         });
 
@@ -142,7 +144,7 @@
                                             chart.update({
                                                 chart: {
                                                     inverted: false,
-                                                    polar: false
+                                                    polar: false,
                                                 },
                                                 subtitle: {
                                                     text: 'Plain'

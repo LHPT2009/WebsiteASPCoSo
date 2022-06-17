@@ -44,7 +44,7 @@ namespace webcoso.Controllers
         {
             var data = context.DonHangs
                 .GroupBy(p => p.NgayDat)
-                .Select(g => new { Ngay = g.Key, tongtien = g.Sum(n => n.TongTien) }).ToList();
+                .Select(g => new { Ngay = DateTime.Parse(g.Key.ToString()).ToString("dd-MM-yyyy"), tongtien = g.Sum(n => n.TongTien) }).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
     }

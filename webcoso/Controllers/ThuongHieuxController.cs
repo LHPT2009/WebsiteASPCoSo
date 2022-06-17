@@ -16,11 +16,14 @@ namespace websitelaptop.Controllers
     public class ThuongHieuxController : Controller
     {
         private WebcosoContext db = new WebcosoContext();
+        private ApplicationDbContext data = new ApplicationDbContext();
 
 
         // GET: ThuongHieux
         public ActionResult Index(int? page)
         {
+            if (!AuthAdmin())
+                return RedirectToAction("Error401", "Admin");
             if (page == null) page = 1;
             var all_sach = (from s in db.ThuongHieu select s).OrderBy(m => m.MaTH);
             int pageSize = 5;
@@ -31,6 +34,8 @@ namespace websitelaptop.Controllers
         // GET: ThuongHieux/Details/5
         public ActionResult Details(int? id)
         {
+            if (!AuthAdmin())
+                return RedirectToAction("Error401", "Admin");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -56,6 +61,8 @@ namespace websitelaptop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaTH,TenTH")] webcoso.Models.ThuongHieu thuongHieu)
         {
+            if (!AuthAdmin())
+                return RedirectToAction("Error401", "Admin");
             if (ModelState.IsValid)
             {
                 db.ThuongHieu.Add(thuongHieu);
@@ -70,6 +77,8 @@ namespace websitelaptop.Controllers
         // GET: ThuongHieux/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!AuthAdmin())
+                return RedirectToAction("Error401", "Admin");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -89,6 +98,8 @@ namespace websitelaptop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "MaTH,TenTH")] webcoso.Models.ThuongHieu thuongHieu)
         {
+            if (!AuthAdmin())
+                return RedirectToAction("Error401", "Admin");
             if (ModelState.IsValid)
             {
                 Notification.set_flash("Chỉnh sửa thành công!", "success");
@@ -102,6 +113,8 @@ namespace websitelaptop.Controllers
         // GET: ThuongHieux/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!AuthAdmin())
+                return RedirectToAction("Error401", "Admin");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -119,6 +132,8 @@ namespace websitelaptop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!AuthAdmin())
+                return RedirectToAction("Error401", "Admin");
             webcoso.Models.ThuongHieu thuongHieu = db.ThuongHieu.Find(id);
             if (db.SanPham.Where(p => p.MaTH == thuongHieu.MaTH).FirstOrDefault() != null)
             {
@@ -139,6 +154,17 @@ namespace websitelaptop.Controllers
             }
             base.Dispose(disposing);
         }
-
+        public bool AuthAdmin()
+        {
+            var user = data.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+            if (user == null)
+                return false;
+            var userExist = user.Roles.FirstOrDefault(r => r.UserId == user.Id);
+            if (userExist == null)
+                return false;
+            if (userExist.RoleId != "1")
+                return false;
+            return true;
+        }
     }
 }
