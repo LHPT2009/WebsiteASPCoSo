@@ -644,6 +644,10 @@
     <Content Include="Views\LienHes\Details.cshtml" />
     <Content Include="Views\Shared\_MessageAlert.cshtml" />
     <Content Include="Views\Users\userDetail.cshtml" />
+    <Content Include="Views\Admin\tongbl.cshtml" />
+    <Content Include="Views\Admin\tongdg.cshtml" />
+    <Content Include="Views\Admin\tongsp.cshtml" />
+    <Content Include="Views\Admin\tonguser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -21,7 +21,27 @@ namespace webcoso.Controllers
         {
             if (!AuthAdmin())
                 return RedirectToAction("Error401", "Admin");
-            var kh = data.Users.ToList();
+            var kh = context.AspNetUsers.ToList();
+            return View(kh);
+        }
+        public ActionResult tongbl()
+        {
+            var kh = context.BinhLuans.ToList();
+            return View(kh);
+        }
+        public ActionResult tongdg()
+        {
+            var kh = context.DanhGias.ToList();
+            return View(kh);
+        }
+        public ActionResult tongsp()
+        {
+            var kh = context.SanPhams.ToList();
+            return View(kh);
+        }
+        public ActionResult tonguser()
+        {
+            var kh = context.AspNetUsers.ToList();
             return View(kh);
         }
         public ActionResult Error401()

@@ -1,0 +1,9 @@
+﻿@model IEnumerable<webcoso.Models.LinQ.SanPham>
+
+@{
+    Layout = null;
+}
+<div class="card-body">Số lượng sản phẩm: </div>
+<div class="card-footer d-flex align-items-center justify-content-between">
+    <a class="small text-white stretched-link" href="#">@Model.Count()</a>
+</div>
