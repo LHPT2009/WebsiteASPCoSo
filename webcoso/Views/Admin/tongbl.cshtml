@@ -1,0 +1,11 @@
+﻿@model IEnumerable<webcoso.Models.LinQ.BinhLuan>
+@{
+    Layout = null;
+}
+<div class="card-body">Số lượng Bình luận</div>
+<div class="card-footer d-flex align-items-center justify-content-between">
+    <a class="small text-white stretched-link" href="#">
+        @Model.Count() 
+    </a>
+</div>
+
