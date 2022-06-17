@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using webcoso.Models;
 using PagedList;
+using webcoso.Message;
 
 namespace webcoso.Controllers
 {
@@ -133,6 +134,12 @@ namespace webcoso.Controllers
             if (!AuthAdmin())
                 return RedirectToAction("Error401", "Admin");
             LoaiSP loaiSP = db.LoaiSP.Find(id);
+            if (db.SanPham.Where(p => p.MaLoai == loaiSP.MaLoai).FirstOrDefault() != null)
+            {
+                Notification.set_flash("Không thể xoá loại \' " + loaiSP.TenLoai + " \'!", "error");
+                return RedirectToAction("Index");
+            }
+            Notification.set_flash("Đã xoá loại \' " + loaiSP.TenLoai + " \'!", "error");
             db.LoaiSP.Remove(loaiSP);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -93,6 +93,8 @@ namespace webcoso.Controllers
         // GET: LienHes/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!AuthAdmin())
+                return RedirectToAction("Error401", "Admin");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -112,6 +114,8 @@ namespace webcoso.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IdLienHe,NgayGui,NoiDung,IdUser")] LienHe lienHe)
         {
+            if (!AuthAdmin())
+                return RedirectToAction("Error401", "Admin");
             if (ModelState.IsValid)
             {
                 db.Entry(lienHe).State = EntityState.Modified;
@@ -124,6 +128,8 @@ namespace webcoso.Controllers
         // GET: LienHes/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!AuthAdmin())
+                return RedirectToAction("Error401", "Admin");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -141,6 +147,8 @@ namespace webcoso.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!AuthAdmin())
+                return RedirectToAction("Error401", "Admin");
             LienHe lienHe = db.LienHe.Find(id);
             db.LienHe.Remove(lienHe);
             db.SaveChanges();
